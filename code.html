@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Next-Gen Cyber Risk Dashboard</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,typography"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet"/>
+<script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        primary: "#00f2ff", // Cyan Neon
+                        accent: "#ff00e5", // Magenta Neon
+                        "background-light": "#f8fafc",
+                        "background-dark": "#0a0a1a", // Deep Midnight Purple
+                        surface: "#1a1a3a",
+                    },
+                    fontFamily: {
+                        display: ["Inter", "sans-serif"],
+                        mono: ["JetBrains Mono", "monospace"],
+                    },
+                    borderRadius: {
+                        DEFAULT: "12px",
+                    },
+                    backgroundImage: {
+                        'glass-gradient': 'linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.01) 100%)',
+                    },
+                    animation: {
+                        'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        'glow': 'glow 2s ease-in-out infinite alternate',
+                        'scroll': 'scroll 30s linear infinite',
+                    },
+                    keyframes: {
+                        glow: {
+                            'from': { 'box-shadow': '0 0 5px #00f2ff, 0 0 10px #00f2ff' },
+                            'to': { 'box-shadow': '0 0 15px #00f2ff, 0 0 30px #00f2ff' },
+                        },
+                        scroll: {
+                            '0%': { transform: 'translateX(0)' },
+                            '100%': { transform: 'translateX(-100%)' },
+                        }
+                    }
+                },
+            },
+        };
+    </script>
+<style>
+        .glass {
+            background: rgba(26, 26, 58, 0.6);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .neon-border-primary { border: 1px solid rgba(0, 242, 255, 0.3); }
+        .neon-text-primary { text-shadow: 0 0 10px rgba(0, 242, 255, 0.5); }
+        .custom-scrollbar::-webkit-scrollbar { width: 4px; height: 4px; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: rgba(0, 242, 255, 0.2); border-radius: 10px; }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-800 dark:text-slate-100 min-h-screen overflow-hidden flex">
+<aside class="w-64 glass border-r border-white/10 flex flex-col h-screen z-20">
+<div class="p-6 flex items-center gap-3">
+<div class="w-10 h-10 bg-gradient-to-br from-primary to-accent rounded-lg flex items-center justify-center shadow-lg shadow-primary/20">
+<span class="material-icons-round text-background-dark">security</span>
+</div>
+<span class="font-bold text-xl tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-primary to-accent">CYVATER</span>
+</div>
+<nav class="flex-1 px-4 space-y-2 mt-4">
+<a class="flex items-center gap-3 p-3 rounded-xl bg-primary/10 text-primary border border-primary/20 transition-all" href="#">
+<span class="material-icons-round">dashboard</span>
+<span class="font-medium">Dashboard</span>
+</a>
+<a class="flex items-center gap-3 p-3 rounded-xl hover:bg-white/5 text-slate-400 hover:text-white transition-all" href="#">
+<span class="material-icons-round">analytics</span>
+<span class="font-medium">Risk Analysis</span>
+</a>
+<a class="flex items-center gap-3 p-3 rounded-xl hover:bg-white/5 text-slate-400 hover:text-white transition-all" href="#">
+<span class="material-icons-round">layers</span>
+<span class="font-medium">Infrastructure</span>
+</a>
+<a class="flex items-center gap-3 p-3 rounded-xl hover:bg-white/5 text-slate-400 hover:text-white transition-all" href="#">
+<span class="material-icons-round">history</span>
+<span class="font-medium">History Logs</span>
+</a>
+<a class="flex items-center gap-3 p-3 rounded-xl hover:bg-white/5 text-slate-400 hover:text-white transition-all" href="#">
+<span class="material-icons-round">settings</span>
+<span class="font-medium">Settings</span>
+</a>
+</nav>
+<div class="p-4 border-t border-white/10">
+<div class="flex items-center gap-3 p-3 glass rounded-2xl">
+<img alt="Rahul Joshi" class="w-10 h-10 rounded-full border border-primary/30" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAla1r6wKUQh_jijYAxuTnrhDkc_IhNVdMNtZKGpO7yVOWSlVAYKvIjAgCjHEw0A5iW2_u14B0HuxlnI9EvP7MWdZ2IzL-A9mkkHNWN7V3tTuONW7ZzxK64Qoadj3oP6JKPCJnL-ysIMwqAlrjGQGoKpAjtYd8_Sm1qNu1RzoUJsalpfZJ8jzpD7dsPWx64ZwUSohBThyZBZ6DTIsuktyFdalFHqTKMZfn9TOgMtXCoy2RBACHGwWxwGhHAm4mITGDr03gE1T0E3WlY"/>
+<div class="flex-1 min-w-0">
+<p class="text-sm font-semibold truncate">Rahul Joshi</p>
+<p class="text-[10px] text-slate-400 truncate">Enterprise Admin</p>
+</div>
+<button class="text-slate-400 hover:text-white">
+<span class="material-icons-round text-sm">logout</span>
+</button>
+</div>
+</div>
+</aside>
+<main class="flex-1 flex flex-col h-screen overflow-y-auto custom-scrollbar relative">
+<div class="absolute top-[-10%] right-[-10%] w-[500px] h-[500px] bg-primary/10 blur-[120px] rounded-full pointer-events-none"></div>
+<div class="absolute bottom-[-10%] left-[20%] w-[400px] h-[400px] bg-accent/10 blur-[100px] rounded-full pointer-events-none"></div>
+<header class="sticky top-0 z-10 p-6 flex items-center justify-between glass border-b border-white/5 backdrop-blur-md">
+<div>
+<h1 class="text-2xl font-bold">Security Overview</h1>
+<p class="text-slate-400 text-sm">Real-time enterprise threat posture</p>
+</div>
+<div class="flex items-center gap-4">
+<div class="flex items-center gap-2 glass px-4 py-2 rounded-full border border-white/10">
+<span class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
+<span class="text-xs font-mono uppercase tracking-widest">Network Secure</span>
+</div>
+<button class="w-10 h-10 rounded-full glass flex items-center justify-center hover:bg-white/10 transition-colors relative">
+<span class="material-icons-round">notifications</span>
+<span class="absolute top-2 right-2 w-2 h-2 bg-accent rounded-full border border-background-dark"></span>
+</button>
+</div>
+</header>
+<div class="bg-primary/5 border-y border-primary/10 overflow-hidden whitespace-nowrap py-2 flex">
+<div class="flex animate-scroll gap-12 items-center">
+<div class="flex items-center gap-2 text-xs font-mono">
+<span class="text-accent uppercase font-bold">[CRITICAL]</span>
+<span class="text-slate-300">Unauthorized login attempt detected from 192.168.1.104</span>
+</div>
+<div class="flex items-center gap-2 text-xs font-mono">
+<span class="text-primary uppercase font-bold">[INFO]</span>
+<span class="text-slate-300">System backup completed successfully for West-Node-1</span>
+</div>
+<div class="flex items-center gap-2 text-xs font-mono">
+<span class="text-yellow-400 uppercase font-bold">[WARN]</span>
+<span class="text-slate-300">SSL Certificate expiring in 48 hours: api.cyvater.io</span>
+</div>
+<div class="flex items-center gap-2 text-xs font-mono">
+<span class="text-accent uppercase font-bold">[CRITICAL]</span>
+<span class="text-slate-300">DDoS spike mitigated on Edge Gateway #4</span>
+</div>
+</div>
+<div class="flex animate-scroll gap-12 items-center">
+<div class="flex items-center gap-2 text-xs font-mono">
+<span class="text-accent uppercase font-bold">[CRITICAL]</span>
+<span class="text-slate-300">Unauthorized login attempt detected from 192.168.1.104</span>
+</div>
+<div class="flex items-center gap-2 text-xs font-mono">
+<span class="text-primary uppercase font-bold">[INFO]</span>
+<span class="text-slate-300">System backup completed successfully for West-Node-1</span>
+</div>
+<div class="flex items-center gap-2 text-xs font-mono">
+<span class="text-yellow-400 uppercase font-bold">[WARN]</span>
+<span class="text-slate-300">SSL Certificate expiring in 48 hours: api.cyvater.io</span>
+</div>
+</div>
+</div>
+<div class="p-6 grid grid-cols-12 gap-6">
+<div class="col-span-12 lg:col-span-5 glass p-8 rounded-3xl flex flex-col items-center justify-center relative overflow-hidden">
+<div class="absolute inset-0 bg-gradient-to-b from-primary/5 to-transparent pointer-events-none"></div>
+<h3 class="text-lg font-semibold mb-8 self-start">Overall Security Posture</h3>
+<div class="relative w-64 h-64 flex items-center justify-center">
+<svg class="w-full h-full transform -rotate-90">
+<circle class="text-white/5" cx="128" cy="128" fill="transparent" r="110" stroke="currentColor" stroke-width="4"></circle>
+<circle class="text-primary animate-pulse-slow filter drop-shadow-[0_0_10px_rgba(0,242,255,0.8)]" cx="128" cy="128" fill="transparent" r="110" stroke="currentColor" stroke-dasharray="691" stroke-dashoffset="60" stroke-width="12"></circle>
+<circle class="text-accent/30" cx="128" cy="128" fill="transparent" r="90" stroke="currentColor" stroke-dasharray="565" stroke-dashoffset="150" stroke-width="2"></circle>
+</svg>
+<div class="absolute flex flex-col items-center">
+<span class="text-8xl font-black tracking-tighter neon-text-primary">A+</span>
+<span class="text-2xl font-mono text-slate-400 mt-[-10px]">9.9/10</span>
+</div>
+</div>
+<div class="mt-8 text-center">
+<p class="text-slate-400 text-sm">Last Scan: Jan 27, 2026 • 12:08 PM</p>
+<div class="mt-6 flex gap-4">
+<button class="px-6 py-2 bg-primary text-background-dark font-bold rounded-full hover:shadow-[0_0_20px_rgba(0,242,255,0.4)] transition-all">
+                            Retake Assessment
+                        </button>
+<button class="px-6 py-2 glass border border-white/10 rounded-full hover:bg-white/5 transition-all text-sm">
+                            View Report
+                        </button>
+</div>
+</div>
+</div>
+<div class="col-span-12 lg:col-span-7 grid grid-cols-2 gap-4">
+<div class="glass p-5 rounded-2xl border border-white/5 hover:border-primary/30 transition-all group">
+<div class="flex justify-between items-start mb-4">
+<div class="p-2 bg-primary/10 rounded-lg group-hover:scale-110 transition-transform">
+<span class="material-icons-round text-primary">system_update</span>
+</div>
+<div class="text-right">
+<span class="text-2xl font-bold">10</span>
+<div class="text-[10px] text-green-400 font-mono">↑ 0.0</div>
+</div>
+</div>
+<p class="font-semibold">Software Patching</p>
+<div class="mt-3 w-full bg-white/5 h-1.5 rounded-full overflow-hidden">
+<div class="bg-primary h-full w-[98%] shadow-[0_0_8px_#00f2ff]"></div>
+</div>
+</div>
+<div class="glass p-5 rounded-2xl border border-white/5 hover:border-accent/30 transition-all group">
+<div class="flex justify-between items-start mb-4">
+<div class="p-2 bg-accent/10 rounded-lg group-hover:scale-110 transition-transform">
+<span class="material-icons-round text-accent">shield</span>
+</div>
+<div class="text-right">
+<span class="text-2xl font-bold">9.6</span>
+<div class="text-[10px] text-red-400 font-mono">↓ -0.1</div>
+</div>
+</div>
+<p class="font-semibold">App Security</p>
+<div class="mt-3 w-full bg-white/5 h-1.5 rounded-full overflow-hidden">
+<div class="bg-accent h-full w-[94%] shadow-[0_0_8px_#ff00e5]"></div>
+</div>
+</div>
+<div class="glass p-5 rounded-2xl border border-white/5 hover:border-primary/30 transition-all group">
+<div class="flex justify-between items-start mb-4">
+<div class="p-2 bg-primary/10 rounded-lg group-hover:scale-110 transition-transform">
+<span class="material-icons-round text-primary">lock</span>
+</div>
+<div class="text-right">
+<span class="text-2xl font-bold">9.7</span>
+<div class="text-[10px] text-green-400 font-mono">↑ 0.9</div>
+</div>
+</div>
+<p class="font-semibold">Web Encryption</p>
+<div class="mt-3 w-full bg-white/5 h-1.5 rounded-full overflow-hidden">
+<div class="bg-primary h-full w-[97%] shadow-[0_0_8px_#00f2ff]"></div>
+</div>
+</div>
+<div class="glass p-5 rounded-2xl border border-white/5 hover:border-primary/30 transition-all group">
+<div class="flex justify-between items-start mb-4">
+<div class="p-2 bg-primary/10 rounded-lg group-hover:scale-110 transition-transform">
+<span class="material-icons-round text-primary">dns</span>
+</div>
+<div class="text-right">
+<span class="text-2xl font-bold">10</span>
+<div class="text-[10px] text-slate-500 font-mono">→ 0.0</div>
+</div>
+</div>
+<p class="font-semibold">System Reputation</p>
+<div class="mt-3 w-full bg-white/5 h-1.5 rounded-full overflow-hidden">
+<div class="bg-primary h-full w-[100%] shadow-[0_0_8px_#00f2ff]"></div>
+</div>
+</div>
+</div>
+<div class="col-span-12 glass p-6 rounded-3xl">
+<div class="flex items-center justify-between mb-8">
+<div>
+<h3 class="text-lg font-bold">Vulnerability Trends</h3>
+<p class="text-sm text-slate-400">Risk frequency over the last 30 days</p>
+</div>
+<div class="flex gap-2">
+<button class="px-4 py-1.5 glass text-xs rounded-lg border border-white/5">1W</button>
+<button class="px-4 py-1.5 bg-primary/10 text-primary text-xs rounded-lg border border-primary/20">1M</button>
+<button class="px-4 py-1.5 glass text-xs rounded-lg border border-white/5">1Y</button>
+</div>
+</div>
+<div class="h-64 w-full relative">
+<svg class="w-full h-full" preserveAspectRatio="none">
+<defs>
+<linearGradient id="gradient" x1="0%" x2="0%" y1="0%" y2="100%">
+<stop offset="0%" stop-color="#00f2ff" stop-opacity="0.3"></stop>
+<stop offset="100%" stop-color="#00f2ff" stop-opacity="0"></stop>
+</linearGradient>
+</defs>
+<line stroke="rgba(255,255,255,0.05)" x1="0" x2="100%" y1="20%" y2="20%"></line>
+<line stroke="rgba(255,255,255,0.05)" x1="0" x2="100%" y1="40%" y2="40%"></line>
+<line stroke="rgba(255,255,255,0.05)" x1="0" x2="100%" y1="60%" y2="60%"></line>
+<line stroke="rgba(255,255,255,0.05)" x1="0" x2="100%" y1="80%" y2="80%"></line>
+<path d="M0 250 Q 150 180, 300 210 T 600 120 T 900 160 T 1200 100 L 1200 250 L 0 250 Z" fill="url(#gradient)"></path>
+<path class="filter drop-shadow-[0_0_5px_rgba(0,242,255,0.5)]" d="M0 250 Q 150 180, 300 210 T 600 120 T 900 160 T 1200 100" fill="none" stroke="#00f2ff" stroke-width="3"></path>
+<circle class="animate-pulse" cx="600" cy="120" fill="#00f2ff" r="4"></circle>
+<circle cx="900" cy="160" fill="#00f2ff" r="4"></circle>
+<circle cx="1200" cy="100" fill="#00f2ff" r="4"></circle>
+</svg>
+<div class="absolute top-0 right-0 p-4 glass rounded-xl border border-primary/20">
+<div class="text-[10px] text-slate-400 uppercase mb-1">Current Risk Peak</div>
+<div class="text-xl font-bold text-primary">14.2% Critical</div>
+</div>
+</div>
+<div class="mt-4 flex justify-between text-[10px] text-slate-500 font-mono px-2">
+<span>JAN 01</span>
+<span>JAN 07</span>
+<span>JAN 14</span>
+<span>JAN 21</span>
+<span>JAN 27</span>
+</div>
+</div>
+</div>
+<footer class="mt-auto p-6 flex justify-between items-center glass border-t border-white/5">
+<div class="flex gap-8">
+<div class="flex flex-col">
+<span class="text-[10px] text-slate-500 uppercase">Industry Rank</span>
+<span class="font-bold text-primary">Top 12%</span>
+</div>
+<div class="flex flex-col">
+<span class="text-[10px] text-slate-500 uppercase">Alert Response</span>
+<span class="font-bold">14s Avg</span>
+</div>
+<div class="flex flex-col">
+<span class="text-[10px] text-slate-500 uppercase">Protected Assets</span>
+<span class="font-bold">1,248</span>
+</div>
+</div>
+<button class="bg-gradient-to-r from-accent to-purple-600 text-white font-bold px-8 py-3 rounded-xl shadow-[0_0_20px_rgba(255,0,229,0.3)] hover:scale-105 active:scale-95 transition-all">
+                Buy Enhanced Protection
+            </button>
+</footer>
+</main>
+<button class="fixed bottom-8 right-8 w-14 h-14 rounded-full bg-primary text-background-dark flex items-center justify-center shadow-2xl shadow-primary/40 animate-bounce group z-50">
+<span class="material-icons-round text-3xl">psychology</span>
+<div class="absolute right-16 px-4 py-2 glass rounded-lg text-sm whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none">
+            Need security insights?
+        </div>
+</button>
+
+</body></html>
