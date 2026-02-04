@@ -132,7 +132,7 @@ export function PerformanceVisualizer() {
     }, [isInView])
 
     return (
-        <section ref={containerRef} className="py-32 bg-white relative overflow-hidden">
+        <section ref={containerRef} className="py-32 bg-transparent relative overflow-hidden">
             <div className="container mx-auto px-6 md:px-12">
                 <div className="flex flex-col lg:flex-row gap-20 items-center">
                     {/* Left: Headline & Gauge */}
@@ -224,8 +224,6 @@ export function PerformanceVisualizer() {
                 </div>
             </div>
 
-            {/* Background Accent */}
-            <div className="absolute top-1/2 left-0 -translate-y-1/2 -translate-x-1/2 size-[600px] bg-blue-500/5 blur-[120px] rounded-full pointer-events-none" />
         </section>
     )
 }

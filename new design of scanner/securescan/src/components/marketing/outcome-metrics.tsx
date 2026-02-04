@@ -1,7 +1,7 @@
 "use client"
 
 import React, { useRef, useState, useEffect } from "react"
-import { motion, useInView, AnimatePresence } from "framer-motion"
+import { motion, useInView, AnimatePresence, useScroll, useTransform } from "framer-motion"
 import { Target, TrendingDown, ShieldCheck, Globe, Lock, Cpu, Activity, LucideIcon } from "lucide-react"
 import { cn } from "@/lib/utils"
 
@@ -50,7 +50,7 @@ const Counter = ({ value, suffix = "", duration = 2, delay = 0, oscillation = fa
     return (
         <motion.span
             ref={ref}
-            animate={{ color: isLocked && oscillation ? "#3b82f6" : "inherit" }}
+            animate={{ color: isLocked && oscillation ? "#3b82f6" : "#0f172a" }}
             className="transition-colors duration-500"
         >
             {count.toFixed(2)}{suffix}
@@ -301,8 +301,18 @@ const HolographicShieldWidget = () => (
 )
 
 export function OutcomeMetrics() {
+    const containerRef = useRef(null)
+    const { scrollYProgress } = useScroll({
+        target: containerRef,
+        offset: ["start end", "end start"]
+    })
+
+    const cardsY = useTransform(scrollYProgress, [0, 0.4], [100, 0])
+    const cardsOpacity = useTransform(scrollYProgress, [0, 0.3], [0, 1])
+    const cardsScale = useTransform(scrollYProgress, [0, 0.4], [0.95, 1])
+
     return (
-        <section className="py-32 bg-white relative overflow-hidden">
+        <section ref={containerRef} className="py-32 bg-transparent relative overflow-hidden">
             <div className="container mx-auto px-6 md:px-12">
                 <div className="text-center max-w-3xl mx-auto mb-24">
                     <motion.div
@@ -331,7 +341,10 @@ export function OutcomeMetrics() {
                     </p>
                 </div>
 
-                <div className="flex flex-col lg:flex-row gap-8 items-stretch">
+                <motion.div
+                    style={{ y: cardsY, opacity: cardsOpacity, scale: cardsScale }}
+                    className="flex flex-col lg:flex-row gap-8 items-stretch"
+                >
                     <MetricCard
                         title="Detection Precision"
                         value={<Counter value={99.98} oscillation suffix="%" />}
@@ -365,7 +378,7 @@ export function OutcomeMetrics() {
                     >
                         <HolographicShieldWidget />
                     </MetricCard>
-                </div>
+                </motion.div>
             </div>
 
             {/* Live Audit Ticker */}
@@ -410,9 +423,6 @@ export function OutcomeMetrics() {
                 <div className="absolute inset-y-0 right-0 w-40 bg-gradient-to-l from-white to-transparent z-10" />
             </div>
 
-            {/* Background elements */}
-            <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-blue-500/5 blur-[120px] rounded-full translate-x-1/2 -translate-y-1/2 pointer-events-none" />
-            <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-indigo-500/5 blur-[120px] rounded-full -translate-x-1/2 translate-y-1/2 pointer-events-none" />
         </section>
     )
 }

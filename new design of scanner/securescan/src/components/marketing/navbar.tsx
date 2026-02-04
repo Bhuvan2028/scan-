@@ -10,6 +10,7 @@ import { DNAParticleField } from "./dna-particle-field"
 import { useRouter } from "next/navigation"
 import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
+import { JellyThemeToggle } from "./jelly-theme-toggle"
 
 export function Navbar() {
     const [isHovered, setIsHovered] = useState(false)
@@ -99,8 +100,9 @@ export function Navbar() {
                 initial={{ y: -100, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
                 transition={{ duration: 0.6, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-                className="fixed top-6 right-6 z-50 hidden md:flex items-center gap-3"
+                className="fixed top-6 right-6 z-50 hidden md:flex items-center gap-5"
             >
+                <JellyThemeToggle />
                 {!isDashboard ? (
                     <>
                         <Link href="/login">

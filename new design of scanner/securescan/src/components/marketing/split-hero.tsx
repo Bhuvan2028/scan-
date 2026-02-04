@@ -1,10 +1,9 @@
 "use client"
 
 import React, { useRef } from "react"
-import { motion, useTransform, useSpring, useMotionValue, AnimatePresence } from "framer-motion"
+import { motion, useTransform, useSpring, useMotionValue, AnimatePresence, useScroll } from "framer-motion"
 import { Search, ArrowRight } from "lucide-react"
 import { useRouter } from "next/navigation"
-import { HolographicGlobe } from "./holographic-globe"
 
 const dnaMarkers = [
     { label: "DNS_A_RECORD", val: "104.21.34.112", color: "text-blue-500" },
@@ -30,6 +29,14 @@ export function SplitHero() {
     const bgY = useTransform(smoothY, [-500, 500], [20, -20])
     const textTiltX = useTransform(smoothY, [-500, 500], [5, -5])
     const textTiltY = useTransform(smoothX, [-500, 500], [-5, 5])
+
+    // Scroll progress for exit animations
+    const { scrollYProgress } = useScroll({
+        target: containerRef,
+        offset: ["start start", "end start"]
+    })
+
+    const textFlyOut = useTransform(scrollYProgress, [0, 1], [0, -100])
 
     const handleMouseMove = (e: React.MouseEvent) => {
         if (!containerRef.current) return
@@ -60,18 +67,8 @@ export function SplitHero() {
         <section
             ref={containerRef}
             onMouseMove={handleMouseMove}
-            className="relative z-0 min-h-screen bg-[#F8F9FA] flex flex-col justify-start pt-20 pb-10 overflow-hidden"
+            className="relative z-0 min-h-screen bg-transparent flex flex-col justify-start pt-20 pb-10 overflow-hidden"
         >
-            {/* Interactive Background Grid */}
-            <motion.div
-                style={{ x: bgX, y: bgY }}
-                className="absolute inset-0 z-0 pointer-events-none opacity-[0.05]"
-            >
-                <div className="absolute inset-0" style={{
-                    backgroundImage: `linear-gradient(to right, #e2e8f0 1px, transparent 1px), linear-gradient(to bottom, #e2e8f0 1px, transparent 1px)`,
-                    backgroundSize: '60px 60px'
-                }} />
-            </motion.div>
 
             {/* Content Container - Asymmetric Staggered */}
             <div className="container mx-auto px-6 md:px-12 z-20 relative grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
@@ -89,7 +86,7 @@ export function SplitHero() {
                     </motion.div>
 
                     <motion.h1
-                        style={{ rotateX: textTiltX, rotateY: textTiltY }}
+                        style={{ rotateX: textTiltX, rotateY: textTiltY, y: textFlyOut }}
                         className="text-6xl md:text-7xl lg:text-[8rem] font-black tracking-tighter text-slate-900 leading-[0.85] mb-6 flex flex-col items-start"
                     >
                         <motion.span
@@ -223,41 +220,12 @@ export function SplitHero() {
                     </div>
                 </div>
 
-                {/* Right Column - Overlapping Globe / HUD */}
-                <div className="lg:col-span-5 relative flex justify-center lg:justify-end items-center">
-                    <motion.div
-                        initial={{ opacity: 0, scale: 0.8, rotate: -20 }}
-                        whileInView={{ opacity: 1, scale: 1, rotate: 0 }}
-                        transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
-                        className="relative z-10 -mr-20 lg:-mr-40"
-                    >
-                        <HolographicGlobe isActive={true} />
-
-                        {/* Overlay HUD Tags */}
-                        <div className="absolute top-1/4 -left-12 z-20">
-                            <motion.div
-                                animate={{ y: [0, -10, 0] }}
-                                transition={{ duration: 4, repeat: Infinity }}
-                                className="bg-white/80 backdrop-blur-xl border border-slate-200 p-4 rounded-sm shadow-2xl"
-                            >
-                                <div className="text-[8px] font-black text-blue-600 mb-1">DATA_STREAM</div>
-                                <div className="text-xs font-bold text-slate-900">ENCRYPTED_PACKET_99</div>
-                            </motion.div>
-                        </div>
-
-                        <div className="absolute bottom-1/4 -right-12 z-20">
-                            <motion.div
-                                animate={{ y: [0, 10, 0] }}
-                                transition={{ duration: 5, repeat: Infinity, delay: 1 }}
-                                className="bg-slate-900/95 backdrop-blur-xl border border-white/10 p-4 rounded-sm shadow-2xl"
-                            >
-                                <div className="text-[8px] font-black text-cyan-400 mb-1">THREAT_LEVEL</div>
-                                <div className="text-xs font-bold text-white tracking-widest">MINIMAL_ACTIVE</div>
-                            </motion.div>
-                        </div>
-                    </motion.div>
+                {/* Right Column - Reserved for Global Globe */}
+                <div className="lg:col-span-5 relative flex justify-center lg:justify-end items-center pointer-events-none">
+                    {/* Empty space allows the fixed global globe to be the main visual here */}
                 </div>
             </div>
+
 
             {/* Decorative Geometric Overlays */}
             <div className="absolute bottom-10 left-10 text-[10px] font-mono text-slate-300 pointer-events-none origin-bottom-left -rotate-90">

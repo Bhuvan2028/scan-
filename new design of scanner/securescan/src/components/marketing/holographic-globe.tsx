@@ -2,7 +2,7 @@
 
 import { useRef, useMemo } from "react"
 import { Canvas, useFrame } from "@react-three/fiber"
-import { Stars, Float, Sphere, MeshDistortMaterial, PerspectiveCamera, RoundedBox } from "@react-three/drei"
+import { Stars, Float, Sphere, MeshDistortMaterial, PerspectiveCamera } from "@react-three/drei"
 import * as THREE from "three"
 import { motion, AnimatePresence } from "framer-motion"
 
@@ -138,14 +138,14 @@ function ShieldAura() {
 
     return (
         <Sphere ref={auraRef} args={[3.2, 64, 64]}>
-            <MeshDistortMaterial
+            <meshStandardMaterial
+                name="ShieldAuraMaterial"
                 color="#06b6d4"
-                speed={2}
-                distort={0.2}
-                radius={1}
                 transparent
                 opacity={0.03}
                 side={THREE.BackSide}
+                metalness={1}
+                roughness={0}
             />
         </Sphere>
     )
@@ -247,7 +247,6 @@ export function HolographicGlobe({ isActive = false }: HolographicGlobeProps) {
                 <ambientLight intensity={0.4} />
                 <pointLight position={[10, 10, 10]} intensity={1} color="#06b6d4" />
                 <pointLight position={[-10, -10, -10]} intensity={0.8} color="#8b5cf6" />
-
                 <Stars radius={100} depth={50} count={3000} factor={4} saturation={0} fade speed={0.8} />
 
                 <Float speed={2} rotationIntensity={0.8} floatIntensity={0.6}>
@@ -255,31 +254,20 @@ export function HolographicGlobe({ isActive = false }: HolographicGlobeProps) {
                 </Float>
 
                 {/* Holographic Projection Effect */}
-                <AnimatePresence>
-                    {isActive && (
-                        <group>
-                            <mesh rotation={[Math.PI / 2, 0, 0]}>
-                                <circleGeometry args={[3.2, 64]} />
-                                <meshBasicMaterial
-                                    color="#06b6d4"
-                                    transparent
-                                    opacity={0.08}
-                                    side={THREE.DoubleSide}
-                                />
-                            </mesh>
-                            <mesh rotation={[Math.PI / 2, 0, 0]}>
-                                <ringGeometry args={[2.9, 3.2, 64]} />
-                                <meshBasicMaterial
-                                    color="#8b5cf6"
-                                    transparent
-                                    opacity={0.4}
-                                />
-                            </mesh>
-                        </group>
-                    )}
-                </AnimatePresence>
+                {isActive && (
+                    <group>
+                        <mesh rotation={[Math.PI / 2, 0, 0]}>
+                            <circleGeometry args={[3.2, 64]} />
+                            <meshBasicMaterial
+                                color="#06b6d4"
+                                transparent
+                                opacity={0.08}
+                                side={THREE.DoubleSide}
+                            />
+                        </mesh>
+                    </group>
+                )}
             </Canvas>
-
         </div>
     )
 }

@@ -88,32 +88,8 @@ export function AnatomyOfScan() {
     })
 
     return (
-        <section ref={containerRef} className="relative h-[600vh] bg-white">
+        <section ref={containerRef} className="relative h-[600vh] bg-transparent">
             <div className="sticky top-0 h-screen flex flex-col items-center justify-center overflow-hidden">
-                {/* Dynamic Background Text */}
-                <div className="absolute inset-0 flex items-center justify-center pointer-events-none select-none overflow-hidden">
-                    {layers.map((layer, i) => {
-                        const start = i / layers.length
-                        const end = (i + 1) / layers.length
-
-                        // eslint-disable-next-line react-hooks/rules-of-hooks
-                        const opacity = useTransform(smoothProgress, [start - 0.1, start, end, end + 0.1], [0, 0.03, 0.03, 0])
-                        // eslint-disable-next-line react-hooks/rules-of-hooks
-                        const scale = useTransform(smoothProgress, [start, end], [1.1, 1])
-
-                        return (
-                            <motion.div
-                                key={`bg-${layer.id}`}
-                                style={{ opacity, scale }}
-                                className="absolute inset-0 flex items-center justify-center"
-                            >
-                                <span className="text-[18vw] font-black uppercase tracking-tighter leading-none text-slate-900">
-                                    {layer.bgLabel}
-                                </span>
-                            </motion.div>
-                        )
-                    })}
-                </div>
 
                 <div className="container mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
                     {/* Left Side: Visual Dissection */}
