@@ -4,19 +4,22 @@ import React, { useRef } from "react"
 import { motion, useScroll, useTransform, useSpring, useInView } from "framer-motion"
 import { Activity, Zap, Search, Shield, Cpu, Database, CheckCircle2 } from "lucide-react"
 import { cn } from "@/lib/utils"
+import { usePerformance } from "@/hooks/use-performance"
 
 const PerformanceStep = ({
     time,
     label,
     description,
     icon: Icon,
-    isLast = false
+    isLast = false,
+    isLow = false
 }: {
     time: string,
     label: string,
     description: string,
     icon: any,
-    isLast?: boolean
+    isLast?: boolean,
+    isLow?: boolean
 }) => {
     const ref = useRef(null)
     const isInView = useInView(ref, { once: true, margin: "-100px" })
@@ -59,8 +62,8 @@ const PerformanceStep = ({
                         className="mt-4 p-3 bg-slate-50 border border-slate-100 rounded-xl font-mono text-[10px] text-blue-600 overflow-hidden"
                     >
                         <motion.div
-                            animate={{ y: [0, -100] }}
-                            transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
+                            animate={isLow ? { y: -50 } : { y: [0, -100] }}
+                            transition={{ duration: 2, repeat: isLow ? 0 : Infinity, ease: "linear" }}
                         >
                             {Array.from({ length: 10 }).map((_, i) => (
                                 <div key={i}>SCAN_BUFFER_{Math.random().toString(16).slice(2, 8)}... OK</div>
@@ -73,7 +76,7 @@ const PerformanceStep = ({
     )
 }
 
-const EKGLine = () => {
+const EKGLine = ({ isLow }: { isLow: boolean }) => {
     return (
         <div className="relative w-full h-32 overflow-hidden bg-white/50 backdrop-blur-sm rounded-3xl border border-slate-100 flex items-center shadow-inner">
             <svg viewBox="0 0 400 100" className="w-full h-full">
@@ -84,20 +87,22 @@ const EKGLine = () => {
                     strokeWidth="2"
                     initial={{ pathLength: 0, opacity: 0 }}
                     animate={{ pathLength: 1, opacity: 1 }}
-                    transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
+                    transition={{ duration: 3, repeat: isLow ? 0 : Infinity, ease: "linear" }}
                 />
-                {/* Glow layer */}
-                <motion.path
-                    d="M 0 50 L 50 50 L 60 20 L 70 80 L 80 50 L 130 50 L 140 10 L 150 90 L 160 50 L 210 50 L 220 30 L 230 70 L 240 50 L 290 50 L 300 15 L 310 85 L 320 50 L 400 50"
-                    fill="none"
-                    stroke="#3b82f6"
-                    strokeWidth="4"
-                    strokeLinecap="round"
-                    className="blur-[2px] opacity-30"
-                    initial={{ pathLength: 0 }}
-                    animate={{ pathLength: 1 }}
-                    transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
-                />
+                {/* Glow layer - Disabled on low end */}
+                {!isLow && (
+                    <motion.path
+                        d="M 0 50 L 50 50 L 60 20 L 70 80 L 80 50 L 130 50 L 140 10 L 150 90 L 160 50 L 210 50 L 220 30 L 230 70 L 240 50 L 290 50 L 300 15 L 310 85 L 320 50 L 400 50"
+                        fill="none"
+                        stroke="#3b82f6"
+                        strokeWidth="4"
+                        strokeLinecap="round"
+                        className="blur-[2px] opacity-30"
+                        initial={{ pathLength: 0 }}
+                        animate={{ pathLength: 1 }}
+                        transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
+                    />
+                )}
             </svg>
             <div className="absolute inset-0 bg-gradient-to-r from-white via-transparent to-white pointer-events-none" />
         </div>
@@ -105,8 +110,10 @@ const EKGLine = () => {
 }
 
 export function PerformanceVisualizer() {
+    const profile = usePerformance()
     const containerRef = useRef(null)
     const isInView = useInView(containerRef, { once: true, margin: "-100px" })
+    const isLow = profile.isLow
 
     // Performance number counter
     const [count, setCount] = React.useState(0)
@@ -161,7 +168,7 @@ export function PerformanceVisualizer() {
                         </div>
 
                         <div className="space-y-6">
-                            <EKGLine />
+                            <EKGLine isLow={isLow} />
                             <div className="flex justify-between items-end">
                                 <div>
                                     <span className="text-[10px] font-black text-slate-400 uppercase tracking-[0.2em] block mb-1">SCAN_LATENCY</span>
@@ -199,18 +206,21 @@ export function PerformanceVisualizer() {
                                 label="Request Initiated"
                                 description="SecureScan node receives target domain. Encryption handshake completed."
                                 icon={Zap}
+                                isLow={isLow}
                             />
                             <PerformanceStep
                                 time="45ms"
                                 label="Global Cross-Reference"
                                 description="Async querying of 200+ global threat databases and WHOIS records."
                                 icon={Database}
+                                isLow={isLow}
                             />
                             <PerformanceStep
                                 time="90ms"
                                 label="AI Logic Analysis"
                                 description="Custom neural network evaluates behavioral patterns and phishing probability."
                                 icon={Cpu}
+                                isLow={isLow}
                             />
                             <PerformanceStep
                                 time="120ms"
@@ -218,6 +228,7 @@ export function PerformanceVisualizer() {
                                 description="Clinical report compiled with actionable mitigation protocols."
                                 icon={CheckCircle2}
                                 isLast={true}
+                                isLow={isLow}
                             />
                         </div>
                     </div>

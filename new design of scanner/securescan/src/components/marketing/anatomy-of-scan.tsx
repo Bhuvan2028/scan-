@@ -1,8 +1,9 @@
 "use client"
 
 import { useRef, useState, useEffect } from "react"
-import { motion, useScroll, useTransform, useSpring, AnimatePresence } from "framer-motion"
+import { motion, useScroll, useTransform, useSpring } from "framer-motion"
 import { Shield, Globe, Lock, Code2, AlertCircle, Terminal } from "lucide-react"
+import { usePerformance } from "@/hooks/use-performance"
 
 const layers = [
     {
@@ -75,17 +76,20 @@ function Typewriter({ text, active }: { text: string; active: boolean }) {
 }
 
 export function AnatomyOfScan() {
+    const profile = usePerformance()
     const containerRef = useRef<HTMLDivElement>(null)
     const { scrollYProgress } = useScroll({
         target: containerRef,
         offset: ["start start", "end end"]
     })
 
-    const smoothProgress = useSpring(scrollYProgress, {
-        stiffness: 100,
-        damping: 30,
-        restDelta: 0.001
-    })
+    // Optimize spring settings based on performance tier
+    // Low performance = Much lighter spring calculation
+    const springConfig = profile.isLow
+        ? { stiffness: 40, damping: 20, restDelta: 0.1 } // Faster, less precise exit
+        : { stiffness: 100, damping: 30, restDelta: 0.001 }
+
+    const smoothProgress = useSpring(scrollYProgress, springConfig)
 
     return (
         <section ref={containerRef} className="relative h-[600vh] bg-transparent">
@@ -94,37 +98,40 @@ export function AnatomyOfScan() {
                 <div className="container mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
                     {/* Left Side: Visual Dissection */}
                     <div className="relative h-[500px] flex items-center justify-center">
-                        {/* SVG Connectors */}
-                        <svg className="absolute inset-0 size-full pointer-events-none opacity-20" viewBox="0 0 500 500">
-                            {layers.map((_, i) => {
-                                const start = i / layers.length
-                                // eslint-disable-next-line react-hooks/rules-of-hooks
-                                const pathLength = useTransform(smoothProgress, [start, start + 0.1], [0, 1])
-                                // eslint-disable-next-line react-hooks/rules-of-hooks
-                                const opacity = useTransform(smoothProgress, [start, start + 0.1], [0, 1])
+                        {/* SVG Connectors - Simplify on mobile */}
+                        {!profile.isLow && (
+                            <svg className="absolute inset-0 size-full pointer-events-none opacity-20" viewBox="0 0 500 500">
+                                {layers.map((_, i) => {
+                                    const start = i / layers.length
+                                    // eslint-disable-next-line react-hooks/rules-of-hooks
+                                    const pathLength = useTransform(smoothProgress, [start, start + 0.1], [0, 1])
+                                    // eslint-disable-next-line react-hooks/rules-of-hooks
+                                    const opacity = useTransform(smoothProgress, [start, start + 0.1], [0, 1])
 
-                                return (
-                                    <motion.path
-                                        key={`path-${i}`}
-                                        d={`M 250 250 L ${250 + (i % 2 === 0 ? -150 : 150)} ${250 + (i - 2) * 100}`}
-                                        stroke="#cbd5e1"
-                                        strokeWidth="1"
-                                        strokeDasharray="4 4"
-                                        fill="none"
-                                        style={{ pathLength, opacity }}
-                                    />
-                                )
-                            })}
-                        </svg>
+                                    return (
+                                        <motion.path
+                                            key={`path-${i}`}
+                                            d={`M 250 250 L ${250 + (i % 2 === 0 ? -150 : 150)} ${250 + (i - 2) * 100}`}
+                                            stroke="#cbd5e1"
+                                            strokeWidth="1"
+                                            strokeDasharray="4 4"
+                                            fill="none"
+                                            style={{ pathLength, opacity }}
+                                        />
+                                    )
+                                })}
+                            </svg>
+                        )}
 
+                        {/* Render Layers (Keep rest of logic same but consuming profile if needed) */}
                         {layers.map((layer, index) => {
                             const start = index / layers.length
                             const end = (index + 1) / layers.length
 
                             // eslint-disable-next-line react-hooks/rules-of-hooks
-                            const opacity = useTransform(smoothProgress, [start, start + 0.05, end - 0.05, end], [0, 1, 1, 0])
+                            const opacity = useTransform(smoothProgress, [start, start + 0.01, end - 0.05, end], [0, 1, 1, 0])
                             // eslint-disable-next-line react-hooks/rules-of-hooks
-                            const y = useTransform(smoothProgress, [start, end], [150, -150])
+                            const y = useTransform(smoothProgress, [start, end], [index === 0 ? 0 : 150, -150])
                             // eslint-disable-next-line react-hooks/rules-of-hooks
                             const scale = useTransform(smoothProgress, [start, start + 0.1, end - 0.1, end], [0.7, 1, 1, 0.7])
 
@@ -196,7 +203,6 @@ export function AnatomyOfScan() {
                             )
                         })}
                     </div>
-
                     {/* Right Side: Copy */}
                     <div className="relative h-[200px] flex items-center">
                         {layers.map((layer, index) => {
@@ -204,7 +210,7 @@ export function AnatomyOfScan() {
                             const end = (index + 1) / layers.length
 
                             // eslint-disable-next-line react-hooks/rules-of-hooks
-                            const opacity = useTransform(smoothProgress, [start, start + 0.1, end - 0.1, end], [0, 1, 1, 0])
+                            const opacity = useTransform(smoothProgress, [start, start + 0.02, end - 0.05, end], [0, 1, 1, 0])
                             // eslint-disable-next-line react-hooks/rules-of-hooks
                             const x = useTransform(smoothProgress, [start, start + 0.1], [60, 0])
                             // eslint-disable-next-line react-hooks/rules-of-hooks

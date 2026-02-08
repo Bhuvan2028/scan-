@@ -4,6 +4,7 @@ import React, { useRef } from "react"
 import { motion, useTransform, useSpring, useMotionValue, AnimatePresence, useScroll } from "framer-motion"
 import { Search, ArrowRight } from "lucide-react"
 import { useRouter } from "next/navigation"
+import { usePerformance } from "@/hooks/use-performance"
 
 const dnaMarkers = [
     { label: "DNS_A_RECORD", val: "104.21.34.112", color: "text-blue-500" },
@@ -16,13 +17,19 @@ const dnaMarkers = [
 export function SplitHero() {
     const containerRef = useRef<HTMLDivElement>(null)
 
+    const profile = usePerformance()
+
     // Mouse movement values for parallax
     const mouseX = useMotionValue(0)
     const mouseY = useMotionValue(0)
 
-    // Smooth magnetic/parallax springs
-    const smoothX = useSpring(mouseX, { stiffness: 100, damping: 30 })
-    const smoothY = useSpring(mouseY, { stiffness: 100, damping: 30 })
+    // Smooth magnetic/parallax springs - Lighter on Low tier
+    const springConfig = profile.isLow
+        ? { stiffness: 40, damping: 20 }
+        : { stiffness: 100, damping: 30 }
+
+    const smoothX = useSpring(mouseX, springConfig)
+    const smoothY = useSpring(mouseY, springConfig)
 
     // Transform values
     const bgX = useTransform(smoothX, [-500, 500], [20, -20])
@@ -36,7 +43,8 @@ export function SplitHero() {
         offset: ["start start", "end start"]
     })
 
-    const textFlyOut = useTransform(scrollYProgress, [0, 1], [0, -100])
+    const heroOpacity = useTransform(scrollYProgress, [0, 1], [1, 1])
+    const textFlyOut = useTransform(scrollYProgress, [0, 1], [0, 0])
 
     const handleMouseMove = (e: React.MouseEvent) => {
         if (!containerRef.current) return
@@ -86,7 +94,7 @@ export function SplitHero() {
                     </motion.div>
 
                     <motion.h1
-                        style={{ rotateX: textTiltX, rotateY: textTiltY, y: textFlyOut }}
+                        style={{ rotateX: textTiltX, rotateY: textTiltY, opacity: heroOpacity, y: textFlyOut }}
                         className="text-6xl md:text-7xl lg:text-[8rem] font-black tracking-tighter text-slate-900 leading-[0.85] mb-6 flex flex-col items-start"
                     >
                         <motion.span
@@ -118,6 +126,7 @@ export function SplitHero() {
                         initial={{ opacity: 0, y: 20 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
+                        style={{ opacity: heroOpacity }}
                         transition={{ duration: 0.8, delay: 0.5 }}
                         className="text-lg md:text-xl text-slate-500 font-medium leading-relaxed mb-6 opacity-80 max-w-lg border-l-2 border-slate-200 pl-6"
                     >

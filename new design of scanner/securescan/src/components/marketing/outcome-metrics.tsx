@@ -4,6 +4,7 @@ import React, { useRef, useState, useEffect } from "react"
 import { motion, useInView, AnimatePresence, useScroll, useTransform } from "framer-motion"
 import { Target, TrendingDown, ShieldCheck, Globe, Lock, Cpu, Activity, LucideIcon } from "lucide-react"
 import { cn } from "@/lib/utils"
+import { usePerformance } from "@/hooks/use-performance"
 
 const Counter = ({ value, suffix = "", duration = 2, delay = 0, oscillation = false }: { value: number | string, suffix?: string, duration?: number, delay?: number, oscillation?: boolean }) => {
     const [count, setCount] = useState(0)
@@ -138,49 +139,54 @@ const MetricCard = ({
     )
 }
 
-const PrecisionDialWidget = () => (
-    <div className="relative size-40 flex items-center justify-center">
-        {/* Scope Rings */}
-        {[0, 1].map((i) => (
+const PrecisionDialWidget = () => {
+    const profile = usePerformance()
+    const isLow = profile.isLow
+
+    return (
+        <div className="relative size-40 flex items-center justify-center">
+            {/* Scope Rings - Only rotate if not on low device */}
+            {[0, 1].map((i) => (
+                <motion.div
+                    key={i}
+                    className="absolute border border-blue-200/50 rounded-full"
+                    style={{ width: `${60 + i * 30}%`, height: `${60 + i * 30}%` }}
+                    animate={isLow ? {} : { rotate: i === 0 ? 360 : -360 }}
+                    transition={{ duration: 10 + i * 5, repeat: Infinity, ease: "linear" }}
+                >
+                    {/* Dial Notches */}
+                    <div className="absolute top-0 left-1/2 -translate-x-1/2 w-0.5 h-2 bg-blue-400/40" />
+                    <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-0.5 h-2 bg-blue-400/40" />
+                </motion.div>
+            ))}
+
+            {/* Rotating Dial */}
             <motion.div
-                key={i}
-                className="absolute border border-blue-200/50 rounded-full"
-                style={{ width: `${60 + i * 30}%`, height: `${60 + i * 30}%` }}
-                animate={{ rotate: i === 0 ? 360 : -360 }}
-                transition={{ duration: 10 + i * 5, repeat: Infinity, ease: "linear" }}
+                className="absolute size-[80%] border-2 border-t-blue-500 border-r-transparent border-b-transparent border-l-transparent rounded-full"
+                animate={isLow ? {} : { rotate: 360 }}
+                transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+            />
+
+            {/* Central Lock-on Core */}
+            <motion.div
+                animate={{
+                    scale: [1, 1.05, 1],
+                    backgroundColor: ["rgba(37, 99, 235, 1)", "rgba(59, 130, 246, 1)", "rgba(37, 99, 235, 1)"]
+                }}
+                transition={{ duration: 2, repeat: Infinity }}
+                className="size-10 rounded-full bg-blue-600 flex items-center justify-center shadow-[0_0_30px_rgba(59,130,246,0.5)] z-10"
             >
-                {/* Dial Notches */}
-                <div className="absolute top-0 left-1/2 -translate-x-1/2 w-0.5 h-2 bg-blue-400/40" />
-                <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-0.5 h-2 bg-blue-400/40" />
+                <div className="size-2.5 rounded-full bg-white animate-pulse" />
             </motion.div>
-        ))}
 
-        {/* Rotating Dial */}
-        <motion.div
-            className="absolute size-[80%] border-2 border-t-blue-500 border-r-transparent border-b-transparent border-l-transparent rounded-full"
-            animate={{ rotate: 360 }}
-            transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-        />
-
-        {/* Central Lock-on Core */}
-        <motion.div
-            animate={{
-                scale: [1, 1.05, 1],
-                backgroundColor: ["rgba(37, 99, 235, 1)", "rgba(59, 130, 246, 1)", "rgba(37, 99, 235, 1)"]
-            }}
-            transition={{ duration: 2, repeat: Infinity }}
-            className="size-10 rounded-full bg-blue-600 flex items-center justify-center shadow-[0_0_30px_rgba(59,130,246,0.5)] z-10"
-        >
-            <div className="size-2.5 rounded-full bg-white animate-pulse" />
-        </motion.div>
-
-        {/* Dynamic Crosshair */}
-        <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-            <div className="w-full h-px bg-blue-500/10" />
-            <div className="h-full w-px bg-blue-500/10 absolute" />
+            {/* Dynamic Crosshair */}
+            <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+                <div className="w-full h-px bg-blue-500/10" />
+                <div className="h-full w-px bg-blue-500/10 absolute" />
+            </div>
         </div>
-    </div>
-)
+    )
+}
 
 const TimeCompressionWidget = () => {
     const [isFinished, setIsFinished] = useState(false)
@@ -301,6 +307,7 @@ const HolographicShieldWidget = () => (
 )
 
 export function OutcomeMetrics() {
+    const profile = usePerformance()
     const containerRef = useRef(null)
     const { scrollYProgress } = useScroll({
         target: containerRef,
@@ -381,47 +388,49 @@ export function OutcomeMetrics() {
                 </motion.div>
             </div>
 
-            {/* Live Audit Ticker */}
-            <div className="mt-32 w-full bg-slate-50 border-y border-slate-100 py-4 flex overflow-hidden whitespace-nowrap relative">
-                <motion.div
-                    animate={{ x: [0, -1000] }}
-                    transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-                    className="flex gap-20 items-center px-10"
-                >
-                    {[0, 1].map((n) => (
-                        <div key={n} className="flex gap-20 items-center">
-                            <div className="flex items-center gap-3">
-                                <Activity size={12} className="text-blue-500" />
-                                <span className="text-[10px] font-black font-mono text-slate-400">
-                                    [AUDIT_LOG]: <span className="text-slate-900">14,203 threats neutralized in last hour</span>
-                                </span>
+            {/* Live Audit Ticker - Disabled on low-end to save layout repaints */}
+            {!profile.isLow && (
+                <div className="mt-32 w-full bg-slate-50 border-y border-slate-100 py-4 flex overflow-hidden whitespace-nowrap relative">
+                    <motion.div
+                        animate={{ x: [0, -1000] }}
+                        transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+                        className="flex gap-20 items-center px-10"
+                    >
+                        {[0, 1].map((n) => (
+                            <div key={n} className="flex gap-20 items-center">
+                                <div className="flex items-center gap-3">
+                                    <Activity size={12} className="text-blue-500" />
+                                    <span className="text-[10px] font-black font-mono text-slate-400">
+                                        [AUDIT_LOG]: <span className="text-slate-900">14,203 threats neutralized in last hour</span>
+                                    </span>
+                                </div>
+                                <div className="flex items-center gap-3">
+                                    <Cpu size={12} className="text-blue-500" />
+                                    <span className="text-[10px] font-black font-mono text-slate-400">
+                                        [SYS_HEALTH]: <span className="text-blue-900">100% OPERATIONAL</span>
+                                    </span>
+                                </div>
+                                <div className="flex items-center gap-3">
+                                    <Globe size={12} className="text-blue-500" />
+                                    <span className="text-[10px] font-black font-mono text-slate-400">
+                                        [AVG_LATENCY]: <span className="text-slate-900">42ms_GLOBAL_CDN</span>
+                                    </span>
+                                </div>
+                                <div className="flex items-center gap-3">
+                                    <ShieldCheck size={12} className="text-emerald-500" />
+                                    <span className="text-[10px] font-black font-mono text-slate-400 uppercase">
+                                        [PROTOCOL_SIG]: <span className="text-emerald-600">VERIFIED_BLOCK_782394</span>
+                                    </span>
+                                </div>
                             </div>
-                            <div className="flex items-center gap-3">
-                                <Cpu size={12} className="text-blue-500" />
-                                <span className="text-[10px] font-black font-mono text-slate-400">
-                                    [SYS_HEALTH]: <span className="text-blue-900">100% OPERATIONAL</span>
-                                </span>
-                            </div>
-                            <div className="flex items-center gap-3">
-                                <Globe size={12} className="text-blue-500" />
-                                <span className="text-[10px] font-black font-mono text-slate-400">
-                                    [AVG_LATENCY]: <span className="text-slate-900">42ms_GLOBAL_CDN</span>
-                                </span>
-                            </div>
-                            <div className="flex items-center gap-3">
-                                <ShieldCheck size={12} className="text-emerald-500" />
-                                <span className="text-[10px] font-black font-mono text-slate-400 uppercase">
-                                    [PROTOCOL_SIG]: <span className="text-emerald-600">VERIFIED_BLOCK_782394</span>
-                                </span>
-                            </div>
-                        </div>
-                    ))}
-                </motion.div>
+                        ))}
+                    </motion.div>
 
-                {/* Gradient Fades */}
-                <div className="absolute inset-y-0 left-0 w-40 bg-gradient-to-r from-white to-transparent z-10" />
-                <div className="absolute inset-y-0 right-0 w-40 bg-gradient-to-l from-white to-transparent z-10" />
-            </div>
+                    {/* Gradient Fades */}
+                    <div className="absolute inset-y-0 left-0 w-40 bg-gradient-to-r from-white to-transparent z-10" />
+                    <div className="absolute inset-y-0 right-0 w-40 bg-gradient-to-l from-white to-transparent z-10" />
+                </div>
+            )}
 
         </section>
     )

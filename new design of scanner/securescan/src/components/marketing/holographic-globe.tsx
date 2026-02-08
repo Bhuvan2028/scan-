@@ -2,13 +2,16 @@
 
 import { useRef, useMemo } from "react"
 import { Canvas, useFrame } from "@react-three/fiber"
-import { Stars, Float, Sphere, MeshDistortMaterial, PerspectiveCamera } from "@react-three/drei"
+import { Stars, Float, Sphere, PerspectiveCamera } from "@react-three/drei"
 import * as THREE from "three"
-import { motion, AnimatePresence } from "framer-motion"
+import { usePerformance } from "@/hooks/use-performance"
 
-function HolographicArcs({ count = 15 }) {
+function HolographicArcs({ count = 15, isLow = false }) {
     const lines = useMemo(() => {
         const result = []
+        // Halve the curve smoothness on low-end devices
+        const segments = isLow ? 20 : 50
+
         for (let i = 0; i < count; i++) {
             const start = new THREE.Vector3().setFromSphericalCoords(
                 2.5,
@@ -23,11 +26,11 @@ function HolographicArcs({ count = 15 }) {
 
             const mid = start.clone().lerp(end, 0.5).normalize().multiplyScalar(3.5)
             const curve = new THREE.QuadraticBezierCurve3(start, mid, end)
-            const points = curve.getPoints(50)
+            const points = curve.getPoints(segments)
             result.push(points)
         }
         return result
-    }, [count])
+    }, [count, isLow])
 
     return (
         <group>
@@ -46,7 +49,7 @@ function HolographicArcs({ count = 15 }) {
     )
 }
 
-function HolographicGrid() {
+function HolographicGrid({ isLow = false }) {
     const gridRef = useRef<THREE.Group>(null)
 
     useFrame((state) => {
@@ -58,7 +61,8 @@ function HolographicGrid() {
 
     const lines = useMemo(() => {
         const result = []
-        const segments = 20
+        // Significantly reduce grid density for mobile
+        const segments = isLow ? 10 : 20
 
         for (let i = 0; i <= segments; i++) {
             const lat = (i / segments) * Math.PI - Math.PI / 2
@@ -77,7 +81,7 @@ function HolographicGrid() {
         }
 
         return result
-    }, [])
+    }, [isLow])
 
     return (
         <group ref={gridRef}>
@@ -90,17 +94,16 @@ function HolographicGrid() {
                 </bufferGeometry>
                 <pointsMaterial
                     size={0.02}
-                    color="#06b6d4"
+                    color="#155e75"
                     transparent
-                    opacity={0.4}
-                    blending={THREE.AdditiveBlending}
+                    opacity={0.6}
                 />
             </points>
         </group>
     )
 }
 
-function ThreatNodes({ count = 8 }) {
+function ThreatNodes({ count = 8, isLow = false }) {
     const nodes = useMemo(() => {
         const result = []
         for (let i = 0; i < count; i++) {
@@ -119,7 +122,8 @@ function ThreatNodes({ count = 8 }) {
                     <mesh position={pos}>
                         <octahedronGeometry args={[0.08, 0]} />
                         <meshBasicMaterial color={i % 2 === 0 ? "#ff3366" : "#06b6d4"} transparent opacity={0.6} />
-                        <pointLight distance={1} intensity={2} color={i % 2 === 0 ? "#ff3366" : "#06b6d4"} />
+                        {/* Reduce shadow/light casting nodes on mobile */}
+                        {!isLow && <pointLight distance={1} intensity={2} color={i % 2 === 0 ? "#ff3366" : "#06b6d4"} />}
                     </mesh>
                 </Float>
             ))}
@@ -137,7 +141,7 @@ function ShieldAura() {
     })
 
     return (
-        <Sphere ref={auraRef} args={[3.2, 64, 64]}>
+        <Sphere ref={auraRef} args={[3.2, 32, 32]}>
             <meshStandardMaterial
                 name="ShieldAuraMaterial"
                 color="#06b6d4"
@@ -151,10 +155,13 @@ function ShieldAura() {
     )
 }
 
-function HolographicGlobeInner({ isActive = false }) {
+function HolographicGlobeInner({ isActive = false, profile }: { isActive?: boolean; profile: any }) {
     const globeRef = useRef<THREE.Group>(null)
     const ringRef = useRef<THREE.Mesh>(null)
     const coreRef = useRef<THREE.Mesh>(null)
+
+    const isLow = profile.isLow
+    const isHigh = profile.isHigh
 
     useFrame((_state) => {
         if (globeRef.current) {
@@ -176,59 +183,59 @@ function HolographicGlobeInner({ isActive = false }) {
     return (
         <group ref={globeRef}>
             {/* Inner Core - Technical Heart */}
-            <Sphere ref={coreRef} args={[1.8, 32, 32]}>
+            <Sphere ref={coreRef} args={[1.8, isLow ? 16 : 32, isLow ? 16 : 32]}>
                 <meshBasicMaterial
                     color="#06b6d4"
                     wireframe={true}
                     transparent
-                    opacity={0.15}
-                    blending={THREE.AdditiveBlending}
+                    opacity={0.3}
                 />
             </Sphere>
 
             {/* Main Globe - Structural Mesh */}
-            <Sphere args={[2.5, 64, 64]}>
+            <Sphere args={[2.5, isLow ? 24 : 48, isLow ? 24 : 48]}>
                 <meshStandardMaterial
-                    color="#0f172a"
+                    color="#f8fafc"
                     emissive="#06b6d4"
+                    emissiveIntensity={0.5}
                     wireframe={true}
                     transparent
-                    opacity={0.2}
-                    metalness={1}
-                    roughness={0}
+                    opacity={0.25}
+                    metalness={0.5}
+                    roughness={0.5}
                 />
             </Sphere>
 
-            {/* Data Visualization Elements */}
-            <HolographicGrid />
-            <HolographicArcs count={20} />
-            <ThreatNodes count={12} />
-            <ShieldAura />
+            {/* Data Visualization Elements - Scaled for performance */}
+            <HolographicGrid isLow={isLow} />
+            <HolographicArcs count={isLow ? 8 : (isHigh ? 25 : 15)} isLow={isLow} />
+            <ThreatNodes count={isLow ? 6 : 12} isLow={isLow} />
+
+            {/* Disable aura on mobile to save GPU blits */}
+            {!isLow && <ShieldAura />}
 
             {/* Interactive Scanning Rings */}
             <mesh ref={ringRef}>
-                <torusGeometry args={[3.1, 0.015, 16, 120]} />
+                <torusGeometry args={[3.1, 0.015, 12, isLow ? 60 : 120]} />
                 <meshBasicMaterial
                     color="#8b5cf6"
                     transparent
-                    opacity={0.5}
-                    blending={THREE.AdditiveBlending}
+                    opacity={0.4}
                 />
             </mesh>
 
             <mesh rotation={[Math.PI / 4, 0, 0]}>
-                <torusGeometry args={[2.9, 0.01, 16, 120]} />
+                <torusGeometry args={[2.9, 0.01, 12, isLow ? 60 : 120]} />
                 <meshBasicMaterial
                     color="#06b6d4"
                     transparent
-                    opacity={0.4}
-                    blending={THREE.AdditiveBlending}
+                    opacity={0.3}
                 />
             </mesh>
 
             {/* Vertical HUD Ring */}
             <mesh rotation={[0, Math.PI / 2, 0]}>
-                <torusGeometry args={[3.3, 0.005, 16, 120]} />
+                <torusGeometry args={[3.3, 0.005, 12, isLow ? 60 : 120]} />
                 <meshBasicMaterial color="#06b6d4" transparent opacity={0.2} />
             </mesh>
         </group>
@@ -240,24 +247,28 @@ interface HolographicGlobeProps {
 }
 
 export function HolographicGlobe({ isActive = false }: HolographicGlobeProps) {
+    const profile = usePerformance()
+
     return (
         <div className="relative size-[600px] md:size-[800px] pointer-events-none select-none">
-            <Canvas>
+            <Canvas gl={{ antialias: !profile.isLow, powerPreference: "high-performance", alpha: true }}>
                 <PerspectiveCamera makeDefault position={[0, 0, 8]} />
                 <ambientLight intensity={0.4} />
                 <pointLight position={[10, 10, 10]} intensity={1} color="#06b6d4" />
-                <pointLight position={[-10, -10, -10]} intensity={0.8} color="#8b5cf6" />
-                <Stars radius={100} depth={50} count={3000} factor={4} saturation={0} fade speed={0.8} />
+                {!profile.isLow && <pointLight position={[-10, -10, -10]} intensity={0.8} color="#8b5cf6" />}
 
-                <Float speed={2} rotationIntensity={0.8} floatIntensity={0.6}>
-                    <HolographicGlobeInner isActive={isActive} />
+                {/* Scale stars count */}
+                <Stars radius={100} depth={50} count={profile.isLow ? 800 : 3000} factor={4} saturation={0} fade speed={0.8} />
+
+                <Float speed={profile.isLow ? 1 : 2} rotationIntensity={0.8} floatIntensity={0.6}>
+                    <HolographicGlobeInner isActive={isActive} profile={profile} />
                 </Float>
 
                 {/* Holographic Projection Effect */}
                 {isActive && (
                     <group>
                         <mesh rotation={[Math.PI / 2, 0, 0]}>
-                            <circleGeometry args={[3.2, 64]} />
+                            <circleGeometry args={[3.2, profile.isLow ? 32 : 64]} />
                             <meshBasicMaterial
                                 color="#06b6d4"
                                 transparent
