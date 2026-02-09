@@ -13,63 +13,86 @@ export function SecurityScoreCard({ score, previousScore = 78 }: SecurityScoreCa
     const diff = Math.abs(score - previousScore)
 
     return (
-        <div className="bg-white rounded-3xl p-10 md:p-14 relative overflow-hidden group ring-1 ring-slate-100 shadow-sm">
-            {/* Background Decor - Subtle for Minimalism */}
-            <div className="absolute top-0 right-0 -mr-24 -mt-24 size-96 bg-slate-50 rounded-full blur-3xl group-hover:bg-slate-100 transition-colors duration-700" />
+        <div className="bg-white rounded-none p-10 md:p-16 relative overflow-hidden group border border-slate-100 hover:border-slate-950 transition-colors duration-500">
+            {/* Surgical Accents */}
+            <div className="absolute top-0 left-0 w-24 h-[1px] bg-slate-100 group-hover:bg-slate-950 transition-colors" />
+            <div className="absolute top-0 left-0 w-[1px] h-24 bg-slate-100 group-hover:bg-slate-950 transition-colors" />
 
-            <div className="relative z-10 flex flex-col lg:flex-row items-center justify-between gap-12">
-                <div className="text-center lg:text-left">
-                    <div className="flex items-center justify-center lg:justify-start gap-4 mb-6">
-                        <div className="p-3 bg-slate-900 text-white rounded-2xl shadow-lg shadow-slate-900/10">
-                            <Shield className="size-8" />
+            <div className="relative z-10 flex flex-col lg:flex-row items-center justify-between gap-16">
+                <div className="text-center lg:text-left flex-1">
+                    <div className="flex items-center justify-center lg:justify-start gap-4 mb-8">
+                        <div className="p-4 border border-slate-950 bg-slate-950 text-white transition-all">
+                            <Shield className="size-6" strokeWidth={2.5} />
                         </div>
-                        <span className="text-[10px] font-black uppercase tracking-[0.3em] text-slate-900">Total Security Posture</span>
+                        <div className="flex flex-col">
+                            <span className="text-[10px] font-black uppercase tracking-[0.4em] text-blue-600 mb-1">GLOBAL_POSTURE_INDEX</span>
+                            <span className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400">Security Health Monitoring</span>
+                        </div>
                     </div>
-                    <h2 className="text-5xl md:text-6xl font-black text-slate-900 tracking-tight mb-4">Security Health</h2>
-                    <p className="text-slate-500 text-lg font-light max-w-md leading-relaxed">
-                        Global security score calculated from 9 critical infrastructure benchmarks.
+                    <h2 className="text-6xl md:text-8xl font-black text-slate-950 tracking-tighter mb-8 uppercase">
+                        Audit <span className="text-slate-400">Score</span>
+                    </h2>
+                    <p className="text-slate-500 text-sm font-bold font-mono max-w-md leading-relaxed uppercase">
+                        // CALCULATION_ENGINE::V4.0
+                        <br />
+                        // AGGREGATING_NINE_INFRA_BENCHMARKS...
+                        <br />
+                        // RESULT_ACCURACY::99.9%
                     </p>
                 </div>
 
                 <div className="relative flex items-center justify-center">
-                    <svg className="size-56 md:size-64 transform -rotate-90">
+                    <svg className="size-64 md:size-80 transform -rotate-90">
                         <circle
                             cx="50%"
                             cy="50%"
-                            r="80"
+                            r="110"
                             stroke="currentColor"
-                            strokeWidth="4"
+                            strokeWidth="1"
                             fill="transparent"
-                            className="text-slate-50"
+                            className="text-slate-100"
                         />
+                        {/* Tick marks for technical feel */}
+                        {[...Array(12)].map((_, i) => (
+                            <line
+                                key={i}
+                                x1="50%"
+                                y1="12%"
+                                x2="50%"
+                                y2="16%"
+                                stroke="currentColor"
+                                strokeWidth="2"
+                                className="text-slate-200"
+                                transform={`rotate(${i * 30}, 160, 160)`}
+                            />
+                        ))}
                         <motion.circle
                             cx="50%"
                             cy="50%"
-                            r="80"
+                            r="110"
                             stroke="currentColor"
-                            strokeWidth="14"
-                            strokeDasharray={502.6}
-                            initial={{ strokeDashoffset: 502.6 }}
-                            animate={{ strokeDashoffset: 502.6 - (score / 100) * 502.6 }}
-                            transition={{ duration: 2, ease: "circOut" }}
+                            strokeWidth="12"
+                            strokeDasharray={691}
+                            initial={{ strokeDashoffset: 691 }}
+                            animate={{ strokeDashoffset: 691 - (score / 100) * 691 }}
+                            transition={{ duration: 2.5, ease: [0.16, 1, 0.3, 1] }}
                             fill="transparent"
-                            strokeLinecap="round"
-                            className="text-slate-900"
+                            className="text-slate-950"
                         />
                     </svg>
                     <div className="absolute inset-0 flex flex-col items-center justify-center">
                         <motion.span
-                            initial={{ opacity: 0, y: 10 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ delay: 0.5 }}
-                            className="text-7xl md:text-8xl font-bold text-slate-900 tracking-tighter tabular-nums"
+                            initial={{ opacity: 0, scale: 0.9 }}
+                            animate={{ opacity: 1, scale: 1 }}
+                            transition={{ delay: 0.5, duration: 0.8 }}
+                            className="text-8xl md:text-9xl font-black text-slate-950 tracking-tighter tabular-nums"
                         >
                             {score}
                         </motion.span>
-                        <div className={`flex items-center gap-1.5 mt-2 px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-widest ${isImproving ? "bg-slate-900 text-white" : "bg-white text-slate-400 border border-slate-100"
+                        <div className={`flex items-center gap-2 mt-2 px-4 py-1 border font-black text-[9px] uppercase tracking-widest font-mono ${isImproving ? "bg-emerald-50 text-emerald-600 border-emerald-100" : "bg-red-50 text-red-600 border-red-100"
                             }`}>
-                            {isImproving ? <TrendingUp size={12} /> : <TrendingDown size={12} />}
-                            {diff}% vs Last
+                            {isImproving ? <TrendingUp size={10} /> : <TrendingDown size={10} />}
+                            VAR::{diff}%_DELTA
                         </div>
                     </div>
                 </div>

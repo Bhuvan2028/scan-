@@ -17,9 +17,9 @@ interface StatusTimelineProps {
 
 export function StatusTimeline({ currentPhaseIndex }: StatusTimelineProps) {
     return (
-        <div className="space-y-8 relative">
+        <div className="space-y-12 relative px-2">
             {/* Vertical Line */}
-            <div className="absolute left-[15px] top-2 bottom-2 w-px bg-slate-100" />
+            <div className="absolute left-[20px] top-4 bottom-4 w-px bg-slate-100" />
 
             {phases.map((phase, index) => {
                 const isCompleted = index < currentPhaseIndex
@@ -28,34 +28,42 @@ export function StatusTimeline({ currentPhaseIndex }: StatusTimelineProps) {
                 return (
                     <motion.div
                         key={phase.id}
-                        initial={{ opacity: 0, x: 20 }}
+                        initial={{ opacity: 0, x: -10 }}
                         animate={{ opacity: 1, x: 0 }}
-                        transition={{ delay: index * 0.1 }}
-                        className="flex gap-6 relative"
+                        transition={{ delay: index * 0.1, duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+                        className="flex gap-10 relative group"
                     >
                         <div className={cn(
-                            "relative z-10 size-8 rounded-full flex items-center justify-center transition-all duration-500",
-                            isCompleted ? "bg-slate-900 text-white" :
-                                isActive ? "bg-white border-2 border-slate-900 text-slate-900 shadow-lg shadow-slate-200" :
-                                    "bg-white border-2 border-slate-100 text-slate-300"
+                            "relative z-10 size-10 border-2 transition-all duration-500 rounded-none flex items-center justify-center",
+                            isCompleted ? "bg-slate-950 border-slate-950 text-white" :
+                                isActive ? "bg-white border-blue-600 text-blue-600 scale-110 shadow-[0_0_20px_rgba(37,99,235,0.1)]" :
+                                    "bg-white border-slate-100 text-slate-200"
                         )}>
-                            {isCompleted ? <CheckCircle2 size={16} /> :
-                                isActive ? <Loader2 size={16} className="animate-spin" /> :
-                                    <Circle size={16} />}
+                            {isCompleted ? <CheckCircle2 size={16} strokeWidth={3} /> :
+                                isActive ? <Loader2 size={16} strokeWidth={3} className="animate-spin" /> :
+                                    <div className="size-1.5 bg-slate-100" />}
+
+                            {/* Connector indicator for active */}
+                            {isActive && (
+                                <div className="absolute left-full ml-4 w-8 h-[2px] bg-blue-600" />
+                            )}
                         </div>
 
-                        <div className="space-y-1 py-0.5">
-                            <h3 className={cn(
-                                "text-base font-semibold transition-colors",
-                                isActive ? "text-slate-900" : isCompleted ? "text-slate-700" : "text-slate-400"
-                            )}>
-                                {phase.title}
-                            </h3>
+                        <div className="space-y-2 py-1 flex-1">
+                            <div className="flex items-center gap-4">
+                                <h3 className={cn(
+                                    "text-sm font-black uppercase tracking-[0.2em] transition-colors",
+                                    isActive ? "text-slate-950" : isCompleted ? "text-slate-600" : "text-slate-300"
+                                )}>
+                                    PHASE_0{index + 1}::{phase.title}
+                                </h3>
+                                {isActive && <span className="text-[8px] font-black text-blue-600 animate-pulse tracking-widest bg-blue-50 px-2 py-0.5">EXE_ACTIVE</span>}
+                            </div>
                             <p className={cn(
-                                "text-sm font-light leading-relaxed transition-colors",
-                                isActive ? "text-slate-500" : "text-slate-400"
+                                "text-[11px] font-bold font-mono leading-relaxed transition-colors uppercase",
+                                isActive ? "text-slate-500" : "text-slate-300"
                             )}>
-                                {phase.description}
+                                // {phase.description}
                             </p>
                         </div>
                     </motion.div>

@@ -18,7 +18,6 @@ export default function HistoryPage() {
         const loadHistory = async () => {
             try {
                 const data = await api.getAllScans()
-                // Show completed or failed scans in history
                 setScans(data.filter(s => s.status === 'completed' || s.status === 'failed'))
             } catch (error) {
                 console.error("Failed to load history:", error)
@@ -38,82 +37,86 @@ export default function HistoryPage() {
     }, [scans, searchQuery])
 
     return (
-        <main className="min-h-screen bg-[#FAF9F6]">
-            <Navbar />
-
-            <div className="max-w-6xl mx-auto px-6 py-24 md:py-32">
-                <motion.div
-                    initial={{ opacity: 0, x: -20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    className="mb-8"
+        <div className="max-w-6xl mx-auto px-6 py-24 md:py-32 relative z-10">
+            {/* Header / Breadcrumbs */}
+            <motion.div
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                className="mb-12 flex items-center justify-between border-b border-slate-200 pb-8"
+            >
+                <Link
+                    href="/dashboard"
+                    className="inline-flex items-center text-[10px] font-black text-slate-400 hover:text-slate-950 transition-colors group uppercase tracking-[0.2em]"
                 >
-                    <Link
-                        href="/dashboard"
-                        className="inline-flex items-center text-sm font-medium text-slate-500 hover:text-slate-900 transition-colors group"
-                    >
-                        <ArrowLeft className="mr-2 size-4 group-hover:-translate-x-1 transition-transform" />
-                        Back to Dashboard
-                    </Link>
+                    <ArrowLeft className="mr-3 size-3 group-hover:-translate-x-1 transition-transform" />
+                    Return_to_Hub
+                </Link>
+            </motion.div>
+
+            <div className="flex flex-col md:flex-row md:items-end justify-between mb-20 gap-8 border-b border-slate-200 pb-16">
+                <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.5 }}
+                >
+                    <div className="flex items-center gap-2 mb-4">
+                        <div className="w-8 h-[1px] bg-blue-600" />
+                        <span className="text-[10px] font-black text-blue-600 uppercase tracking-[0.4em]">Audit_Log_Retrieval</span>
+                    </div>
+                    <h1 className="text-5xl md:text-8xl font-black text-slate-950 tracking-tighter mb-8 uppercase">
+                        Scan <span className="text-slate-400">History</span>
+                    </h1>
+                    <p className="text-slate-600 text-base font-bold font-mono max-w-2xl leading-relaxed">
+                        // ACCESSING_DECENTRALIZED_THREAT_DATABASE
+                        <br />
+                        // FILTERING_HISTORICAL_ATTACK_SURFACES
+                    </p>
                 </motion.div>
 
-                <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
-                    <motion.div
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.5 }}
-                    >
-                        <h1 className="text-4xl md:text-5xl font-semibold text-slate-900 tracking-tight mb-4">
-                            Scan History
-                        </h1>
-                        <p className="text-slate-500 text-lg font-light max-w-xl leading-relaxed">
-                            Browse and manage your historical security assessments and detailed audit reports.
-                        </p>
-                    </motion.div>
-
-                    <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4">
-                        <div className="relative group w-full sm:w-auto">
-                            <Search className="absolute left-4 top-1/2 -translate-y-1/2 size-4 text-slate-400 group-focus-within:text-slate-900 transition-colors" />
-                            <input
-                                type="text"
-                                placeholder="Search history..."
-                                value={searchQuery}
-                                onChange={(e) => setSearchQuery(e.target.value)}
-                                className="pl-11 pr-4 py-3 bg-white border border-slate-100 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-slate-900/10 focus:border-slate-900 transition-all w-full sm:w-64 shadow-sm"
-                            />
-                        </div>
+                <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4">
+                    <div className="relative group w-full sm:w-64 border border-slate-200 hover:border-slate-950 transition-all">
+                        <Search className="absolute left-4 top-1/2 -translate-y-1/2 size-3 text-slate-400 group-focus-within:text-slate-950 transition-colors" />
+                        <input
+                            type="text"
+                            placeholder="SEARCH_INDEX..."
+                            value={searchQuery}
+                            onChange={(e) => setSearchQuery(e.target.value)}
+                            className="pl-10 pr-4 py-3 bg-white rounded-none text-[10px] font-black uppercase tracking-widest focus:outline-none w-full"
+                        />
                     </div>
                 </div>
-
-                <div className="space-y-4">
-                    {loading ? (
-                        <div className="py-24 flex justify-center">
-                            <Loader2 className="size-8 animate-spin text-slate-400" />
-                        </div>
-                    ) : (
-                        <AnimatePresence mode="popLayout">
-                            {filteredHistory.map((scan, index) => (
-                                <ScanLogItem key={scan._id} scan={scan} index={index} />
-                            ))}
-                        </AnimatePresence>
-                    )}
-
-                    {!loading && filteredHistory.length === 0 && (
-                        <motion.div
-                            initial={{ opacity: 0 }}
-                            animate={{ opacity: 1 }}
-                            className="py-24 text-center"
-                        >
-                            <p className="text-slate-400 font-light italic">No assessments found matching your search.</p>
-                            <button
-                                onClick={() => { setSearchQuery(""); }}
-                                className="mt-4 text-sm font-semibold text-slate-900 hover:text-black underline underline-offset-4"
-                            >
-                                Reset Filters
-                            </button>
-                        </motion.div>
-                    )}
-                </div>
             </div>
-        </main>
+
+
+            <div className="space-y-6">
+                {loading ? (
+                    <div className="py-24 flex justify-center">
+                        <Loader2 className="size-8 animate-spin text-slate-200" />
+                    </div>
+                ) : (
+                    <AnimatePresence mode="popLayout">
+                        {filteredHistory.map((scan, index) => (
+                            <ScanLogItem key={scan._id} scan={scan} index={index} />
+                        ))}
+                    </AnimatePresence>
+                )}
+
+                {!loading && filteredHistory.length === 0 && (
+                    <motion.div
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        className="py-32 text-center border border-dashed border-slate-200 bg-slate-50/20"
+                    >
+                        <p className="text-slate-300 font-black text-[10px] uppercase tracking-[0.2em] mb-4">NO_MATCHING_RECORDS_IDENTIFIED</p>
+                        <button
+                            onClick={() => { setSearchQuery(""); }}
+                            className="text-[10px] font-black text-slate-400 hover:text-slate-950 border-b border-slate-400 hover:border-slate-950 pb-0.5 uppercase tracking-widest transition-all"
+                        >
+                            Reset_All_Filters
+                        </button>
+                    </motion.div>
+                )}
+            </div>
+        </div >
     )
 }

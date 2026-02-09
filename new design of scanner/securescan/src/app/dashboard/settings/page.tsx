@@ -2,7 +2,6 @@
 
 import { useState } from "react"
 import { motion, AnimatePresence } from "framer-motion"
-import { Navbar } from "@/components/marketing/navbar"
 import { Button } from "@/components/ui/button"
 import {
     Settings,
@@ -10,9 +9,6 @@ import {
     Shield,
     Code,
     Monitor,
-    Globe,
-    Clock,
-    Calendar,
     Check,
     RotateCcw,
     Save
@@ -20,176 +16,139 @@ import {
 import { cn } from "@/lib/utils"
 
 const navigation = [
-    { id: "general", label: "General", icon: Settings },
-    { id: "notifications", label: "Notifications", icon: Bell },
-    { id: "security", label: "Security", icon: Shield },
-    { id: "api", label: "API & Integrations", icon: Code }
+    { id: "general", label: "General_Engine", icon: Settings },
+    { id: "notifications", label: "Alert_Protocol", icon: Bell },
+    { id: "security", label: "Access_Control", icon: Shield },
+    { id: "api", label: "API_Threads", icon: Code }
+]
+
+const themes = [
+    { id: "light", label: "Light_Mode", desc: "Surgical clarity for daylight operations.", color: "bg-white" },
+    { id: "dark", label: "Dark_Aperture", desc: "Low-light precision for deep analysis.", color: "bg-slate-950" },
+    { id: "auto", label: "System_Default", desc: "Matches technical environment settings.", color: "bg-slate-400" }
 ]
 
 export default function SettingsPage() {
-    const [activeSection, setActiveSection] = useState("general")
+    const [activeTab, setActiveTab] = useState("general")
     const [theme, setTheme] = useState("auto")
 
     return (
-        <main className="min-h-screen bg-[#FAF9F6]">
-            <Navbar />
+        <div className="max-w-6xl mx-auto px-6 py-32">
+            <header className="flex flex-col md:flex-row md:items-end justify-between gap-12 mb-20 border-b border-slate-200 pb-16">
+                <div>
+                    <div className="flex items-center gap-3 mb-6">
+                        <div className="w-8 h-[1px] bg-sky-500" />
+                        <span className="text-[10px] font-black text-sky-600 uppercase tracking-[0.4em]">System_Optimization_v2.0</span>
+                    </div>
+                    <h1 className="text-5xl md:text-8xl font-black text-slate-950 tracking-tighter uppercase mb-6">
+                        Control <span className="text-slate-400">Center</span>
+                    </h1>
+                    <p className="text-slate-600 font-bold font-mono text-xs uppercase opacity-80 flex items-center gap-3">
+                        <span className="text-slate-400">// CORE_ENGINE::</span> STATUS_OPTIMAL
+                    </p>
+                </div>
+            </header>
 
-            <div className="max-w-6xl mx-auto px-6 py-24 md:py-32">
-                <div className="flex flex-col md:flex-row gap-12">
-                    {/* Sidebar Navigation */}
-                    <aside className="w-full md:w-64 space-y-2">
-                        <div className="mb-8">
-                            <h1 className="text-2xl font-bold text-slate-900 tracking-tight">System Settings</h1>
-                            <p className="text-slate-500 text-xs font-light mt-1 uppercase tracking-widest">Global Configuration</p>
-                        </div>
-                        <nav className="space-y-1">
-                            {navigation.map((item) => (
-                                <button
-                                    key={item.id}
-                                    onClick={() => setActiveSection(item.id)}
-                                    className={cn(
-                                        "w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-bold transition-all",
-                                        activeSection === item.id
-                                            ? "bg-slate-900 text-white shadow-sm ring-1 ring-slate-900"
-                                            : "text-slate-500 hover:text-slate-900 hover:bg-slate-100/50"
-                                    )}
-                                >
-                                    <item.icon size={18} className={cn(activeSection === item.id ? "text-white" : "text-slate-400")} />
-                                    {item.label}
-                                </button>
-                            ))}
-                        </nav>
-                    </aside>
-
-                    {/* Content Area */}
-                    <div className="flex-1 max-w-2xl">
-                        <AnimatePresence mode="wait">
-                            <motion.div
-                                key={activeSection}
-                                initial={{ opacity: 0, x: 10 }}
-                                animate={{ opacity: 1, x: 0 }}
-                                exit={{ opacity: 0, x: -10 }}
-                                transition={{ duration: 0.3 }}
-                                className="space-y-8"
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-16">
+                {/* Sidebar Navigation */}
+                <div className="lg:col-span-3">
+                    <div className="space-y-4 sticky top-32">
+                        {navigation.map(item => (
+                            <button
+                                key={item.id}
+                                onClick={() => setActiveTab(item.id)}
+                                className={cn(
+                                    "w-full flex items-center justify-between p-6 transition-all border group",
+                                    activeTab === item.id
+                                        ? "bg-slate-950 border-slate-950 text-white shadow-[8px_8px_0px_rgba(15,23,42,0.1)]"
+                                        : "bg-white border-slate-200 text-slate-400 hover:border-slate-950 hover:text-slate-950"
+                                )}
                             >
-                                {activeSection === "general" && (
-                                    <>
-                                        {/* Site Configuration */}
-                                        <section className="bg-white p-8 rounded-[2.5rem] border border-slate-100 shadow-sm">
-                                            <h3 className="text-lg font-bold text-slate-900 mb-8 border-b border-slate-50 pb-4">Site Configuration</h3>
-
-                                            <div className="space-y-6">
-                                                <div className="space-y-2">
-                                                    <label className="text-[10px] font-black uppercase tracking-widest text-slate-400">Site Name</label>
-                                                    <input
-                                                        type="text"
-                                                        defaultValue="Security Dashboard"
-                                                        className="w-full h-12 px-4 rounded-xl border border-slate-100 bg-slate-50/50 focus:bg-white focus:ring-2 focus:ring-slate-900/10 focus:border-slate-900 outline-none transition-all text-sm font-medium"
-                                                    />
-                                                </div>
-
-                                                <div className="space-y-2">
-                                                    <label className="text-[10px] font-black uppercase tracking-widest text-slate-400">Site Description</label>
-                                                    <textarea
-                                                        rows={2}
-                                                        defaultValue="Comprehensive security scanning and assessment platform"
-                                                        className="w-full p-4 rounded-xl border border-slate-100 bg-slate-50/50 focus:bg-white focus:ring-2 focus:ring-slate-900/10 focus:border-slate-900 outline-none transition-all text-sm font-medium resize-none"
-                                                    />
-                                                </div>
-
-                                                <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                                                    <div className="space-y-2">
-                                                        <label className="text-[10px] font-black uppercase tracking-widest text-slate-400 flex items-center gap-2">
-                                                            <Globe size={12} /> Default Language
-                                                        </label>
-                                                        <select className="w-full h-12 px-4 rounded-xl border border-slate-100 bg-slate-50/50 focus:bg-white focus:ring-2 focus:ring-blue-600/10 focus:border-blue-600 outline-none transition-all text-sm font-medium appearance-none">
-                                                            <option>English</option>
-                                                            <option>Spanish</option>
-                                                            <option>German</option>
-                                                        </select>
-                                                    </div>
-                                                    <div className="space-y-2">
-                                                        <label className="text-[10px] font-black uppercase tracking-widest text-slate-400 flex items-center gap-2">
-                                                            <Clock size={12} /> Timezone
-                                                        </label>
-                                                        <select className="w-full h-12 px-4 rounded-xl border border-slate-100 bg-slate-50/50 focus:bg-white focus:ring-2 focus:ring-blue-600/10 focus:border-blue-600 outline-none transition-all text-sm font-medium appearance-none">
-                                                            <option>UTC (Coordinated Universal Time)</option>
-                                                            <option>PST (Pacific Standard Time)</option>
-                                                            <option>IST (India Standard Time)</option>
-                                                        </select>
-                                                    </div>
-                                                </div>
-
-                                                <div className="space-y-2">
-                                                    <label className="text-[10px] font-black uppercase tracking-widest text-slate-400 flex items-center gap-2">
-                                                        <Calendar size={12} /> Date Format
-                                                    </label>
-                                                    <select className="w-full h-12 px-4 rounded-xl border border-slate-100 bg-slate-50/50 focus:bg-white focus:ring-2 focus:ring-blue-600/10 focus:border-blue-600 outline-none transition-all text-sm font-medium appearance-none">
-                                                        <option>MM/DD/YYYY</option>
-                                                        <option>DD/MM/YYYY</option>
-                                                        <option>YYYY-MM-DD</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                        </section>
-
-                                        {/* Theme Selection */}
-                                        <section className="bg-white p-8 rounded-[2.5rem] border border-slate-100 shadow-sm">
-                                            <h3 className="text-lg font-bold text-slate-900 mb-8 border-b border-slate-50 pb-4">Display Theme</h3>
-
-                                            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-                                                {[
-                                                    { id: "light", label: "Light", desc: "Default Workspace", color: "bg-white border-slate-200" },
-                                                    { id: "dark", label: "Dark", desc: "Low Light Mode", color: "bg-slate-900 border-slate-800" },
-                                                    { id: "auto", label: "Auto", desc: "System Sync", color: "bg-gradient-to-br from-white to-slate-900 border-slate-200" }
-                                                ].map((t) => (
-                                                    <button
-                                                        key={t.id}
-                                                        onClick={() => setTheme(t.id)}
-                                                        className={cn(
-                                                            "p-4 rounded-[1.5rem] border-2 text-left transition-all relative group",
-                                                            theme === t.id ? "border-slate-900 bg-slate-50/50" : "border-slate-50 hover:border-slate-100"
-                                                        )}
-                                                    >
-                                                        {theme === t.id && (
-                                                            <div className="absolute top-4 right-4 text-slate-900">
-                                                                <Check size={16} />
-                                                            </div>
-                                                        )}
-                                                        <div className={cn("size-10 rounded-xl mb-4 shadow-sm", t.color)} />
-                                                        <p className="text-sm font-bold text-slate-900">{t.label}</p>
-                                                        <p className="text-[10px] text-slate-400 uppercase tracking-widest mt-1">{t.desc}</p>
-                                                    </button>
-                                                ))}
-                                            </div>
-                                        </section>
-
-                                        {/* Action Buttons */}
-                                        <div className="flex flex-col sm:flex-row items-center gap-4 pt-4">
-                                            <Button className="w-full sm:w-auto h-12 px-10 bg-slate-900 hover:bg-slate-800 rounded-2xl shadow-xl shadow-slate-900/10 text-white font-bold text-xs uppercase tracking-widest flex items-center gap-2">
-                                                <Save size={16} /> Save Settings
-                                            </Button>
-                                            <Button variant="ghost" className="w-full sm:w-auto h-12 px-10 text-slate-400 hover:text-slate-600 font-bold text-xs uppercase tracking-widest flex items-center gap-2">
-                                                <RotateCcw size={16} /> Reset to Defaults
-                                            </Button>
-                                        </div>
-                                    </>
-                                )}
-
-                                {activeSection !== "general" && (
-                                    <div className="bg-white p-20 rounded-[2.5rem] border border-slate-100 border-dashed text-center">
-                                        <div className="p-4 bg-slate-50 text-slate-300 rounded-full w-fit mx-auto mb-6">
-                                            <Monitor size={48} strokeWidth={1} />
-                                        </div>
-                                        <h3 className="text-xl font-bold text-slate-900 mb-2">{navigation.find(n => n.id === activeSection)?.label} Settings</h3>
-                                        <p className="text-slate-400 font-light text-sm">Experimental modules currently under maintenance.</p>
-                                    </div>
-                                )}
-                            </motion.div>
-                        </AnimatePresence>
+                                <div className="flex items-center gap-4">
+                                    <item.icon size={18} strokeWidth={activeTab === item.id ? 2.5 : 2} />
+                                    <span className="text-[10px] font-black uppercase tracking-widest">{item.label}</span>
+                                </div>
+                                <div className={cn(
+                                    "size-1.5 rounded-full transition-all",
+                                    activeTab === item.id ? "bg-sky-400 animate-pulse" : "bg-transparent group-hover:bg-slate-200"
+                                )} />
+                            </button>
+                        ))}
                     </div>
                 </div>
+
+                {/* Content Area */}
+                <div className="lg:col-span-9">
+                    <AnimatePresence mode="wait">
+                        <motion.div
+                            key={activeTab}
+                            initial={{ opacity: 0, x: 10 }}
+                            animate={{ opacity: 1, x: 0 }}
+                            exit={{ opacity: 0, x: -10 }}
+                            transition={{ duration: 0.2 }}
+                            className="space-y-12"
+                        >
+                            {activeTab === "general" ? (
+                                <section className="space-y-12">
+                                    <div className="bg-white p-12 border border-slate-200 rounded-none relative overflow-hidden group">
+                                        <div className="flex items-center gap-4 mb-10">
+                                            <div className="w-6 h-[2px] bg-slate-950" />
+                                            <h3 className="text-lg font-black text-slate-950 uppercase tracking-tighter flex items-center gap-4">
+                                                Visual_Interface_Protocol
+                                            </h3>
+                                        </div>
+
+                                        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                                            {themes.map(t => (
+                                                <button
+                                                    key={t.id}
+                                                    onClick={() => setTheme(t.id)}
+                                                    className={cn(
+                                                        "p-6 rounded-none border-2 text-left transition-all relative group h-full",
+                                                        theme === t.id
+                                                            ? "border-slate-950 bg-slate-50/50 shadow-[6px_6px_0px_rgba(0,0,0,0.05)]"
+                                                            : "border-slate-100 hover:border-slate-200"
+                                                    )}
+                                                >
+                                                    {theme === t.id && (
+                                                        <div className="absolute top-4 right-4 text-sky-600">
+                                                            <Check size={16} strokeWidth={3} />
+                                                        </div>
+                                                    )}
+                                                    <div className={cn("size-12 rounded-none mb-6 border border-slate-200", t.color)} />
+                                                    <p className="text-[10px] font-black text-slate-950 uppercase tracking-tighter mb-1">{t.label}</p>
+                                                    <p className="text-[9px] font-bold text-slate-400 uppercase tracking-widest font-mono leading-relaxed">{t.desc}</p>
+                                                </button>
+                                            ))}
+                                        </div>
+                                    </div>
+
+                                    <div className="flex flex-col sm:flex-row items-center gap-6">
+                                        <Button className="w-full sm:w-auto h-16 px-12 bg-slate-950 hover:bg-slate-800 rounded-none shadow-[10px_10px_0px_rgba(15,23,42,0.1)] text-white font-black text-[11px] uppercase tracking-widest flex items-center gap-3 transition-all">
+                                            <Save size={18} strokeWidth={2.5} /> Update_Parameters
+                                        </Button>
+                                        <Button variant="ghost" className="w-full sm:w-auto h-16 px-12 text-slate-400 hover:text-slate-950 font-black text-[11px] uppercase tracking-widest flex items-center gap-3 transition-all rounded-none border border-transparent hover:border-slate-100">
+                                            <RotateCcw size={18} strokeWidth={2.5} /> Revert_to_Genesis
+                                        </Button>
+                                    </div>
+                                </section>
+                            ) : (
+                                <div className="bg-slate-50 p-24 border border-slate-100 rounded-none border-dashed text-center">
+                                    <div className="p-8 border border-slate-200 bg-white text-slate-200 rounded-none w-fit mx-auto mb-8 shadow-[10px_10px_0px_rgba(0,0,0,0.02)]">
+                                        <Monitor size={48} strokeWidth={1} />
+                                    </div>
+                                    <h3 className="text-xl font-black text-slate-950 mb-4 uppercase tracking-tighter">Under_Maintenance</h3>
+                                    <p className="text-slate-400 font-bold font-mono text-[10px] uppercase tracking-widest leading-relaxed">
+                                        // EXPERIMENTAL_MODULE::{activeTab.toUpperCase()}_CONTROL
+                                        <br />
+                                        // RELAYING HEARTBEAT... COMPONENT CURRENTLY OFFLINE.
+                                    </p>
+                                </div>
+                            )}
+                        </motion.div>
+                    </AnimatePresence>
+                </div>
             </div>
-        </main>
+        </div>
     )
 }

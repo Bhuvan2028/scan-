@@ -60,7 +60,6 @@ export function MetricGrid({ scan }: MetricGridProps) {
     const countHits = (keywords: string[]) =>
         findings.filter(f => new RegExp(keywords.join('|'), 'i').test(f.title || f.raw || "")).length
 
-    // Define the structure of our metrics based on backend logic
     const runtimeMetrics: Metric[] = [
         {
             name: "DNS Security",
@@ -121,51 +120,58 @@ export function MetricGrid({ scan }: MetricGridProps) {
     const displayMetrics = scan ? runtimeMetrics : metrics
 
     return (
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
             {displayMetrics.map((metric, index) => {
                 const colors = colorMap[metric.color] || colorMap.blue
                 return (
-                    <TiltCard key={metric.name} degree={10}>
-                        <motion.div
-                            initial={{ opacity: 0, y: 20 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ delay: index * 0.05 }}
-                            className="bg-white p-8 rounded-3xl border border-slate-100 hover:border-slate-200 transition-all group hover:shadow-xl hover:shadow-slate-200/20 h-full"
-                        >
-                            <div className="flex items-center justify-between mb-6">
-                                <div className={cn(
-                                    "p-3 rounded-2xl transition-all duration-300",
-                                    colors.bg,
-                                    colors.text,
-                                    "group-hover:scale-110"
-                                )}>
-                                    <metric.icon size={24} />
-                                </div>
-                                <div className="text-right">
-                                    <span className="text-xs font-black uppercase tracking-widest text-slate-400 mb-1 block">Rating</span>
-                                    <span className={cn(
-                                        "text-2xl font-bold",
-                                        metric.score >= 90 ? "text-slate-900" : "text-slate-500"
-                                    )}>
-                                        {metric.score}%
-                                    </span>
-                                </div>
-                            </div>
+                    <motion.div
+                        key={metric.name}
+                        initial={{ opacity: 0, y: 10 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ delay: index * 0.05 }}
+                        className="bg-white p-10 rounded-none border border-slate-200 hover:border-slate-950 transition-all group relative overflow-hidden h-full flex flex-col"
+                    >
+                        {/* Corner Accents */}
+                        <div className="absolute top-0 right-0 w-8 h-[1px] bg-slate-200 group-hover:bg-slate-950 transition-colors" />
+                        <div className="absolute top-0 right-0 w-[1px] h-8 bg-slate-200 group-hover:bg-slate-950 transition-colors" />
 
-                            <h3 className="text-lg font-semibold text-slate-900 mb-2 truncate">{metric.name}</h3>
-                            <div className="w-full bg-slate-50 h-1.5 rounded-full overflow-hidden">
+                        <div className="flex items-center justify-between mb-8">
+                            <div className={cn(
+                                "p-3 border transition-all duration-300",
+                                "border-slate-200 bg-slate-50 text-slate-500 group-hover:border-slate-950 group-hover:bg-white group-hover:text-slate-950 shadow-sm"
+                            )}>
+                                <metric.icon size={20} strokeWidth={2.5} />
+                            </div>
+                            <div className="text-right">
+                                <span className="text-[9px] font-black uppercase tracking-[0.2em] text-slate-400 mb-1 block font-mono">VAL::OUT</span>
+                                <span className={cn(
+                                    "text-3xl font-black tracking-tighter tabular-nums text-slate-950"
+                                )}>
+                                    {metric.score}%
+                                </span>
+                            </div>
+                        </div>
+
+                        <h3 className="text-sm font-black text-slate-950 mb-6 uppercase tracking-wider">{metric.name}</h3>
+
+                        <div className="mt-auto">
+                            <div className="w-full bg-slate-50 h-[3px] rounded-none overflow-hidden mb-2">
                                 <motion.div
                                     initial={{ width: 0 }}
                                     animate={{ width: `${metric.score}%` }}
-                                    transition={{ duration: 1.5, delay: 0.5 + index * 0.05 }}
+                                    transition={{ duration: 1.5, delay: 0.5 + index * 0.05, ease: [0.16, 1, 0.3, 1] }}
                                     className={cn(
-                                        "h-full rounded-full transition-colors",
-                                        metric.score >= 70 ? "bg-slate-900" : "bg-slate-400"
+                                        "h-full rounded-none transition-colors",
+                                        metric.score >= 70 ? "bg-slate-950" : "bg-slate-300"
                                     )}
                                 />
                             </div>
-                        </motion.div>
-                    </TiltCard>
+                            <div className="flex justify-between text-[8px] font-black text-slate-400 uppercase tracking-widest font-mono">
+                                <span>MIN_THR</span>
+                                <span>IDX::{metric.score}/100</span>
+                            </div>
+                        </div>
+                    </motion.div>
                 )
             })}
         </div>
