@@ -61,7 +61,7 @@ export default function HistoryPage() {
                 >
                     <div className="flex items-center gap-2 mb-4">
                         <div className="w-8 h-[1px] bg-blue-600" />
-                        <span className="text-[10px] font-black text-blue-600 uppercase tracking-[0.4em]">Audit_Log_Retrieval</span>
+                        <span className="text-[10px] font-black text-primary uppercase tracking-[0.4em]">Audit_Log_Retrieval</span>
                     </div>
                     <h1 className="text-5xl md:text-8xl font-black text-slate-950 tracking-tighter mb-8 uppercase">
                         Scan <span className="text-slate-400">History</span>

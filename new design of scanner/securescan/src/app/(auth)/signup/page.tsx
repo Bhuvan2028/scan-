@@ -30,7 +30,7 @@ export default function SignupPage() {
                 </Link>
                 <div className="flex items-center gap-3 text-sm">
                     <span className="text-slate-500 font-light">Already have an account?</span>
-                    <Link href="/login" className="text-blue-600 font-semibold hover:text-blue-700 transition-colors">
+                    <Link href="/login" className="text-primary font-semibold hover:opacity-80 transition-colors">
                         Sign in
                     </Link>
                 </div>
@@ -46,7 +46,7 @@ export default function SignupPage() {
                     <label className="text-sm font-medium text-slate-600 ml-0.5">Full Name</label>
                     <div className="relative group">
                         <div className="absolute inset-y-0 left-4 flex items-center pointer-events-none">
-                            <User className="size-4.5 text-slate-400 group-focus-within:text-blue-600 transition-colors" />
+                            <User className="size-4.5 text-slate-400 group-focus-within:text-primary transition-colors" />
                         </div>
                         <input
                             type="text"
@@ -60,7 +60,7 @@ export default function SignupPage() {
                     <label className="text-sm font-medium text-slate-600 ml-0.5">Work Email</label>
                     <div className="relative group">
                         <div className="absolute inset-y-0 left-4 flex items-center pointer-events-none">
-                            <Mail className="size-4.5 text-slate-400 group-focus-within:text-blue-600 transition-colors" />
+                            <Mail className="size-4.5 text-slate-400 group-focus-within:text-primary transition-colors" />
                         </div>
                         <input
                             type="email"
@@ -74,7 +74,7 @@ export default function SignupPage() {
                     <label className="text-sm font-medium text-slate-600 ml-0.5">Password</label>
                     <div className="relative group">
                         <div className="absolute inset-y-0 left-4 flex items-center pointer-events-none">
-                            <Lock className="size-4.5 text-slate-400 group-focus-within:text-blue-600 transition-colors" />
+                            <Lock className="size-4.5 text-slate-400 group-focus-within:text-primary transition-colors" />
                         </div>
                         <input
                             type={showPassword ? "text" : "password"}
@@ -107,7 +107,7 @@ export default function SignupPage() {
                             </div>
                         </div>
                         <span className="text-xs text-slate-500 font-light leading-relaxed">
-                            I agree to iSecurify&apos;s <Link href="#" className="text-blue-600 font-medium hover:underline underline-offset-4 decoration-blue-200/30">Terms of Use</Link> and <Link href="#" className="text-blue-600 font-medium hover:underline underline-offset-4 decoration-blue-200/30">Privacy Policy</Link>.
+                            I agree to iSecurify&apos;s <Link href="#" className="text-primary font-medium hover:underline underline-offset-4 decoration-purple-200/30">Terms of Use</Link> and <Link href="#" className="text-primary font-medium hover:underline underline-offset-4 decoration-purple-200/30">Privacy Policy</Link>.
                         </span>
                     </label>
                 </div>

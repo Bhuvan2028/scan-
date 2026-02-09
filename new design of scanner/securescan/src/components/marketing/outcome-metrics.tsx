@@ -51,7 +51,7 @@ const Counter = ({ value, suffix = "", duration = 2, delay = 0, oscillation = fa
     return (
         <motion.span
             ref={ref}
-            animate={{ color: isLocked && oscillation ? "#3b82f6" : "#0f172a" }}
+            animate={{ color: isLocked && oscillation ? "#a146a1" : "#0f172a" }}
             className="transition-colors duration-500"
         >
             {count.toFixed(2)}{suffix}
@@ -79,9 +79,9 @@ const MetricCard = ({
     valueLabel?: string
 }) => {
     const colors = {
-        blue: "text-blue-600 bg-blue-50 border-blue-100",
+        blue: "text-primary bg-purple-50 border-purple-100",
         emerald: "text-emerald-600 bg-emerald-50 border-emerald-100",
-        indigo: "text-indigo-600 bg-indigo-50 border-indigo-100"
+        indigo: "text-purple-600 bg-purple-50 border-purple-100"
     }
 
     const shadows = {
@@ -114,7 +114,7 @@ const MetricCard = ({
                     <div className="flex items-center gap-2">
                         <p className="text-xs font-black text-slate-400 uppercase tracking-widest">{subtitle}</p>
                         {valueLabel && (
-                            <span className="text-[9px] font-bold text-blue-500/60 font-mono tracking-tighter">{valueLabel}</span>
+                            <span className="text-[9px] font-bold text-primary/60 font-mono tracking-tighter">{valueLabel}</span>
                         )}
                     </div>
                 </div>
@@ -133,7 +133,7 @@ const MetricCard = ({
 
             {/* Background Shimmer */}
             <div className={cn(
-                "absolute inset-x-0 bottom-0 h-1 bg-gradient-to-r from-transparent via-blue-500/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700"
+                "absolute inset-x-0 bottom-0 h-1 bg-gradient-to-r from-transparent via-primary/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700"
             )} />
         </motion.div>
     )
@@ -149,20 +149,20 @@ const PrecisionDialWidget = () => {
             {[0, 1].map((i) => (
                 <motion.div
                     key={i}
-                    className="absolute border border-blue-200/50 rounded-full"
+                    className="absolute border border-purple-200/50 rounded-full"
                     style={{ width: `${60 + i * 30}%`, height: `${60 + i * 30}%` }}
                     animate={isLow ? {} : { rotate: i === 0 ? 360 : -360 }}
                     transition={{ duration: 10 + i * 5, repeat: Infinity, ease: "linear" }}
                 >
                     {/* Dial Notches */}
-                    <div className="absolute top-0 left-1/2 -translate-x-1/2 w-0.5 h-2 bg-blue-400/40" />
-                    <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-0.5 h-2 bg-blue-400/40" />
+                    <div className="absolute top-0 left-1/2 -translate-x-1/2 w-0.5 h-2 bg-purple-400/40" />
+                    <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-0.5 h-2 bg-purple-400/40" />
                 </motion.div>
             ))}
 
             {/* Rotating Dial */}
             <motion.div
-                className="absolute size-[80%] border-2 border-t-blue-500 border-r-transparent border-b-transparent border-l-transparent rounded-full"
+                className="absolute size-[80%] border-2 border-t-primary border-r-transparent border-b-transparent border-l-transparent rounded-full"
                 animate={isLow ? {} : { rotate: 360 }}
                 transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
             />
@@ -171,18 +171,18 @@ const PrecisionDialWidget = () => {
             <motion.div
                 animate={{
                     scale: [1, 1.05, 1],
-                    backgroundColor: ["rgba(37, 99, 235, 1)", "rgba(59, 130, 246, 1)", "rgba(37, 99, 235, 1)"]
+                    backgroundColor: ["rgba(161, 70, 161, 1)", "rgba(192, 132, 252, 1)", "rgba(161, 70, 161, 1)"]
                 }}
                 transition={{ duration: 2, repeat: Infinity }}
-                className="size-10 rounded-full bg-blue-600 flex items-center justify-center shadow-[0_0_30px_rgba(59,130,246,0.5)] z-10"
+                className="size-10 rounded-full bg-primary flex items-center justify-center shadow-[0_0_30px_rgba(161,70,161,0.5)] z-10"
             >
                 <div className="size-2.5 rounded-full bg-white animate-pulse" />
             </motion.div>
 
             {/* Dynamic Crosshair */}
             <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-                <div className="w-full h-px bg-blue-500/10" />
-                <div className="h-full w-px bg-blue-500/10 absolute" />
+                <div className="w-full h-px bg-purple-500/10" />
+                <div className="h-full w-px bg-purple-500/10 absolute" />
             </div>
         </div>
     )
@@ -213,20 +213,20 @@ const TimeCompressionWidget = () => {
 
             {/* iSecurity Line */}
             <div className="space-y-2 relative">
-                <div className="flex justify-between text-[8px] font-black text-blue-600 uppercase tracking-widest">
+                <div className="flex justify-between text-[8px] font-black text-primary uppercase tracking-widest">
                     <span>iSecurity_Scan</span>
                     <span>100%_Locked</span>
                 </div>
-                <div className="h-1.5 w-full bg-blue-50 rounded-full overflow-hidden relative">
+                <div className="h-1.5 w-full bg-purple-50 rounded-full overflow-hidden relative">
                     <motion.div
                         initial={{ width: 0, left: 0 }}
                         animate={isInView ? { width: "100%" } : { width: 0 }}
                         onAnimationComplete={() => setIsFinished(true)}
                         transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
-                        className="h-full bg-blue-500 relative"
+                        className="h-full bg-primary relative"
                     >
                         <motion.div
-                            className="absolute right-0 top-0 bottom-0 w-8 bg-gradient-to-r from-transparent to-white/50 skew-x-12"
+                            className="absolute right-0 top-0 bottom-0 w-8 bg-gradient-to-r from-transparent to-purple-400/50 skew-x-12"
                             animate={{ opacity: [0, 1, 0] }}
                             transition={{ duration: 0.5, repeat: Infinity }}
                         />
@@ -238,7 +238,7 @@ const TimeCompressionWidget = () => {
                     initial={{ left: 0 }}
                     animate={isInView ? { left: "100%" } : { left: 0 }}
                     transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
-                    className="absolute -bottom-1 size-2 bg-blue-600 rounded-full blur-[2px] z-10"
+                    className="absolute -bottom-1 size-2 bg-primary rounded-full blur-[2px] z-10"
                 />
             </div>
 
@@ -275,25 +275,25 @@ const HolographicShieldWidget = () => (
             <motion.div
                 initial={{ y: 0, rotateX: 45, rotateZ: 45, scale: 0.8 }}
                 whileHover={{ y: 40, opacity: 0.5 }}
-                className="absolute inset-0 bg-indigo-500/5 backdrop-blur-md border border-indigo-500/20 rounded-2xl flex flex-col items-center justify-center"
+                className="absolute inset-0 bg-purple-500/5 backdrop-blur-md border border-purple-500/20 rounded-2xl flex flex-col items-center justify-center"
             >
-                <span className="text-[8px] font-black text-indigo-400 rotate-[-45deg]">ISO_27001</span>
+                <span className="text-[8px] font-black text-primary/80 rotate-[-45deg]">ISO_27001</span>
             </motion.div>
 
             {/* SOC 2 - Middle */}
             <motion.div
                 initial={{ y: 0, rotateX: 45, rotateZ: 45, scale: 0.9 }}
                 whileHover={{ y: 0, scale: 1 }}
-                className="absolute inset-0 bg-indigo-500/10 backdrop-blur-md border border-indigo-500/30 rounded-2xl flex flex-col items-center justify-center z-10"
+                className="absolute inset-0 bg-purple-500/10 backdrop-blur-md border border-purple-500/30 rounded-2xl flex flex-col items-center justify-center z-10"
             >
-                <span className="text-[8px] font-black text-indigo-500 rotate-[-45deg]">SOC2_TYPE_II</span>
+                <span className="text-[8px] font-black text-primary rotate-[-45deg]">SOC2_TYPE_II</span>
             </motion.div>
 
             {/* Logo/Core - Top */}
             <motion.div
                 initial={{ y: 0, rotateX: 45, rotateZ: 45, scale: 1 }}
                 whileHover={{ y: -40, scale: 1.1 }}
-                className="absolute inset-0 bg-indigo-600 backdrop-blur-xl border border-white/20 rounded-2xl flex flex-col items-center justify-center z-20 shadow-2xl shadow-indigo-500/30"
+                className="absolute inset-0 bg-primary backdrop-blur-xl border border-white/20 rounded-2xl flex flex-col items-center justify-center z-20 shadow-2xl shadow-purple-500/30"
             >
                 <div className="rotate-[-45deg]">
                     <Lock size={20} className="text-white" />
@@ -328,7 +328,7 @@ export function OutcomeMetrics() {
                         viewport={{ once: true }}
                         className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-slate-900 shadow-2xl text-white mb-6"
                     >
-                        <ShieldCheck size={12} className="text-blue-400" />
+                        <ShieldCheck size={12} className="text-primary" />
                         <span className="text-[10px] font-black uppercase tracking-[0.3em]">Performance Lab</span>
                     </motion.div>
 
@@ -340,7 +340,7 @@ export function OutcomeMetrics() {
                         className="text-6xl md:text-7xl font-black tracking-tighter text-slate-900 leading-[0.85] mb-8"
                     >
                         Precision Grade. <br />
-                        <span className="text-blue-600 italic">Sovereign Proof.</span>
+                        <span className="text-primary italic">Sovereign Proof.</span>
                     </motion.h2>
                     <p className="text-slate-500 font-medium text-lg max-w-xl mx-auto leading-relaxed">
                         Processing millions of asynchronous security signals to deliver <br className="hidden md:block" />
@@ -399,19 +399,21 @@ export function OutcomeMetrics() {
                         {[0, 1].map((n) => (
                             <div key={n} className="flex gap-20 items-center">
                                 <div className="flex items-center gap-3">
-                                    <Activity size={12} className="text-blue-500" />
+                                    <Activity size={12} className="text-primary" />
                                     <span className="text-[10px] font-black font-mono text-slate-400">
                                         [AUDIT_LOG]: <span className="text-slate-900">14,203 threats neutralized in last hour</span>
                                     </span>
                                 </div>
                                 <div className="flex items-center gap-3">
-                                    <Cpu size={12} className="text-blue-500" />
-                                    <span className="text-[10px] font-black font-mono text-slate-400">
-                                        [SYS_HEALTH]: <span className="text-blue-900">100% OPERATIONAL</span>
-                                    </span>
+                                    <Cpu size={12} className="text-primary" />
+                                    <div className="flex-1 space-y-1">
+                                        <span className="text-[10px] font-black font-mono text-slate-400">
+                                            [SYS_HEALTH]: <span className="text-primary font-bold">100% OPERATIONAL</span>
+                                        </span>
+                                    </div>
                                 </div>
                                 <div className="flex items-center gap-3">
-                                    <Globe size={12} className="text-blue-500" />
+                                    <Globe size={12} className="text-primary" />
                                     <span className="text-[10px] font-black font-mono text-slate-400">
                                         [AVG_LATENCY]: <span className="text-slate-900">42ms_GLOBAL_CDN</span>
                                     </span>

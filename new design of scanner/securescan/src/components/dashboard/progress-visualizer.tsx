@@ -59,7 +59,7 @@ export function ProgressVisualizer({ progress, status }: ProgressVisualizerProps
 
             <div className="absolute inset-0 flex flex-col items-center justify-center text-center">
                 <div className="flex flex-col items-center">
-                    <span className="text-[10px] font-black text-blue-600 uppercase tracking-[0.4em] mb-2 font-mono">TASK_PROXIMITY</span>
+                    <span className="text-[10px] font-black text-primary uppercase tracking-[0.4em] mb-2 font-mono">TASK_PROXIMITY</span>
                     <motion.span
                         initial={{ opacity: 0, scale: 0.9 }}
                         animate={{ opacity: 1, scale: 1 }}

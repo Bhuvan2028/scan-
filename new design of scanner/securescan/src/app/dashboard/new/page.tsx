@@ -62,7 +62,7 @@ export default function NewScanPage() {
                 </Link>
                 <div className="flex items-center gap-4">
                     <span className="text-[10px] font-black text-slate-300 uppercase tracking-widest font-mono">NODE_OPERATOR::ADMIN</span>
-                    <div className="size-2 bg-blue-600 animate-pulse" />
+                    <div className="size-2 bg-primary animate-pulse" />
                 </div>
             </motion.div>
 
@@ -79,8 +79,8 @@ export default function NewScanPage() {
                         <div className="absolute top-0 right-0 w-32 h-32 border-t border-r border-slate-50 pointer-events-none" />
 
                         <div className="flex items-center gap-2 mb-6">
-                            <div className="w-8 h-[1px] bg-blue-600" />
-                            <span className="text-[10px] font-black text-blue-600 uppercase tracking-[0.4em]">Protocol_Initiation</span>
+                            <div className="w-8 h-[1px] bg-primary" />
+                            <span className="text-[10px] font-black text-primary uppercase tracking-[0.4em]">Protocol_Initiation</span>
                         </div>
                         <h1 className="text-5xl md:text-7xl font-black text-slate-950 tracking-tighter mb-8 uppercase">
                             Configuration <span className="text-slate-400">Node</span>
@@ -122,11 +122,11 @@ export default function NewScanPage() {
                         </div>
                         <ul className="space-y-6">
                             <li className="flex gap-4">
-                                <div className="shrink-0 size-1.5 bg-sky-600 mt-1.5" />
+                                <div className="shrink-0 size-1.5 bg-primary mt-1.5" />
                                 <p className="text-[11px] text-slate-600 font-bold font-mono uppercase leading-relaxed">Ensure target domain is publicly accessible via port 80/443 for web app audits.</p>
                             </li>
                             <li className="flex gap-4">
-                                <div className="shrink-0 size-1.5 bg-sky-600 mt-1.5" />
+                                <div className="shrink-0 size-1.5 bg-primary mt-1.5" />
                                 <p className="text-[11px] text-slate-600 font-bold font-mono uppercase leading-relaxed">Comprehensive scans may take up to 45 minutes for dense infrastructure.</p>
                             </li>
                         </ul>

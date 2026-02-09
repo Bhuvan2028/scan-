@@ -33,7 +33,7 @@ export function SurgicalGrid() {
                     ease: "linear",
                     repeatDelay: 2
                 }}
-                className="absolute inset-x-0 h-[1px] bg-gradient-to-r from-transparent via-blue-500/5 to-transparent z-10"
+                className="absolute inset-x-0 h-[1px] bg-gradient-to-r from-transparent via-fuchsia-500/5 to-transparent z-10"
             />
         </div>
     )

@@ -28,7 +28,7 @@ export function ScanBar() {
                         exit={{ opacity: 0, y: 10, scale: 0.95 }}
                         className="absolute -top-12 left-1/2 -translate-x-1/2 px-4 py-1.5 bg-slate-900 text-white text-[10px] font-black uppercase tracking-widest rounded-lg shadow-xl z-20 flex items-center gap-2 whitespace-nowrap"
                     >
-                        <span className="text-blue-400">TIP:</span> Enter any domain to begin deep-recon
+                        <span className="text-primary">TIP:</span> Enter any domain to begin deep-recon
                     </motion.div>
                 )}
             </AnimatePresence>

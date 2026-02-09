@@ -51,9 +51,9 @@ export function CyberApertureHero() {
                 <motion.div
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
-                    className="inline-flex items-center gap-2 mb-6 text-[10px] font-black uppercase tracking-[0.4em] text-blue-500/60"
+                    className="inline-flex items-center gap-2 mb-6 text-[10px] font-black uppercase tracking-[0.4em] text-primary/60"
                 >
-                    <div className="size-1 rounded-full bg-blue-500 animate-pulse" />
+                    <div className="size-1 rounded-full bg-primary animate-pulse" />
                     Aperture_Protocol_v9
                 </motion.div>
                 <motion.h1
@@ -61,7 +61,7 @@ export function CyberApertureHero() {
                     style={{ opacity: useTransform(scrollYProgress, [0, 0.2], [1, 0.2]) }}
                 >
                     Opening <br />
-                    The <span className="text-blue-500 italic">Unseen</span>
+                    The <span className="text-primary italic">Unseen</span>
                 </motion.h1>
             </div>
 
@@ -81,7 +81,7 @@ export function CyberApertureHero() {
                                 key={pulse}
                                 initial={{ opacity: 0, scaleX: 0 }}
                                 animate={{ opacity: [0, 1, 0], scaleX: [0, 1.2, 1] }}
-                                className="absolute inset-0 bg-blue-400 blur-sm"
+                                className="absolute inset-0 bg-purple-400 blur-sm"
                             />
                         </AnimatePresence>
                     </motion.div>
@@ -94,7 +94,7 @@ export function CyberApertureHero() {
                             onFocus={() => setIsFocused(true)}
                             onBlur={() => setIsFocused(false)}
                             placeholder="TYPE_URL"
-                            className="bg-transparent border-none outline-none text-center text-2xl md:text-4xl font-black tracking-widest text-white placeholder:text-blue-900/40 uppercase"
+                            className="bg-transparent border-none outline-none text-center text-2xl md:text-4xl font-black tracking-widest text-white placeholder:text-purple-900/40 uppercase"
                         />
                     </form>
                 </div>
@@ -108,7 +108,7 @@ export function CyberApertureHero() {
                         height: smoothSize,
                         opacity: apertureOpacity,
                     }}
-                    className="relative rounded-full border border-blue-500/20 bg-[#020617] overflow-hidden shadow-[0_0_100px_rgba(59,130,246,0.1)]"
+                    className="relative rounded-full border border-primary/20 bg-[#020617] overflow-hidden shadow-[0_0_100px_rgba(161,70,161,0.1)]"
                 >
                     {/* Internal Mesh (3D Abstract) */}
                     <motion.div
@@ -120,7 +120,7 @@ export function CyberApertureHero() {
                             <svg className="absolute inset-0 size-full" viewBox="0 0 100 100">
                                 <defs>
                                     <pattern id="mesh-grid" width="10" height="10" patternUnits="userSpaceOnUse">
-                                        <path d="M 10 0 L 0 0 0 10" fill="none" stroke="currentColor" strokeWidth="0.1" className="text-blue-500/40" />
+                                        <path d="M 10 0 L 0 0 0 10" fill="none" stroke="currentColor" strokeWidth="0.1" className="text-primary/40" />
                                     </pattern>
                                 </defs>
                                 <rect width="100" height="100" fill="url(#mesh-grid)" />
@@ -132,7 +132,7 @@ export function CyberApertureHero() {
                                         d={`M ${20 * i} 0 L ${20 * i} 100`}
                                         stroke="currentColor"
                                         strokeWidth="0.2"
-                                        className="text-blue-400/20"
+                                        className="text-primary/20"
                                         animate={{ y: [-100, 100] }}
                                         transition={{ duration: 10 + i * 2, repeat: Infinity, ease: "linear" }}
                                     />
@@ -143,7 +143,7 @@ export function CyberApertureHero() {
                             <motion.div
                                 animate={{ scale: [1, 1.2, 1], opacity: [0.5, 0.8, 0.5] }}
                                 transition={{ duration: 4, repeat: Infinity }}
-                                className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 size-40 bg-blue-500/10 blur-3xl rounded-full"
+                                className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 size-40 bg-purple-500/10 blur-3xl rounded-full"
                             />
                         </div>
                     </motion.div>

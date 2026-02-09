@@ -41,7 +41,7 @@ const PerformanceStep = ({
                 transition={{ type: "spring", stiffness: 300, damping: 20 }}
                 className="absolute left-0 top-0 size-10 rounded-full bg-white border-2 border-blue-500 flex items-center justify-center z-10 shadow-lg shadow-blue-200"
             >
-                <Icon size={18} className="text-blue-600" />
+                <Icon size={18} className="text-primary" />
             </motion.div>
 
             <motion.div
@@ -50,7 +50,7 @@ const PerformanceStep = ({
                 transition={{ duration: 0.6, delay: 0.2 }}
             >
                 <div className="flex items-center gap-3 mb-2">
-                    <span className="text-sm font-black text-blue-600 font-mono tracking-tighter">{time}</span>
+                    <span className="text-sm font-black text-primary font-mono tracking-tighter">{time}</span>
                     <h4 className="text-lg font-black tracking-tight text-slate-900">{label}</h4>
                 </div>
                 <p className="text-slate-500 font-medium max-w-md">{description}</p>
@@ -59,7 +59,7 @@ const PerformanceStep = ({
                     <motion.div
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
-                        className="mt-4 p-3 bg-slate-50 border border-slate-100 rounded-xl font-mono text-[10px] text-blue-600 overflow-hidden"
+                        className="mt-4 p-3 bg-slate-50 border border-slate-100 rounded-xl font-mono text-[10px] text-primary overflow-hidden"
                     >
                         <motion.div
                             animate={isLow ? { y: -50 } : { y: [0, -100] }}
@@ -151,8 +151,8 @@ export function PerformanceVisualizer() {
                                 viewport={{ once: true }}
                                 className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-50 border border-blue-100 mb-6"
                             >
-                                <Activity size={12} className="text-blue-600" />
-                                <span className="text-[10px] font-black uppercase tracking-widest text-blue-600">Zero-Latency Engine</span>
+                                <Activity size={12} className="text-primary" />
+                                <span className="text-[10px] font-black uppercase tracking-widest text-primary">Zero-Latency Engine</span>
                             </motion.div>
 
                             <motion.h2
@@ -163,7 +163,7 @@ export function PerformanceVisualizer() {
                                 className="text-5xl md:text-6xl lg:text-7xl font-black tracking-tighter text-slate-900 leading-[0.9] mb-8"
                             >
                                 Analysis at the <br />
-                                <span className="text-blue-600 italic">Speed of Thought.</span>
+                                <span className="text-primary italic">Speed of Thought.</span>
                             </motion.h2>
                         </div>
 
@@ -173,8 +173,8 @@ export function PerformanceVisualizer() {
                                 <div>
                                     <span className="text-[10px] font-black text-slate-400 uppercase tracking-[0.2em] block mb-1">SCAN_LATENCY</span>
                                     <div className="flex items-baseline gap-2">
-                                        <span className="text-6xl font-black text-blue-600 tracking-tighter">{count}</span>
-                                        <span className="text-2xl font-black text-blue-300">ms</span>
+                                        <span className="text-6xl font-black text-primary tracking-tighter">{count}</span>
+                                        <span className="text-2xl font-black text-primary/30">ms</span>
                                     </div>
                                 </div>
                                 <div className="text-right">

@@ -15,7 +15,7 @@ export function NewScanTrigger() {
                     <Plus size={16} strokeWidth={3} />
                 </div>
                 Access_Protocol
-                <Zap className="ml-4 size-4 text-blue-400 group-hover:animate-pulse" />
+                <Zap className="ml-4 size-4 text-primary group-hover:animate-pulse" />
             </Button>
         </Link>
     )

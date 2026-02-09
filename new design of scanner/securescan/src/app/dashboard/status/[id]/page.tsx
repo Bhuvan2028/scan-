@@ -120,7 +120,7 @@ export default function ScanStatusPage() {
                 <div className="space-y-4 font-mono text-[11px] uppercase tracking-tighter max-h-60 overflow-y-auto pr-6 custom-scrollbar">
                     {telemetryLogs.map((log, i) => (
                         <div key={i} className="flex gap-6 group hover:translate-x-1 transition-transform">
-                            <span className={`shrink-0 font-black ${log.type === 'error' ? 'text-red-500' : log.type === 'warning' ? 'text-yellow-500' : 'text-blue-500'}`}>
+                            <span className={`shrink-0 font-black ${log.type === 'error' ? 'text-red-500' : log.type === 'warning' ? 'text-primary' : 'text-primary'}`}>
                                 [{log.timestamp}]
                             </span>
                             <span className="text-white/40 font-black shrink-0">::</span>

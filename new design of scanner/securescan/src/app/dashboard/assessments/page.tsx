@@ -57,8 +57,8 @@ export default function AssessmentsHubPage() {
                     transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
                 >
                     <div className="flex items-center gap-2 mb-6">
-                        <div className="w-8 h-[1px] bg-blue-600" />
-                        <span className="text-[10px] font-black uppercase tracking-[0.4em] text-blue-600">SecureScan_Intelligence_Unit</span>
+                        <div className="w-8 h-[1px] bg-primary" />
+                        <span className="text-[10px] font-black uppercase tracking-[0.4em] text-primary">SecureScan_Intelligence_Unit</span>
                     </div>
                     <h1 className="text-5xl md:text-8xl font-black text-slate-950 tracking-tighter leading-none mb-10 uppercase">
                         Autonomous <br />

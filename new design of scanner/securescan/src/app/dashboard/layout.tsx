@@ -10,7 +10,7 @@ export default function DashboardLayout({
     children: React.ReactNode
 }) {
     return (
-        <main className="min-h-screen bg-white selection:bg-blue-100 selection:text-blue-900">
+        <main className="min-h-screen bg-white selection:bg-purple-50 selection:text-primary">
             <SurgicalGrid />
             <Navbar />
             <PortalTransition>

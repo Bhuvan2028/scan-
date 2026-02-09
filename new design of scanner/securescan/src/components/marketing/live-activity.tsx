@@ -39,8 +39,8 @@ export function LiveActivityTicker() {
                         </div>
                         <div className="flex items-center gap-1.5 ml-2">
                             <span className={`text-[10px] font-black px-2 py-0.5 rounded-md tracking-widest ${item.type === "success" ? "bg-emerald-50 text-emerald-600 border border-emerald-100" :
-                                    item.type === "danger" ? "bg-rose-50 text-rose-600 border border-rose-100" :
-                                        "bg-blue-50 text-blue-600 border border-blue-100"
+                                item.type === "danger" ? "bg-rose-50 text-rose-600 border border-rose-100" :
+                                    "bg-purple-50 text-primary border border-purple-100"
                                 }`}>
                                 [{item.status}]
                             </span>

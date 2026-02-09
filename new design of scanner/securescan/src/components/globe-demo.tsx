@@ -30,7 +30,7 @@ export default function GlobeDemo() {
         autoRotate: true,
         autoRotateSpeed: 0.5,
     };
-    const colors = ["#06b6d4", "#3b82f6", "#6366f1"];
+    const colors = ["#a146a1", "#c084fc", "#e879f9"];
     const sampleArcs = [
         {
             order: 1,

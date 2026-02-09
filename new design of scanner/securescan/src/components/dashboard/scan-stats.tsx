@@ -24,7 +24,7 @@ export function ScanStats({ scans }: ScanStatsProps) {
             value: totalScans.toLocaleString(),
             icon: Shield,
             change: scans.length > 0 ? "STABLE" : "INIT",
-            color: "text-blue-600"
+            color: "text-primary"
         },
         {
             label: "Real-time Nodes",

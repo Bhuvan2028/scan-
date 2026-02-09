@@ -22,7 +22,7 @@ const layers = [
         description: "Our agents parse MX, SPF, and TXT records to verify routing integrity and sender authenticity.",
         data: "MX: mx1.securescan.tech (10)\nSPF: v=spf1 include:_spf.google.com ~all\nTXT: google-site-verification=...",
         icon: Shield,
-        color: "text-blue-500"
+        color: "text-primary"
     },
     {
         id: "ssl",
@@ -31,7 +31,7 @@ const layers = [
         description: "Validating certificate chains, expiration dates, and the strength of the TLS 1.3 handshake.",
         data: "Cert: Valid | Expires: 240 days\nCipher: TLS_AES_256_GCM_SHA384\nIssuer: Let's Encrypt E6",
         icon: Lock,
-        color: "text-indigo-500"
+        color: "text-primary/70"
     },
     {
         id: "content",
@@ -170,9 +170,9 @@ export function AnatomyOfScan() {
                                                 <Terminal size={18} className="text-slate-200" />
                                             </div>
 
-                                            <div className="bg-slate-900 rounded-[1.5rem] p-6 font-mono text-xs md:text-sm text-blue-400 overflow-hidden relative">
+                                            <div className="bg-slate-900 rounded-[1.5rem] p-6 font-mono text-xs md:text-sm text-primary overflow-hidden relative">
                                                 <div className="absolute top-0 right-0 p-3 opacity-20">
-                                                    <div className="size-1 rounded-full bg-blue-400 animate-ping" />
+                                                    <div className="size-1 rounded-full bg-purple-400 animate-ping" />
                                                 </div>
 
                                                 <div className="flex items-center gap-2 mb-3 text-slate-600 border-b border-slate-800 pb-2">
@@ -187,7 +187,7 @@ export function AnatomyOfScan() {
                                                 <motion.span
                                                     animate={{ opacity: [0, 1, 0] }}
                                                     transition={{ duration: 0.8, repeat: Infinity }}
-                                                    className="inline-block w-2 h-4 bg-blue-400 ml-1 translate-y-1"
+                                                    className="inline-block w-2 h-4 bg-primary ml-1 translate-y-1"
                                                 />
                                             </div>
 

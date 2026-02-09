@@ -37,8 +37,8 @@ export default function SettingsPage() {
             <header className="flex flex-col md:flex-row md:items-end justify-between gap-12 mb-20 border-b border-slate-200 pb-16">
                 <div>
                     <div className="flex items-center gap-3 mb-6">
-                        <div className="w-8 h-[1px] bg-sky-500" />
-                        <span className="text-[10px] font-black text-sky-600 uppercase tracking-[0.4em]">System_Optimization_v2.0</span>
+                        <div className="w-8 h-[1px] bg-purple-500" />
+                        <span className="text-[10px] font-black text-purple-500 uppercase tracking-[0.4em]">Audit_Log_Retrieval</span>
                     </div>
                     <h1 className="text-5xl md:text-8xl font-black text-slate-950 tracking-tighter uppercase mb-6">
                         Control <span className="text-slate-400">Center</span>
@@ -70,7 +70,7 @@ export default function SettingsPage() {
                                 </div>
                                 <div className={cn(
                                     "size-1.5 rounded-full transition-all",
-                                    activeTab === item.id ? "bg-sky-400 animate-pulse" : "bg-transparent group-hover:bg-slate-200"
+                                    activeTab === item.id ? "bg-purple-400 animate-pulse" : "bg-transparent group-hover:bg-slate-200"
                                 )} />
                             </button>
                         ))}
@@ -93,7 +93,7 @@ export default function SettingsPage() {
                                     <div className="bg-white p-12 border border-slate-200 rounded-none relative overflow-hidden group">
                                         <div className="flex items-center gap-4 mb-10">
                                             <div className="w-6 h-[2px] bg-slate-950" />
-                                            <h3 className="text-lg font-black text-slate-950 uppercase tracking-tighter flex items-center gap-4">
+                                            <h3 className="text-lg font-black text-primary uppercase tracking-tighter flex items-center gap-4">
                                                 Visual_Interface_Protocol
                                             </h3>
                                         </div>
@@ -111,7 +111,7 @@ export default function SettingsPage() {
                                                     )}
                                                 >
                                                     {theme === t.id && (
-                                                        <div className="absolute top-4 right-4 text-sky-600">
+                                                        <div className="absolute top-4 right-4 text-primary">
                                                             <Check size={16} strokeWidth={3} />
                                                         </div>
                                                     )}

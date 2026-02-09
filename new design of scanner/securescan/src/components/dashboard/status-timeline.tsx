@@ -36,7 +36,7 @@ export function StatusTimeline({ currentPhaseIndex }: StatusTimelineProps) {
                         <div className={cn(
                             "relative z-10 size-10 border-2 transition-all duration-500 rounded-none flex items-center justify-center",
                             isCompleted ? "bg-slate-950 border-slate-950 text-white" :
-                                isActive ? "bg-white border-blue-600 text-blue-600 scale-110 shadow-[0_0_20px_rgba(37,99,235,0.1)]" :
+                                isActive ? "bg-white border-primary text-primary scale-110 shadow-[0_0_20px_rgba(128,0,128,0.1)]" :
                                     "bg-white border-slate-100 text-slate-200"
                         )}>
                             {isCompleted ? <CheckCircle2 size={16} strokeWidth={3} /> :
@@ -45,7 +45,7 @@ export function StatusTimeline({ currentPhaseIndex }: StatusTimelineProps) {
 
                             {/* Connector indicator for active */}
                             {isActive && (
-                                <div className="absolute left-full ml-4 w-8 h-[2px] bg-blue-600" />
+                                <div className="absolute left-full ml-4 w-8 h-[2px] bg-primary" />
                             )}
                         </div>
 
@@ -57,7 +57,7 @@ export function StatusTimeline({ currentPhaseIndex }: StatusTimelineProps) {
                                 )}>
                                     PHASE_0{index + 1}::{phase.title}
                                 </h3>
-                                {isActive && <span className="text-[8px] font-black text-blue-600 animate-pulse tracking-widest bg-blue-50 px-2 py-0.5">EXE_ACTIVE</span>}
+                                {isActive && <span className="text-[8px] font-black text-primary animate-pulse tracking-widest bg-purple-50 px-2 py-0.5">EXE_ACTIVE</span>}
                             </div>
                             <p className={cn(
                                 "text-[11px] font-bold font-mono leading-relaxed transition-colors uppercase",

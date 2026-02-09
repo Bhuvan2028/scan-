@@ -8,9 +8,9 @@ import { usePerformance } from "@/hooks/use-performance"
 
 const dnaMarkers = [
     { label: "DNS_A_RECORD", val: "104.21.34.112", color: "text-blue-500" },
-    { label: "SSL_CERT_VALID", val: "210d_REMAINING", color: "text-emerald-500" },
-    { label: "MAIL_SECURITY", val: "SPF/DKIM: PASS", color: "text-blue-500" },
-    { label: "PHISHING_SCORE", val: "0.2/10 (CLEAN)", color: "text-blue-500" }
+    { label: "DNS_A_RECORD", val: "104.21.34.112", color: "text-primary" },
+    { label: "MAIL_SECURITY", val: "SPF/DKIM: PASS", color: "text-primary" },
+    { label: "PHISHING_SCORE", val: "0.2/10 (CLEAN)", color: "text-primary" }
 ]
 
 
@@ -89,8 +89,8 @@ export function SplitHero() {
                         transition={{ duration: 0.8 }}
                         className="mb-4 flex items-center gap-3"
                     >
-                        <div className="h-px w-12 bg-blue-600" />
-                        <span className="text-[10px] font-black uppercase tracking-[0.5em] text-blue-600">SecureScan_Protocol_Active</span>
+                        <div className="h-px w-12 bg-primary" />
+                        <span className="text-[10px] font-black uppercase tracking-[0.5em] text-primary">SecureScan_Protocol_Active</span>
                     </motion.div>
 
                     <motion.h1
@@ -108,7 +108,7 @@ export function SplitHero() {
                             initial={{ opacity: 0, x: 50 }}
                             animate={{ opacity: 1, x: 0 }}
                             transition={{ duration: 0.8, delay: 0.2 }}
-                            className="bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-cyan-500"
+                            className="bg-clip-text text-transparent bg-gradient-to-r from-primary to-purple-400"
                         >
                             SECURE
                         </motion.span>
@@ -168,7 +168,7 @@ export function SplitHero() {
                             }}
                             className="relative flex items-center p-5 backdrop-blur-3xl rounded-sm border shadow-2xl overflow-hidden group"
                         >
-                            <Search className={`relative z-10 mr-4 transition-colors ${isFocused ? 'text-blue-500' : 'text-slate-400'}`} size={24} />
+                            <Search className={`relative z-10 mr-4 transition-colors ${isFocused ? 'text-primary' : 'text-slate-400'}`} size={24} />
 
                             <form onSubmit={handleSubmit} className="relative z-10 flex-1">
                                 <input
@@ -187,7 +187,7 @@ export function SplitHero() {
                                 animate={{ opacity: userInput.length > 0 ? 1 : 0, x: userInput.length > 0 ? 0 : 20 }}
                                 type="submit"
                                 onClick={handleSubmit}
-                                className="relative z-10 flex items-center justify-center size-10 bg-slate-900 text-white rounded-sm hover:bg-blue-600 transition-colors"
+                                className="relative z-10 flex items-center justify-center size-10 bg-slate-900 text-white rounded-sm hover:bg-primary transition-colors"
                             >
                                 <ArrowRight size={18} />
                             </motion.button>

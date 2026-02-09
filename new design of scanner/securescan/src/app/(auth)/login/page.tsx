@@ -36,7 +36,7 @@ export default function LoginPage() {
                 </Link>
                 <div className="flex items-center gap-3 text-sm">
                     <span className="text-slate-500 font-light">Need an account?</span>
-                    <Link href="/signup" className="text-blue-600 font-semibold hover:text-blue-700 transition-colors">
+                    <Link href="/signup" className="text-primary font-semibold hover:opacity-80 transition-colors">
                         Create one
                     </Link>
                 </div>
@@ -52,7 +52,7 @@ export default function LoginPage() {
                     <label className="text-sm font-medium text-slate-600 ml-0.5">Work Email</label>
                     <div className="relative group">
                         <div className="absolute inset-y-0 left-4 flex items-center pointer-events-none">
-                            <Mail className="size-4.5 text-slate-400 group-focus-within:text-blue-600 transition-colors" />
+                            <Mail className="size-4.5 text-slate-400 group-focus-within:text-primary transition-colors" />
                         </div>
                         <input
                             type="email"
@@ -65,13 +65,13 @@ export default function LoginPage() {
                 <div className="space-y-2.5">
                     <div className="flex items-center justify-between ml-0.5">
                         <label className="text-sm font-medium text-slate-600">Password</label>
-                        <Link href="#" className="text-xs font-medium text-blue-600 hover:text-blue-700 transition-colors">
+                        <Link href="#" className="text-xs font-medium text-primary hover:opacity-80 transition-colors">
                             Forgot password?
                         </Link>
                     </div>
                     <div className="relative group">
                         <div className="absolute inset-y-0 left-4 flex items-center pointer-events-none">
-                            <Lock className="size-4.5 text-slate-400 group-focus-within:text-blue-600 transition-colors" />
+                            <Lock className="size-4.5 text-slate-400 group-focus-within:text-primary transition-colors" />
                         </div>
                         <input
                             type={showPassword ? "text" : "password"}
@@ -136,9 +136,9 @@ export default function LoginPage() {
 
             <p className="mt-12 text-center text-xs text-slate-400 font-light leading-relaxed">
                 Protected by enterprise-grade encryption. By continuing, you agree to our <br />
-                <Link href="#" className="text-slate-600 hover:text-blue-600 transition-colors underline underline-offset-4 decoration-slate-200">Terms of Service</Link>
+                <Link href="#" className="text-slate-600 hover:text-primary transition-colors underline underline-offset-4 decoration-slate-200">Terms of Service</Link>
                 {" "}and{" "}
-                <Link href="#" className="text-slate-600 hover:text-blue-600 transition-colors underline underline-offset-4 decoration-slate-200">Privacy Policy</Link>.
+                <Link href="#" className="text-slate-600 hover:text-primary transition-colors underline underline-offset-4 decoration-slate-200">Privacy Policy</Link>.
             </p>
         </motion.div>
     )

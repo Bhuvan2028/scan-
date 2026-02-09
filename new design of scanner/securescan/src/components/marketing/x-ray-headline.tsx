@@ -51,16 +51,16 @@ export function XRayHeadline() {
                     maskImage: maskImage,
                 }}
             >
-                <div className="text-[12vw] md:text-[8vw] font-black tracking-tighter leading-[0.8] uppercase text-blue-500/20 font-mono">
+                <div className="text-[12vw] md:text-[8vw] font-black tracking-tighter leading-[0.8] uppercase text-primary/20 font-mono">
                     {/* Background noise of IPs and data */}
                     <div className="absolute inset-0 flex flex-wrap gap-2 overflow-hidden opacity-10 text-[8px] font-mono leading-none tracking-widest p-4">
                         {Array.from({ length: 1000 }).map((_, i) => (
-                            <span key={i} className="text-blue-500">
+                            <span key={i} className="text-primary">
                                 {Math.floor(Math.random() * 255)}.{Math.floor(Math.random() * 255)}.xxx.xxx
                             </span>
                         ))}
                     </div>
-                    <span className="relative z-10 text-blue-600 block">
+                    <span className="relative z-10 text-primary block">
                         42.67.110.12<br />INFRA_RECON
                     </span>
                 </div>
@@ -69,13 +69,13 @@ export function XRayHeadline() {
             {/* Flashlight Cursor */}
             <motion.div
                 style={{ left: x, top: y, opacity: isHovered ? 1 : 0 }}
-                className="pointer-events-none absolute size-40 -translate-x-1/2 -translate-y-1/2 rounded-full bg-blue-500/10 blur-3xl"
+                className="pointer-events-none absolute size-40 -translate-x-1/2 -translate-y-1/2 rounded-full bg-purple-500/10 blur-3xl"
             />
             <motion.div
                 style={{ left: x, top: y, opacity: isHovered ? 1 : 0 }}
-                className="pointer-events-none absolute size-1 border border-blue-500/50 rounded-full flex items-center justify-center"
+                className="pointer-events-none absolute size-1 border border-primary/50 rounded-full flex items-center justify-center"
             >
-                <div className="size-[200px] border border-blue-500/5 rounded-full" />
+                <div className="size-[200px] border border-primary/5 [mask-image:radial-gradient(circle,white,transparent)] rounded-full" />
             </motion.div>
         </div>
     )

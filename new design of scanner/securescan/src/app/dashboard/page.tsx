@@ -39,8 +39,8 @@ export default function DashboardPage() {
             >
                 <div className="max-w-3xl">
                     <div className="flex items-center gap-2 mb-4">
-                        <div className="w-8 h-[1px] bg-blue-600" />
-                        <span className="text-[10px] font-black text-blue-600 uppercase tracking-[0.4em]">SecureScan_Dashboard_v4.0</span>
+                        <div className="w-8 h-[1px] bg-primary" />
+                        <span className="text-[10px] font-black text-primary uppercase tracking-[0.4em]">SecureScan_Dashboard_v4.0</span>
                     </div>
                     <h1 className="text-5xl md:text-7xl font-black text-slate-950 tracking-tighter mb-6 uppercase">
                         Operational <span className="text-slate-500">Hub</span>

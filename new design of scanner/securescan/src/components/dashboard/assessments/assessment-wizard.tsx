@@ -81,7 +81,7 @@ export function AssessmentWizard() {
     if (loading) {
         return (
             <div className="flex flex-col items-center justify-center py-20 min-h-[400px]">
-                <Loader2 className="animate-spin text-blue-600 mb-4" size={40} />
+                <Loader2 className="animate-spin text-primary mb-4" size={40} />
                 <p className="text-slate-500 font-mono text-xs font-bold uppercase tracking-widest">Initialising_Assessment_Engine...</p>
             </div>
         )
@@ -112,7 +112,7 @@ export function AssessmentWizard() {
                 className="max-w-2xl mx-auto text-center py-12"
             >
                 <div className="inline-block p-4 border border-slate-200 mb-8 bg-white shadow-sm">
-                    <Shield className="text-blue-600" size={32} />
+                    <Shield className="text-primary" size={32} />
                 </div>
                 <h2 className="text-3xl font-black text-slate-950 tracking-tighter uppercase mb-6">Maturity Assessment Protocol</h2>
                 <p className="text-slate-600 font-mono text-sm font-bold leading-relaxed mb-12">
@@ -121,15 +121,15 @@ export function AssessmentWizard() {
                 </p>
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-12 text-left">
                     <div className="p-6 border border-slate-100 bg-slate-50/50">
-                        <div className="text-[10px] font-black text-blue-600 uppercase mb-2">Phase_01</div>
+                        <div className="text-[10px] font-black text-primary uppercase mb-2">Phase_01</div>
                         <div className="text-xs font-bold text-slate-950 uppercase">Basic Controls</div>
                     </div>
                     <div className="p-6 border border-slate-100 bg-slate-50/50">
-                        <div className="text-[10px] font-black text-blue-600 uppercase mb-2">Phase_02</div>
+                        <div className="text-[10px] font-black text-primary uppercase mb-2">Phase_02</div>
                         <div className="text-xs font-bold text-slate-950 uppercase">Infrastructure</div>
                     </div>
                     <div className="p-6 border border-slate-100 bg-slate-50/50">
-                        <div className="text-[10px] font-black text-blue-600 uppercase mb-2">Phase_03</div>
+                        <div className="text-[10px] font-black text-primary uppercase mb-2">Phase_03</div>
                         <div className="text-xs font-bold text-slate-950 uppercase">Governance</div>
                     </div>
                 </div>
@@ -153,7 +153,7 @@ export function AssessmentWizard() {
             {/* Progress Header */}
             <div className="mb-12">
                 <div className="flex items-center justify-between mb-4">
-                    <div className="text-[10px] font-black text-blue-600 uppercase tracking-widest">
+                    <div className="text-[10px] font-black text-primary uppercase tracking-widest">
                         Assessment_In_Progress::{currentQuestion.category}
                     </div>
                     <div className="text-[10px] font-black text-slate-400 font-mono">
@@ -164,7 +164,7 @@ export function AssessmentWizard() {
                     <motion.div
                         initial={{ width: 0 }}
                         animate={{ width: `${progress}%` }}
-                        className="h-full bg-blue-600"
+                        className="h-full bg-primary"
                     />
                 </div>
             </div>
@@ -188,14 +188,14 @@ export function AssessmentWizard() {
                     </h3>
 
                     <div className="space-y-4">
-                        {currentQuestion.options.map((option: any) => (
+                        {currentQuestion.options.map((option: any, index: number) => (
                             <button
                                 key={option.key}
                                 onClick={() => handleOptionSelect(currentQuestion.id, option.key)}
                                 className={cn(
                                     "w-full p-6 text-left border-2 transition-all group flex items-center justify-between",
                                     responses[currentQuestion.id.toString()] === option.key
-                                        ? "border-blue-600 bg-blue-50/30 ring-1 ring-blue-600"
+                                        ? "border-primary bg-purple-50/30 ring-1 ring-primary"
                                         : "border-slate-100 hover:border-slate-300 hover:bg-slate-50"
                                 )}
                             >
@@ -203,7 +203,7 @@ export function AssessmentWizard() {
                                     <div className={cn(
                                         "w-8 h-8 flex items-center justify-center font-mono text-xs font-black border-2",
                                         responses[currentQuestion.id.toString()] === option.key
-                                            ? "border-blue-600 bg-blue-600 text-white"
+                                            ? "border-primary bg-primary text-white"
                                             : "border-slate-200 text-slate-400 group-hover:border-slate-400 group-hover:text-slate-600"
                                     )}>
                                         {option.key}
@@ -211,14 +211,14 @@ export function AssessmentWizard() {
                                     <span className={cn(
                                         "font-bold text-sm uppercase tracking-tight",
                                         responses[currentQuestion.id.toString()] === option.key
-                                            ? "text-blue-600"
+                                            ? "text-primary"
                                             : "text-slate-600"
                                     )}>
                                         {option.text}
                                     </span>
                                 </div>
                                 {responses[currentQuestion.id.toString()] === option.key && (
-                                    <CheckCircle2 className="text-blue-600" size={20} />
+                                    <CheckCircle2 className="text-primary" size={20} />
                                 )}
                             </button>
                         ))}
@@ -244,7 +244,7 @@ export function AssessmentWizard() {
                         size="lg"
                         onClick={handleSubmit}
                         disabled={submitting}
-                        className="h-14 px-10 bg-blue-600 hover:bg-blue-700 text-white rounded-none font-black text-[10px] uppercase tracking-widest transition-all"
+                        className="h-14 px-10 bg-primary hover:opacity-90 text-white rounded-none font-black text-[10px] uppercase tracking-widest transition-all"
                     >
                         {submitting ? (
                             <Loader2 className="animate-spin mr-2" size={14} />

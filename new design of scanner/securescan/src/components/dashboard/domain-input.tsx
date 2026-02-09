@@ -11,7 +11,7 @@ export function DomainInput({ value, onChange }: DomainInputProps) {
     return (
         <div className="relative group">
             <div className="absolute inset-y-0 left-6 flex items-center pointer-events-none">
-                <Globe className="size-5 text-slate-400 group-focus-within:text-blue-600 transition-colors" />
+                <Globe className="size-5 text-slate-400 group-focus-within:text-primary transition-colors" />
             </div>
             <input
                 type="text"

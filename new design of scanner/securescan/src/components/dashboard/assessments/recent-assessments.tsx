@@ -28,7 +28,7 @@ export function RecentAssessments() {
     if (loading) {
         return (
             <div className="flex flex-col items-center justify-center py-20 bg-white border border-slate-100 rounded-none">
-                <Loader2 className="animate-spin text-blue-600 mb-4" size={24} />
+                <Loader2 className="animate-spin text-primary mb-4" size={24} />
                 <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Retaining_Recent_Logs...</p>
             </div>
         )
@@ -76,7 +76,7 @@ export function RecentAssessments() {
                         transition={{ duration: 0.4, delay: index * 0.1 }}
                         className="bg-white p-8 border border-slate-200 hover:border-slate-950 shadow-[0_4px_20px_-4px_rgba(0,0,0,0.05)] transition-all group flex flex-col md:flex-row md:items-center justify-between gap-8 relative overflow-hidden"
                     >
-                        <div className="absolute top-0 left-0 w-1 h-full bg-blue-600 opacity-0 group-hover:opacity-100 transition-opacity" />
+                        <div className="absolute top-0 left-0 w-1 h-full bg-primary opacity-0 group-hover:opacity-100 transition-opacity" />
 
                         <div className="flex items-center gap-8">
                             <div className="w-16 h-16 flex items-center justify-center bg-slate-50 border border-slate-100 text-slate-900 font-black text-xl tracking-tighter">
@@ -92,7 +92,7 @@ export function RecentAssessments() {
                                     </span>
                                 </div>
                                 <div className="flex items-center gap-4 text-slate-400 text-[10px] font-black font-mono">
-                                    <span className="flex items-center gap-1.5 uppercase"><Shield size={12} className="text-blue-600" />{item.score}% Fidelity</span>
+                                    <span className="flex items-center gap-1.5 uppercase"><Shield size={12} className="text-primary" />{item.score}% Fidelity</span>
                                     <span className="h-3 w-px bg-slate-200" />
                                     <span className="flex items-center gap-1.5 uppercase"><Clock size={12} />{new Date(item.createdAt).toLocaleDateString()}</span>
                                 </div>

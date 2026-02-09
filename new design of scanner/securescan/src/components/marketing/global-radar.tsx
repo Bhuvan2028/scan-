@@ -9,13 +9,13 @@ export function GlobalRadar() {
             <motion.div
                 animate={{ rotate: 360 }}
                 transition={{ duration: 40, repeat: Infinity, ease: "linear" }}
-                className="absolute inset-0 border border-blue-500/20 rounded-full"
+                className="absolute inset-0 border border-purple-500/20 rounded-full"
             />
             {/* Middle Ring */}
             <motion.div
                 animate={{ rotate: -360 }}
                 transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
-                className="absolute inset-20 border border-dashed border-blue-500/10 rounded-full"
+                className="absolute inset-20 border border-dashed border-purple-500/10 rounded-full"
             />
 
             {/* The Globe Shadow */}

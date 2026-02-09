@@ -35,7 +35,7 @@ export default function AssessmentHistoryPage() {
     if (loading) {
         return (
             <div className="max-w-7xl mx-auto px-6 py-32 flex flex-col items-center justify-center min-h-[600px]">
-                <Loader2 className="animate-spin text-blue-600 mb-8" size={48} />
+                <Loader2 className="animate-spin text-primary mb-8" size={48} />
                 <p className="text-[12px] font-black text-slate-400 uppercase tracking-[0.4em]">Deciphering_Security_Archives...</p>
             </div>
         )
@@ -54,11 +54,11 @@ export default function AssessmentHistoryPage() {
                         <div className="w-12 h-12 bg-slate-950 flex items-center justify-center text-white">
                             <Shield size={24} />
                         </div>
-                        <span className="text-[10px] font-black uppercase tracking-[0.4em] text-blue-600">Archive_Protocol::Security_Maturity</span>
+                        <span className="text-[10px] font-black uppercase tracking-[0.4em] text-primary">Archive_Protocol::Security_Maturity</span>
                     </div>
                     <h1 className="text-5xl md:text-7xl font-black text-slate-950 tracking-tighter uppercase leading-none italic">
                         Assessment <br />
-                        <span className="text-slate-400 font-normal">Records</span>
+                        <span className="text-primary font-bold">Protocol Archive</span>
                     </h1>
                 </div>
 
@@ -68,7 +68,7 @@ export default function AssessmentHistoryPage() {
                         placeholder="SEARCH_BY_SEQUENCE_OR_GRADE..."
                         value={searchQuery}
                         onChange={(e: React.ChangeEvent<HTMLInputElement>) => setSearchQuery(e.target.value)}
-                        className="h-16 pl-14 bg-white border-2 border-slate-950 rounded-none font-mono text-xs font-bold uppercase tracking-tight shadow-sm focus-visible:ring-0 focus-visible:border-blue-600"
+                        className="h-16 pl-14 bg-white border-2 border-slate-950 rounded-none font-mono text-xs font-bold uppercase tracking-tight shadow-sm focus-visible:ring-0 focus-visible:border-primary"
                     />
                 </div>
             </div>
@@ -103,13 +103,13 @@ export default function AssessmentHistoryPage() {
                                 <div>
                                     <div className="flex items-center gap-3 mb-4">
                                         <h4 className="text-2xl font-black text-slate-950 uppercase tracking-tighter">Sequence_{item._id.slice(-8).toUpperCase()}</h4>
-                                        <div className="px-3 py-1 bg-blue-50 text-blue-600 border border-blue-100 text-[10px] font-black uppercase tracking-widest">
+                                        <div className="px-3 py-1 bg-purple-50 text-primary border border-purple-100 text-[10px] font-black uppercase tracking-widest">
                                             Verified_Data
                                         </div>
                                     </div>
                                     <div className="flex flex-wrap gap-6 text-slate-400 text-[11px] font-black font-mono">
                                         <span className="flex items-center gap-2 uppercase">
-                                            <Shield size={14} className="text-blue-600" />
+                                            <Shield size={14} className="text-primary" />
                                             Fidelity: {item.score}%
                                         </span>
                                         <span className="flex items-center gap-2 uppercase">

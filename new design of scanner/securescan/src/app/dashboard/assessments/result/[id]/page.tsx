@@ -30,7 +30,7 @@ export default function AssessmentResultPage({ params }: { params: Promise<{ id:
     if (loading) {
         return (
             <div className="flex flex-col items-center justify-center py-32 min-h-[600px]">
-                <div className="w-16 h-16 border-4 border-slate-100 border-t-blue-600 rounded-full animate-spin mb-8" />
+                <div className="w-16 h-16 border-4 border-slate-100 border-t-primary rounded-full animate-spin mb-8" />
                 <p className="text-slate-500 font-mono text-xs font-black uppercase tracking-widest">Generating_Maturity_Report...</p>
             </div>
         )
@@ -65,8 +65,8 @@ export default function AssessmentResultPage({ params }: { params: Promise<{ id:
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 mb-24">
                 <div>
                     <div className="flex items-center gap-2 mb-6">
-                        <div className="w-8 h-[1px] bg-blue-600" />
-                        <span className="text-[10px] font-black uppercase tracking-[0.4em] text-blue-600">Report_Generated::{result._id.slice(-8).toUpperCase()}</span>
+                        <div className="w-8 h-[1px] bg-primary" />
+                        <span className="text-[10px] font-black uppercase tracking-[0.4em] text-primary">Report_Generated::{result._id.slice(-8).toUpperCase()}</span>
                     </div>
                     <h1 className="text-5xl md:text-8xl font-black text-slate-950 tracking-tighter leading-none mb-10 uppercase italic">
                         Security <br />
@@ -91,7 +91,7 @@ export default function AssessmentResultPage({ params }: { params: Promise<{ id:
                             {result.grade}
                         </div>
                         <div className="inline-flex items-center gap-2 px-6 py-2 bg-slate-100 border border-slate-200">
-                            <Shield className="text-blue-600" size={16} />
+                            <Shield className="text-primary" size={16} />
                             <span className="text-[14px] font-black text-slate-950">{result.score}% Accuracy</span>
                         </div>
                     </div>
@@ -105,7 +105,7 @@ export default function AssessmentResultPage({ params }: { params: Promise<{ id:
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                     <div className="p-10 border-2 border-slate-950 bg-white">
                         <div className="size-12 rounded-full bg-blue-50 flex items-center justify-center mb-8 border border-blue-100">
-                            <CheckCircle2 className="text-blue-600" size={24} />
+                            <CheckCircle2 className="text-primary" size={24} />
                         </div>
                         <h3 className="text-lg font-black text-slate-950 mb-4 uppercase tracking-tight">Active Strengths</h3>
                         <p className="text-slate-500 font-mono text-xs font-bold leading-relaxed italic">

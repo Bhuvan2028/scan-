@@ -46,7 +46,7 @@ export function ScanLogItem({ scan, index }: ScanLogItemProps) {
                             UID: <span className="text-slate-950">{scan._id.slice(-12).toUpperCase()}</span>
                         </p>
                         <div className="text-[10px] font-black text-slate-400 font-mono tracking-widest uppercase flex items-center gap-2">
-                            <span className="size-1 bg-blue-600 inline-block" />
+                            <span className="size-1 bg-primary inline-block" />
                             MODE: <span className="text-slate-950">{scan.mode?.toUpperCase()}</span>
                         </div>
                         <div className="text-[10px] font-bold text-slate-500 font-mono uppercase tracking-tighter flex items-center gap-2">

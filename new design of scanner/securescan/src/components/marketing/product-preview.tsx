@@ -82,7 +82,7 @@ export function ProductPreview() {
                                         className={cn(
                                             "w-full flex items-center gap-3 px-3 py-2 text-sm font-medium rounded-md transition-colors",
                                             activeTab === tab.id
-                                                ? "bg-white text-blue-600 shadow-sm border border-slate-200/60"
+                                                ? "bg-white text-primary shadow-sm border border-slate-200/60"
                                                 : "text-slate-600 hover:bg-slate-100 hover:text-slate-900"
                                         )}
                                     >

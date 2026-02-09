@@ -121,7 +121,7 @@ export function ReportDeepDive({ scan }: ReportDeepDiveProps) {
                 {/* Navigation Sidebar */}
                 <div className="md:col-span-4 lg:col-span-3 border-r border-slate-200 bg-slate-50/20 p-8 space-y-3 relative">
                     <div className="mb-12 relative z-10">
-                        <span className="text-[9px] font-black uppercase tracking-[0.4em] text-blue-600 block mb-3 font-mono">INTEL_NAVIGATION</span>
+                        <span className="text-[9px] font-black uppercase tracking-[0.4em] text-primary block mb-3 font-mono">INTEL_NAVIGATION</span>
                         <h3 className="text-xl font-black text-slate-950 tracking-tighter uppercase">Query_Buffer</h3>
                     </div>
 

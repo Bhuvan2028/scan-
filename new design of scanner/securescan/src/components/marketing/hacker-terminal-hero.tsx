@@ -116,7 +116,7 @@ export function HackerTerminalHero({ onInteraction }: HackerTerminalHeroProps) {
                     <div className="flex flex-col gap-4">
                         {/* Prompt Line */}
                         <div className="flex items-center gap-3">
-                            <span className="text-blue-500 font-black">isecurify_root@scanner:~$</span>
+                            <span className="text-primary font-black">isecurify_root@scanner:~$</span>
                             <div className="relative flex-1 flex items-center">
                                 {isAutoTyping ? (
                                     <span className="text-white text-lg md:text-xl font-medium">{command}</span>
@@ -137,7 +137,7 @@ export function HackerTerminalHero({ onInteraction }: HackerTerminalHeroProps) {
                                 <motion.div
                                     animate={{ opacity: [0, 1, 0] }}
                                     transition={{ duration: 0.8, repeat: Infinity }}
-                                    className="w-2.5 h-6 bg-blue-500 ml-1"
+                                    className="w-2.5 h-6 bg-primary ml-1"
                                 />
                             </div>
                         </div>
@@ -149,7 +149,7 @@ export function HackerTerminalHero({ onInteraction }: HackerTerminalHeroProps) {
                                     key={i}
                                     initial={{ opacity: 0, x: -5 }}
                                     animate={{ opacity: 1, x: 0 }}
-                                    className={`text-[10px] md:text-xs tracking-tighter flex items-center gap-2 ${log && log.includes("VERDICT") ? "text-blue-400 font-bold" :
+                                    className={`text-[10px] md:text-xs tracking-tighter flex items-center gap-2 ${log && log.includes("VERDICT") ? "text-primary font-bold" :
                                         log && log.includes("SUCCESS") ? "text-emerald-500" : "text-slate-500"
                                         }`}
                                 >
@@ -174,7 +174,7 @@ export function HackerTerminalHero({ onInteraction }: HackerTerminalHeroProps) {
                             animate={{ opacity: 1, y: 0 }}
                             exit={{ opacity: 0, y: 10 }}
                             onClick={handleSubmit}
-                            className="absolute bottom-6 right-6 h-12 px-6 rounded-full bg-blue-500 text-white font-black uppercase text-[10px] tracking-widest flex items-center gap-2 shadow-2xl shadow-blue-500/20 hover:bg-blue-400 transition-all hover:scale-105"
+                            className="absolute bottom-6 right-6 h-12 px-6 rounded-full bg-primary text-white font-black uppercase text-[10px] tracking-widest flex items-center gap-2 shadow-2xl shadow-purple-500/20 hover:opacity-90 transition-all hover:scale-105"
                         >
                             Execute Scan <ArrowRight size={14} />
                         </motion.button>
@@ -198,8 +198,8 @@ export function HackerTerminalHero({ onInteraction }: HackerTerminalHeroProps) {
                         className="bg-white/5 backdrop-blur-md border border-white/5 p-4 rounded-xl flex flex-col gap-1 ring-1 ring-inset ring-white/5"
                     >
                         <div className="flex items-center justify-between mb-1">
-                            <stat.icon size={12} className="text-blue-500/50" />
-                            <span className="text-[10px] font-black text-blue-400">{stat.delta}</span>
+                            <stat.icon size={12} className="text-primary/50" />
+                            <span className="text-[10px] font-black text-primary">{stat.delta}</span>
                         </div>
                         <span className="text-lg font-black text-white">{stat.val}</span>
                         <span className="text-[9px] font-black uppercase tracking-widest text-slate-500">{stat.label}</span>

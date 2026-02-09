@@ -38,7 +38,7 @@ export function SecurityScoreCard({ score, previousScore = 78 }: SecurityScoreCa
                             <Shield className="size-5 lg:size-6" strokeWidth={2.5} />
                         </div>
                         <div className="flex flex-col text-left">
-                            <span className="text-[8px] lg:text-[10px] font-black uppercase tracking-[0.4em] text-blue-600">POSTURE_INDEX_V4.0</span>
+                            <span className="text-[8px] lg:text-[10px] font-black uppercase tracking-[0.4em] text-primary">POSTURE_INDEX_V4.0</span>
                             <span className="text-[7px] lg:text-[8px] font-black uppercase tracking-[0.2em] text-slate-400">Diagnostic Monitor</span>
                         </div>
                     </div>

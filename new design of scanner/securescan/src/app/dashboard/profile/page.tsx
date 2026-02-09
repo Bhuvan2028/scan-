@@ -31,8 +31,8 @@ export default function ProfilePage() {
                 <div className="flex flex-col md:flex-row md:items-end justify-between gap-12 border-b border-slate-200 pb-16">
                     <div>
                         <div className="flex items-center gap-3 mb-6">
-                            <div className="w-8 h-[1px] bg-sky-500" />
-                            <span className="text-[10px] font-black text-sky-600 uppercase tracking-[0.4em]">Operator_Credentials_v4.2</span>
+                            <div className="w-8 h-[1px] bg-primary" />
+                            <span className="text-[10px] font-black text-primary uppercase tracking-[0.4em]">Operator_Credentials_v4.2</span>
                         </div>
                         <h1 className="text-5xl md:text-8xl font-black text-slate-950 tracking-tighter uppercase mb-6">
                             Identity <span className="text-slate-400">Profile</span>
@@ -177,7 +177,7 @@ function AccountTab() {
                 <div className="bg-slate-950 p-10 rounded-none relative overflow-hidden group border border-slate-800 shadow-[12px_12px_0px_rgba(30,58,138,0.2)]">
                     <div className="relative z-10">
                         <div className="flex items-center gap-3 mb-6">
-                            <Fingerprint className="text-sky-500" size={24} />
+                            <Fingerprint className="text-primary" size={24} />
                             <h4 className="text-lg font-black text-white uppercase tracking-tighter leading-none">Identity_Verified</h4>
                         </div>
                         <p className="text-white/40 text-[11px] font-bold font-mono uppercase tracking-[0.2em] leading-relaxed mb-10">
@@ -211,7 +211,7 @@ function SecurityTab() {
                     </p>
                     <div className="flex items-center justify-between p-6 bg-slate-50 border border-slate-200 group-hover:border-slate-950 transition-colors">
                         <div className="flex items-center gap-4">
-                            <div className="size-2 bg-sky-600 animate-pulse shadow-[0_0_8px_rgba(37,99,235,0.6)]" />
+                            <div className="size-2 bg-primary animate-pulse shadow-[0_0_8px_rgba(161,70,161,0.6)]" />
                             <span className="text-[10px] font-black text-slate-950 uppercase tracking-[0.2em] font-mono">STATUS::OPERATIONAL</span>
                         </div>
                         <Button variant="outline" size="sm" className="h-10 px-6 rounded-none text-[10px] font-black uppercase tracking-widest border-slate-200 hover:border-slate-950">
@@ -276,7 +276,7 @@ function SubscriptionTab() {
                 <div className="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-16">
                     <div className="flex-1">
                         <div className="inline-flex items-center gap-3 px-4 py-1.5 bg-slate-950 text-white text-[10px] font-black uppercase tracking-[0.2em] border border-slate-950 mb-10">
-                            <Zap size={14} className="fill-sky-500 text-sky-500" /> ACTIVE_LICENSE_TIER
+                            <Zap size={14} className="fill-primary text-primary" /> ACTIVE_LICENSE_TIER
                         </div>
                         <h2 className="text-5xl font-black text-slate-950 mb-6 tracking-tighter uppercase">Enterprise <span className="text-slate-300">Hub</span></h2>
                         <p className="text-slate-500 font-bold font-mono text-xs uppercase max-w-lg leading-relaxed mb-12 opacity-80">
@@ -324,7 +324,7 @@ function SubscriptionTab() {
                                 <span className="text-[10px] font-black text-slate-950 font-mono">8.4K / 50K</span>
                             </div>
                             <div className="w-full h-1.5 bg-slate-100 rounded-none overflow-hidden">
-                                <div className="h-full w-[17%] bg-sky-600" />
+                                <div className="h-full w-[17%] bg-primary" />
                             </div>
                         </div>
                     </div>

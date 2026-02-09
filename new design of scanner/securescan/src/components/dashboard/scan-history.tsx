@@ -20,7 +20,7 @@ export function ScanHistory({ scans }: ScanHistoryProps) {
 
             <div className="flex items-center justify-between mb-10">
                 <div className="flex items-center gap-2">
-                    <div className="w-1 h-3 bg-blue-600" />
+                    <div className="w-1 h-3 bg-primary" />
                     <h2 className="text-[10px] font-black text-slate-900 uppercase tracking-[0.2em]">Log_Buffer</h2>
                 </div>
                 <Link href="/dashboard/history">
