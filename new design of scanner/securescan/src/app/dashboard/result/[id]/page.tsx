@@ -67,44 +67,73 @@ export default function ScanResultPage() {
     }
 
     return (
-        <div className="max-w-7xl mx-auto px-6 py-24 md:py-32 relative z-10">
-            {/* Header Section */}
-            <div className="flex flex-col md:flex-row md:items-end justify-between gap-12 mb-20 border-b border-slate-200 pb-16">
-                <div className="grid grid-cols-1 lg:grid-cols-4 gap-8 mb-8">
-                    <div className="lg:col-span-1">
-                        <SecurityScoreCard score={scan?.score || 0} />
-                    </div>
-                    <div className="lg:col-span-3">
-                        <MetricGrid scan={scan} />
-                    </div>
+        <div className="max-w-7xl mx-auto px-6 py-12 md:py-16 relative z-10">
+            {/* HUD Framing Decoration */}
+            <div className="fixed inset-4 border border-slate-950/5 pointer-events-none hidden lg:block">
+                <div className="absolute top-0 left-0 w-3 h-3 border-t border-l border-slate-950/20" />
+                <div className="absolute top-0 right-0 w-3 h-3 border-t border-r border-slate-950/20" />
+                <div className="absolute bottom-0 left-0 w-3 h-3 border-b border-l border-slate-950/20" />
+                <div className="absolute bottom-0 right-0 w-3 h-3 border-b border-r border-slate-950/20" />
+            </div>
+
+            {/* Technical Toolset Bar */}
+            <div className="flex items-center gap-6 mb-8 border-b border-slate-100 pb-4">
+                <div className="flex items-center gap-2 px-2.5 py-1 bg-slate-950 text-white text-[8px] font-black uppercase tracking-widest font-mono">
+                    <span className="size-1.5 bg-emerald-500 rounded-full animate-pulse" />
+                    Live_Intel
+                </div>
+                <div className="h-3 w-[1px] bg-slate-200" />
+                <div className="flex items-center gap-4">
+                    <button className="text-[9px] font-bold text-slate-400 hover:text-slate-950 transition-colors uppercase tracking-widest flex items-center gap-1.5 group">
+                        <Download className="size-2.5 group-hover:-translate-y-0.5 transition-transform" />
+                        Export
+                    </button>
+                    <button className="text-[9px] font-bold text-slate-400 hover:text-slate-950 transition-colors uppercase tracking-widest flex items-center gap-1.5 group">
+                        <Share2 className="size-2.5 group-hover:-translate-y-0.5 transition-transform" />
+                        Share
+                    </button>
+                </div>
+            </div>
+
+            {/* Main Content Stack */}
+            <div className="space-y-8 mb-16">
+                {/* Wide Horizon Banner Score */}
+                <div className="w-full">
+                    <SecurityScoreCard score={scan?.score || 0} />
                 </div>
 
-                <div className="mb-32">
-                    <ReportDeepDive scan={scan} />
+                {/* Primary Metrics Grid (Symmetric 3x3) */}
+                <div className="w-full">
+                    <MetricGrid scan={scan} />
+                </div>
+            </div>
+
+            {/* Detailed Findings & JSON Buffer */}
+            <div className="relative">
+                <ReportDeepDive scan={scan} />
+            </div>
+
+            {/* Expert Reminders / Footer */}
+            <div className="p-16 border-2 border-slate-950 bg-white rounded-none relative overflow-hidden group">
+                <div className="absolute inset-0 opacity-[0.03] pointer-events-none select-none font-mono text-[8px] leading-none overflow-hidden uppercase whitespace-pre p-2">
+                    {Array(40).fill("SURGICAL_APERTURE_SECURITY_SYSTEM_OPTIMIZED_V4.2 ").join("\n")}
                 </div>
 
-                {/* Expert Reminders / Footer */}
-                <div className="p-16 border-2 border-slate-950 bg-white rounded-none relative overflow-hidden group">
-                    <div className="absolute inset-0 opacity-[0.03] pointer-events-none select-none font-mono text-[8px] leading-none overflow-hidden uppercase whitespace-pre p-2">
-                        {Array(40).fill("SURGICAL_APERTURE_SECURITY_SYSTEM_OPTIMIZED_V4.2 ").join("\n")}
-                    </div>
-
-                    <div className="relative z-10 flex flex-col items-center text-center max-w-3xl mx-auto">
-                        <div className="size-16 border border-slate-950 flex items-center justify-center mb-8 rotate-45 group-hover:rotate-180 transition-transform duration-1000">
-                            <div className="-rotate-45 group-hover:-rotate-180 transition-transform duration-1000">
-                                <Shield className="size-6 text-slate-950" strokeWidth={2.5} />
-                            </div>
+                <div className="relative z-10 flex flex-col items-center text-center max-w-3xl mx-auto">
+                    <div className="size-16 border border-slate-950 flex items-center justify-center mb-8 rotate-45 group-hover:rotate-180 transition-transform duration-1000">
+                        <div className="-rotate-45 group-hover:-rotate-180 transition-transform duration-1000">
+                            <Shield className="size-6 text-slate-950" strokeWidth={2.5} />
                         </div>
-                        <h3 className="text-4xl font-black text-slate-950 mb-6 uppercase tracking-tighter">Deeper_Perimeter_Intelligence?</h3>
-                        <p className="text-slate-600 font-bold font-mono text-xs mb-10 uppercase leading-relaxed opacity-80">
-                        // Schedule a manual diagnostic walkthrough with our primary security architects.
-                            <br />
-                        // Build a custom remediation roadmap tailored to your specific infrastructure requirements.
-                        </p>
-                        <Button className="h-16 px-12 bg-slate-950 hover:bg-black text-white rounded-none font-black text-[11px] uppercase tracking-[0.2em] transition-all shadow-2xl">
-                            Schedule_Advisory_Session
-                        </Button>
                     </div>
+                    <h3 className="text-4xl font-black text-slate-950 mb-6 uppercase tracking-tighter">Deeper_Perimeter_Intelligence?</h3>
+                    <p className="text-slate-600 font-bold font-mono text-xs mb-10 uppercase leading-relaxed opacity-80">
+                        // Schedule a manual diagnostic walkthrough with our primary security architects.
+                        <br />
+                        // Build a custom remediation roadmap tailored to your specific infrastructure requirements.
+                    </p>
+                    <Button className="h-16 px-12 bg-slate-950 hover:bg-black text-white rounded-none font-black text-[11px] uppercase tracking-[0.2em] transition-all shadow-2xl">
+                        Schedule_Advisory_Session
+                    </Button>
                 </div>
             </div>
         </div>

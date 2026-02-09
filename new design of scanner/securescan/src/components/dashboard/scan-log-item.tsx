@@ -45,14 +45,14 @@ export function ScanLogItem({ scan, index }: ScanLogItemProps) {
                         <p className="text-[10px] font-black text-slate-400 font-mono tracking-widest uppercase">
                             UID: <span className="text-slate-950">{scan._id.slice(-12).toUpperCase()}</span>
                         </p>
-                        <p className="text-[10px] font-black text-slate-400 font-mono tracking-widest uppercase flex items-center gap-2">
-                            <div className="size-1 bg-blue-600" />
+                        <div className="text-[10px] font-black text-slate-400 font-mono tracking-widest uppercase flex items-center gap-2">
+                            <span className="size-1 bg-blue-600 inline-block" />
                             MODE: <span className="text-slate-950">{scan.mode?.toUpperCase()}</span>
-                        </p>
-                        <p className="text-[10px] font-bold text-slate-500 font-mono uppercase tracking-tighter flex items-center gap-2">
+                        </div>
+                        <div className="text-[10px] font-bold text-slate-500 font-mono uppercase tracking-tighter flex items-center gap-2">
                             <Clock size={10} />
                             LOGGED::{date} @ {time}
-                        </p>
+                        </div>
                     </div>
                 </div>
             </div>

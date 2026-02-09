@@ -39,29 +39,6 @@ const features = [
     }
 ]
 
-const methodologies = [
-    {
-        name: "Passive Discovery",
-        duration: "2-5 Mins",
-        focus: "DNS, OSINT, WHOIS",
-        description: "Lightweight sweep of public records and metadata without touching your servers.",
-        tier: "Starter"
-    },
-    {
-        name: "Standard Audit",
-        duration: "10-20 Mins",
-        focus: "Ports, Services, SSL",
-        description: "Direct infrastructure analysis and service identification for common endpoints.",
-        tier: "Professional"
-    },
-    {
-        name: "Full Penetration",
-        duration: "45-60 Mins",
-        focus: "Full Stack Simulation",
-        description: "Comprehensive vulnerability testing including application-layer logic and breach paths.",
-        tier: "Enterprise"
-    }
-]
 
 const colorMap: Record<string, { bg: string, text: string, shadow: string }> = {
     blue: { bg: "bg-slate-100", text: "text-slate-900", shadow: "shadow-slate-100" },
@@ -95,7 +72,7 @@ export default function AssessmentsHubPage() {
                         // GOAL::PRE_EMPTIVE_ADVERSARY_MIMICRY
                     </p>
                     <div className="flex flex-wrap gap-6">
-                        <Link href="/dashboard/new">
+                        <Link href="/dashboard/assessments/new">
                             <Button size="lg" className="h-16 px-12 bg-slate-950 hover:bg-black rounded-none shadow-[0_8px_30px_rgb(0,0,0,0.12)] text-white font-black text-[11px] uppercase tracking-widest transition-all group border border-slate-800">
                                 Launch_Protocol
                                 <ArrowRight className="ml-4 size-4 group-hover:translate-x-1 transition-transform" />
@@ -135,57 +112,6 @@ export default function AssessmentsHubPage() {
                 })}
             </div>
 
-            {/* Methodology Tiers */}
-            <div className="mb-40">
-                <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-8 border-b border-slate-200 pb-12">
-                    <div className="max-w-xl">
-                        <h2 className="text-3xl font-black text-slate-950 tracking-tighter uppercase mb-4">Assessment_Tiers</h2>
-                        <p className="text-slate-500 font-mono text-xs font-bold leading-relaxed">
-                            // DEPTH_CALIBRATION: SELECT_INTENSITY_MODIFIER
-                        </p>
-                    </div>
-                </div>
-
-                <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-                    {methodologies.map((tier, index) => (
-                        <motion.div
-                            key={tier.name}
-                            initial={{ opacity: 0, scale: 0.98 }}
-                            whileInView={{ opacity: 1, scale: 1 }}
-                            viewport={{ once: true }}
-                            transition={{ duration: 0.5, delay: index * 0.1 }}
-                            className="bg-white border border-slate-200 shadow-[0_4px_20px_-4px_rgba(0,0,0,0.08)] rounded-none p-10 hover:border-slate-950 transition-all group flex flex-col justify-between relative"
-                        >
-                            <div>
-                                <div className="flex items-center justify-between mb-10">
-                                    <span className="text-[9px] font-black uppercase tracking-widest text-white bg-slate-950 px-3 py-1">
-                                        {tier.tier}
-                                    </span>
-                                    <div className="flex items-center gap-2 text-slate-500 text-[10px] font-black font-mono">
-                                        <Zap size={12} className="text-blue-500" />
-                                        {tier.duration}
-                                    </div>
-                                </div>
-                                <h4 className="text-xl font-black text-slate-950 mb-4 tracking-tighter uppercase">{tier.name}</h4>
-                                <p className="text-slate-600 text-xs font-bold font-mono leading-relaxed mb-8 border-l-2 border-slate-200 pl-4">
-                                    {tier.description}
-                                </p>
-                                <div className="space-y-3 pt-6">
-                                    <div className="flex items-center gap-3 text-[10px] font-black text-slate-900 uppercase tracking-widest">
-                                        <div className="w-1 h-1 bg-blue-500" />
-                                        {tier.focus}
-                                    </div>
-                                </div>
-                            </div>
-                            <Link href="/dashboard/new" className="mt-12">
-                                <Button className="w-full h-14 rounded-none bg-white text-slate-500 group-hover:bg-slate-950 group-hover:text-white transition-all font-black text-[10px] uppercase tracking-widest border border-slate-200 group-hover:border-slate-950">
-                                    LOAD_PLAN::EXECUTE
-                                </Button>
-                            </Link>
-                        </motion.div>
-                    ))}
-                </div>
-            </div>
 
             {/* History Section */}
             <RecentAssessments />

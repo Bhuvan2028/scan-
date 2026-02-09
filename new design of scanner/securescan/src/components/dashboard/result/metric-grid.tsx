@@ -120,58 +120,75 @@ export function MetricGrid({ scan }: MetricGridProps) {
     const displayMetrics = scan ? runtimeMetrics : metrics
 
     return (
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
             {displayMetrics.map((metric, index) => {
                 const colors = colorMap[metric.color] || colorMap.blue
                 return (
-                    <motion.div
+                    <TiltCard
                         key={metric.name}
-                        initial={{ opacity: 0, y: 10 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ delay: index * 0.05 }}
-                        className="bg-white p-10 rounded-none border border-slate-200 hover:border-slate-950 transition-all group relative overflow-hidden h-full flex flex-col"
+                        degree={15}
+                        className="h-full"
                     >
-                        {/* Corner Accents */}
-                        <div className="absolute top-0 right-0 w-8 h-[1px] bg-slate-200 group-hover:bg-slate-950 transition-colors" />
-                        <div className="absolute top-0 right-0 w-[1px] h-8 bg-slate-200 group-hover:bg-slate-950 transition-colors" />
+                        <motion.div
+                            initial={{ opacity: 0, y: 10 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ delay: index * 0.05 }}
+                            className="bg-white p-6 rounded-none border border-slate-200 hover:border-slate-950 transition-all group relative overflow-hidden h-full flex flex-col"
+                        >
+                            {/* Surgical Accents */}
+                            <div className="absolute top-0 right-0 w-6 h-[1px] bg-slate-200 group-hover:bg-slate-950 transition-colors" />
+                            <div className="absolute top-0 right-0 w-[1px] h-6 bg-slate-200 group-hover:bg-slate-950 transition-colors" />
+                            <div className="absolute bottom-0 left-0 w-4 h-[1px] bg-slate-100 group-hover:bg-slate-950 transition-colors" />
 
-                        <div className="flex items-center justify-between mb-8">
-                            <div className={cn(
-                                "p-3 border transition-all duration-300",
-                                "border-slate-200 bg-slate-50 text-slate-500 group-hover:border-slate-950 group-hover:bg-white group-hover:text-slate-950 shadow-sm"
-                            )}>
-                                <metric.icon size={20} strokeWidth={2.5} />
+                            {/* Technical Telemetry Noise */}
+                            <div className="absolute top-2 left-2 flex flex-col gap-0.5 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-700">
+                                <span className="text-[5px] font-mono text-slate-300">NODE::{(index + 1).toString().padStart(2, '0')}</span>
                             </div>
-                            <div className="text-right">
-                                <span className="text-[9px] font-black uppercase tracking-[0.2em] text-slate-400 mb-1 block font-mono">VAL::OUT</span>
-                                <span className={cn(
-                                    "text-3xl font-black tracking-tighter tabular-nums text-slate-950"
+
+                            <div className="flex items-center justify-between mb-4 flex-1">
+                                <div className={cn(
+                                    "p-2 border transition-all duration-300",
+                                    "border-slate-200 bg-slate-50 text-slate-500 group-hover:border-slate-950 group-hover:bg-white group-hover:text-slate-950 shadow-sm"
                                 )}>
-                                    {metric.score}%
-                                </span>
+                                    <metric.icon size={16} strokeWidth={2.5} />
+                                </div>
+                                <div className="text-right">
+                                    <div className="flex items-center justify-end gap-1.5 mb-0.5">
+                                        <div className={cn(
+                                            "size-1 rounded-full animate-pulse",
+                                            metric.score > 0 ? "bg-emerald-500" : "bg-slate-300"
+                                        )} />
+                                        <span className="text-[8px] font-black uppercase tracking-[0.2em] text-slate-400 font-mono">VAL::OUT</span>
+                                    </div>
+                                    <span className="text-3xl lg:text-4xl font-black tracking-tighter tabular-nums text-slate-950">
+                                        {metric.score}%
+                                    </span>
+                                </div>
                             </div>
-                        </div>
 
-                        <h3 className="text-sm font-black text-slate-950 mb-6 uppercase tracking-wider">{metric.name}</h3>
+                            <div className="mt-2">
+                                <h3 className="font-black text-slate-950 uppercase tracking-wider mb-3 text-[13px]">
+                                    {metric.name}
+                                </h3>
 
-                        <div className="mt-auto">
-                            <div className="w-full bg-slate-50 h-[3px] rounded-none overflow-hidden mb-2">
-                                <motion.div
-                                    initial={{ width: 0 }}
-                                    animate={{ width: `${metric.score}%` }}
-                                    transition={{ duration: 1.5, delay: 0.5 + index * 0.05, ease: [0.16, 1, 0.3, 1] }}
-                                    className={cn(
-                                        "h-full rounded-none transition-colors",
-                                        metric.score >= 70 ? "bg-slate-950" : "bg-slate-300"
-                                    )}
-                                />
+                                <div className="w-full bg-slate-50 h-[2px] rounded-none overflow-hidden mb-1.5">
+                                    <motion.div
+                                        initial={{ width: 0 }}
+                                        animate={{ width: `${metric.score}%` }}
+                                        transition={{ duration: 1.5, delay: 0.5 + index * 0.05, ease: [0.16, 1, 0.3, 1] }}
+                                        className={cn(
+                                            "h-full rounded-none transition-colors",
+                                            metric.score >= 70 ? "bg-slate-950" : "bg-slate-300"
+                                        )}
+                                    />
+                                </div>
+                                <div className="flex justify-between text-[7px] font-black text-slate-400 uppercase tracking-widest font-mono">
+                                    <span>THR</span>
+                                    <span>CAL::{metric.score}/100</span>
+                                </div>
                             </div>
-                            <div className="flex justify-between text-[8px] font-black text-slate-400 uppercase tracking-widest font-mono">
-                                <span>MIN_THR</span>
-                                <span>IDX::{metric.score}/100</span>
-                            </div>
-                        </div>
-                    </motion.div>
+                        </motion.div>
+                    </TiltCard>
                 )
             })}
         </div>

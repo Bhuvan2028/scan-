@@ -5,6 +5,7 @@ require("dotenv").config();
 
 const scanRoutes = require("./routes/scanRoutes");
 const notificationRoutes = require("./routes/notificationRoutes");
+const assessmentRoutes = require("./routes/assessmentRoutes");
 const Scan = require("./models/Scan"); // 🔴 REQUIRED for startup safety
 const { runQueueWorker } = require("./services/scanQueueWorker");
 const app = express();
@@ -34,6 +35,7 @@ app.get("/api", (req, res) => {
 
 app.use("/api/scans", scanRoutes);
 app.use("/api/notifications", notificationRoutes);
+app.use("/api/assessments", assessmentRoutes);
 
 /* --------------------
    DATABASE

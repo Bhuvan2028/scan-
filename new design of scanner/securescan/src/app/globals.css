@@ -25,6 +25,17 @@
   }
 }
 
+@layer utilities {
+  @keyframes vertical-scroll {
+    from { transform: translateY(0); }
+    to { transform: translateY(-50%); }
+  }
+
+  .animate-vertical-scroll {
+    animation: vertical-scroll 20s linear infinite;
+  }
+}
+
 .text-gradient {
   @apply bg-clip-text text-transparent bg-gradient-to-br from-slate-900 to-slate-600;
 }

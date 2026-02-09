@@ -5,10 +5,17 @@ import Image from "next/image"
 import { motion } from "framer-motion"
 import { Mail, Lock, Eye, EyeOff, ArrowRight, Github } from "lucide-react"
 import { useState } from "react"
+import { useRouter } from "next/navigation"
 import { Button } from "@/components/ui/button"
 
 export default function LoginPage() {
     const [showPassword, setShowPassword] = useState(false)
+    const router = useRouter()
+
+    const handleLogin = (e: React.FormEvent) => {
+        e.preventDefault()
+        router.push("/dashboard")
+    }
 
     return (
         <motion.div
@@ -40,7 +47,7 @@ export default function LoginPage() {
                 <p className="text-slate-500 text-lg font-light">Access your autonomous security dashboard.</p>
             </div>
 
-            <form className="space-y-6" onSubmit={(e) => e.preventDefault()}>
+            <form className="space-y-6" onSubmit={handleLogin}>
                 <div className="space-y-2.5">
                     <label className="text-sm font-medium text-slate-600 ml-0.5">Work Email</label>
                     <div className="relative group">
@@ -81,7 +88,10 @@ export default function LoginPage() {
                     </div>
                 </div>
 
-                <Button className="w-full h-12 rounded-xl bg-blue-600 hover:bg-blue-700 shadow-md shadow-blue-500/10 text-white font-semibold transition-all hover:translate-y-[-1px] active:translate-y-[0px] text-base">
+                <Button
+                    type="submit"
+                    className="w-full h-12 rounded-xl bg-blue-600 hover:bg-blue-700 shadow-md shadow-blue-500/10 text-white font-semibold transition-all hover:translate-y-[-1px] active:translate-y-[0px] text-base"
+                >
                     Continue to Dashboard
                     <ArrowRight className="ml-2 size-4.5" />
                 </Button>
