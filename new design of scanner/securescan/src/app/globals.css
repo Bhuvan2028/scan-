@@ -24,7 +24,7 @@
 
 @layer base {
   body {
-    @apply bg-white text-slate-900;
+    @apply bg-slate-50 text-slate-900;
   }
 }
 

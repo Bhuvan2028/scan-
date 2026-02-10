@@ -70,7 +70,7 @@ export function ProductPreview() {
                         {/* Sidebar */}
                         <div className="w-64 border-r border-slate-100 bg-slate-50/30 p-4 hidden md:flex flex-col gap-1">
                             <div className="flex items-center gap-2 px-2 py-3 mb-4">
-                                <div className="size-6 bg-blue-600 rounded-md" />
+                                <div className="size-6 bg-primary rounded-md" />
                                 <span className="font-semibold text-slate-900 text-sm">SecureScan Workspace</span>
                             </div>
 

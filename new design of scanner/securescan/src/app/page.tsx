@@ -28,7 +28,7 @@ export default function Home() {
   const globeY = useTransform(scrollYProgress, [0, 1], ["0%", "10%"])
 
   return (
-    <main ref={containerRef} className="min-h-screen bg-white relative">
+    <main ref={containerRef} className="min-h-screen bg-transparent relative">
       <AnimatePresence>
         {!showContent && (
           <BrandReveal

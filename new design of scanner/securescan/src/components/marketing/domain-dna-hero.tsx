@@ -8,7 +8,7 @@ import { useRouter } from "next/navigation"
 import { cn } from "@/lib/utils"
 
 const dnaMarkers = [
-    { label: "DNS_A_RECORD", val: "104.21.34.112", color: "text-blue-400" },
+    { label: "DNS_A_RECORD", val: "104.21.34.112", color: "text-primary" },
     { label: "DNS_A_RECORD", val: "104.21.34.112", color: "text-primary" },
     { label: "MAIL_SECURITY", val: "SPF/DKIM: PASS", color: "text-primary" },
     { label: "PHISHING_SCORE", val: "0.2/10 (CLEAN)", color: "text-primary" }

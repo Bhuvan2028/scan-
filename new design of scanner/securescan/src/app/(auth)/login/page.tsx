@@ -57,7 +57,7 @@ export default function LoginPage() {
                         <input
                             type="email"
                             placeholder="name@company.com"
-                            className="w-full h-12 pl-12 pr-4 bg-white border border-slate-200 rounded-xl outline-none focus:ring-4 focus:ring-blue-600/5 focus:border-blue-600 transition-all text-slate-900 placeholder:text-slate-400 font-light"
+                            className="w-full h-12 pl-12 pr-4 bg-white border border-slate-200 rounded-xl outline-none focus:ring-4 focus:ring-primary/5 focus:border-primary transition-all text-slate-900 placeholder:text-slate-400 font-light"
                         />
                     </div>
                 </div>
@@ -76,7 +76,7 @@ export default function LoginPage() {
                         <input
                             type={showPassword ? "text" : "password"}
                             placeholder="••••••••"
-                            className="w-full h-12 pl-12 pr-12 bg-white border border-slate-200 rounded-xl outline-none focus:ring-4 focus:ring-blue-600/5 focus:border-blue-600 transition-all text-slate-900 placeholder:text-slate-400 font-light"
+                            className="w-full h-12 pl-12 pr-12 bg-white border border-slate-200 rounded-xl outline-none focus:ring-4 focus:ring-primary/5 focus:border-primary transition-all text-slate-900 placeholder:text-slate-400 font-light"
                         />
                         <button
                             type="button"
@@ -90,7 +90,7 @@ export default function LoginPage() {
 
                 <Button
                     type="submit"
-                    className="w-full h-12 rounded-xl bg-blue-600 hover:bg-blue-700 shadow-md shadow-blue-500/10 text-white font-semibold transition-all hover:translate-y-[-1px] active:translate-y-[0px] text-base"
+                    className="w-full h-12 rounded-xl bg-primary hover:bg-primary/90 shadow-md shadow-primary/10 text-white font-semibold transition-all hover:translate-y-[-1px] active:translate-y-[0px] text-base"
                 >
                     Continue to Dashboard
                     <ArrowRight className="ml-2 size-4.5" />

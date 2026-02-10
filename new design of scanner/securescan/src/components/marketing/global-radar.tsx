@@ -25,21 +25,21 @@ export function GlobalRadar() {
             <svg className="absolute inset-0 size-full" viewBox="0 0 600 600">
                 <defs>
                     <radialGradient id="globeGrad" cx="50%" cy="50%" r="50%">
-                        <stop offset="0%" stopColor="#60a5fa" stopOpacity="0.2" />
-                        <stop offset="100%" stopColor="#1e293b" stopOpacity="0" />
+                        <stop offset="0%" stopColor="#a146a1" stopOpacity="0.2" />
+                        <stop offset="100%" stopColor="#0a0a0a" stopOpacity="0" />
                     </radialGradient>
                 </defs>
 
                 {/* Globe Sphere */}
                 <circle cx="300" cy="300" r="180" fill="url(#globeGrad)" />
-                <circle cx="300" cy="300" r="180" stroke="#60a5fa" strokeWidth="0.5" strokeOpacity="0.1" fill="none" />
+                <circle cx="300" cy="300" r="180" stroke="#a146a1" strokeWidth="0.5" strokeOpacity="0.1" fill="none" />
 
                 {/* Arcs (Simulating connections) */}
                 {[...Array(6)].map((_, i) => (
                     <motion.path
                         key={i}
                         d={`M ${300 + Math.cos(i) * 150} ${300 + Math.sin(i) * 150} Q 300 300 ${300 + Math.cos(i + 2) * 150} ${300 + Math.sin(i + 2) * 150}`}
-                        stroke="#60a5fa"
+                        stroke="#a146a1"
                         strokeWidth="1"
                         fill="none"
                         initial={{ pathLength: 0, opacity: 0 }}
@@ -63,7 +63,7 @@ export function GlobalRadar() {
                         key={`lat-${i}`}
                         cx="300" cy="300"
                         rx="180" ry={180 * (i / 8)}
-                        fill="none" stroke="#60a5fa"
+                        fill="none" stroke="#a146a1"
                         strokeWidth="0.5" strokeOpacity="0.05"
                     />
                 ))}
@@ -73,7 +73,7 @@ export function GlobalRadar() {
             <motion.div
                 animate={{ y: [200, 400, 200] }}
                 transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-                className="absolute left-[120px] right-[120px] h-px bg-gradient-to-r from-transparent via-blue-500/30 to-transparent z-10"
+                className="absolute left-[120px] right-[120px] h-px bg-gradient-to-r from-transparent via-primary/30 to-transparent z-10"
             />
         </div>
     )

@@ -25,7 +25,7 @@ export default function DashboardPage() {
         }
 
         loadScans()
-        const interval = setInterval(loadScans, 10000)
+        const interval = setInterval(loadScans, 3000)
         return () => clearInterval(interval)
     }, [])
 

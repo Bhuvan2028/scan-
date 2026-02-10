@@ -22,7 +22,7 @@ export function ActiveAgentsBadge() {
         >
             <div className="relative">
                 <Users size={14} className="text-primary" />
-                <span className="absolute -top-1 -right-1 size-1.5 bg-blue-500 rounded-full animate-ping" />
+                <span className="absolute -top-1 -right-1 size-1.5 bg-primary rounded-full animate-ping" />
             </div>
             <div className="flex flex-col">
                 <span className="text-[10px] font-black uppercase tracking-widest text-slate-500 leading-none mb-0.5">Active Agents</span>

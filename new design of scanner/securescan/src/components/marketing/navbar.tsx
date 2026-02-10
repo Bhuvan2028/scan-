@@ -125,7 +125,7 @@ export function Navbar() {
                             </Button>
                         </Link>
                         <Link href="/signup">
-                            <Button size="sm" className="rounded-full px-6 bg-slate-900 hover:bg-slate-800 shadow-xl shadow-slate-200/20 text-white font-bold text-[10px] uppercase tracking-widest">
+                            <Button size="sm" className="rounded-full px-6 bg-slate-950 hover:bg-primary shadow-xl shadow-primary/10 text-white font-bold text-[10px] uppercase tracking-widest transition-all">
                                 Sign Up
                             </Button>
                         </Link>

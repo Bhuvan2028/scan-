@@ -46,7 +46,16 @@ exports.startScan = async (req, res) => {
       });
     }
 
-    const cleanDomain = domain.trim().toLowerCase();
+    let cleanDomain = domain.trim().toLowerCase();
+
+    // Remove protocol (http://, https://)
+    cleanDomain = cleanDomain.replace(/^https?:\/\//i, '');
+
+    // Remove trailing slash and any paths
+    cleanDomain = cleanDomain.split('/')[0];
+
+    // Remove port if present
+    cleanDomain = cleanDomain.split(':')[0];
 
     const isDomain = /^[a-z0-9.-]+\.[a-z]{2,}$/i.test(cleanDomain);
     const isIPv4 = /^(?:\d{1,3}\.){3}\d{1,3}$/.test(cleanDomain);

@@ -140,7 +140,7 @@ export function ReportDeepDive({ scan }: ReportDeepDiveProps) {
                                 <section.icon size={14} strokeWidth={2.5} />
                                 {section.name}
                             </div>
-                            {activeTab === section.id && <div className="size-1 bg-blue-500" />}
+                            {activeTab === section.id && <div className="size-1 bg-primary" />}
                         </button>
                     ))}
                 </div>
@@ -271,7 +271,7 @@ export function ReportDeepDive({ scan }: ReportDeepDiveProps) {
                                                                 className="flex items-center justify-between p-6 rounded-none border border-slate-100 hover:border-slate-950 transition-all bg-white group shadow-sm hover:shadow-md"
                                                             >
                                                                 <div className="flex items-center gap-4">
-                                                                    <div className="size-1 bg-blue-500 opacity-0 group-hover:opacity-100 transition-opacity" />
+                                                                    <div className="size-1 bg-primary opacity-0 group-hover:opacity-100 transition-opacity" />
                                                                     <span className="text-slate-950 font-black font-mono text-sm uppercase tracking-tighter">{item}</span>
                                                                 </div>
                                                                 <span className="text-[9px] font-black text-slate-400 uppercase tracking-widest font-mono opacity-0 group-hover:opacity-100 transition-opacity">VERIFIED::LOD_01</span>

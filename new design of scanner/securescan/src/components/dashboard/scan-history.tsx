@@ -32,7 +32,7 @@ export function ScanHistory({ scans }: ScanHistoryProps) {
 
             <div className="space-y-2">
                 {scans.map((item, index) => (
-                    <Link key={item._id} href={`/dashboard/result?id=${item._id}`}>
+                    <Link key={item._id} href={item.status === 'completed' || item.status === 'failed' ? `/dashboard/result/${item._id}` : `/dashboard/status/${item._id}`}>
                         <motion.div
                             initial={{ opacity: 0, scale: 0.98 }}
                             animate={{ opacity: 1, scale: 1 }}

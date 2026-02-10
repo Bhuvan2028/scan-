@@ -24,7 +24,7 @@ export function DomainInput({ value, onChange }: DomainInputProps) {
                 <span className="text-[10px] font-black text-slate-400 uppercase tracking-[0.4em] hidden sm:block font-mono">NODE_INIT::READY</span>
             </div>
             {/* Bottom technical line */}
-            <div className="absolute bottom-0 left-0 right-0 h-[2px] bg-slate-100 group-focus-within:bg-blue-600 transition-colors" />
+            <div className="absolute bottom-0 left-0 right-0 h-[2px] bg-slate-100 group-focus-within:bg-primary transition-colors" />
         </div>
     )
 }

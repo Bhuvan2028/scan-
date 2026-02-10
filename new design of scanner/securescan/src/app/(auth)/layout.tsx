@@ -32,7 +32,7 @@ export default function AuthLayout({
 
                     <div className="max-w-xl">
                         <h2 className="text-5xl font-semibold text-white mb-6 leading-[1.1] tracking-tight">
-                            Autonomous security for the <span className="text-blue-500">modern enterprise.</span>
+                            Autonomous security for the <span className="text-primary">modern enterprise.</span>
                         </h2>
                         <p className="text-slate-400 text-xl leading-relaxed font-light">
                             Deploy intelligent agents that scan, detect, and defend your infrastructure around the clock.
@@ -48,8 +48,8 @@ export default function AuthLayout({
                 </div>
 
                 {/* Advanced decorative elements */}
-                <div className="absolute -bottom-32 -left-32 size-[500px] bg-blue-600/5 blur-[120px] rounded-full" />
-                <div className="absolute top-1/4 -right-16 size-80 bg-indigo-600/10 blur-[100px] rounded-full" />
+                <div className="absolute -bottom-32 -left-32 size-[500px] bg-primary/5 blur-[120px] rounded-full" />
+                <div className="absolute top-1/4 -right-16 size-80 bg-primary/10 blur-[100px] rounded-full" />
             </div>
 
             {/* Right side: Auth forms */}

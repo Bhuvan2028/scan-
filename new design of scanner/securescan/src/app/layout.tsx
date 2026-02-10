@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import { SmoothScroll } from "@/components/ui/smooth-scroll";
+import { SurgicalGrid } from "@/components/ui/surgical-grid";
 import "./globals.css";
 
 const inter = Inter({
@@ -24,8 +25,9 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <body
         suppressHydrationWarning
-        className={`${inter.variable} font-sans antialiased text-slate-900 bg-white`}
+        className={`${inter.variable} font-sans antialiased text-slate-900`}
       >
+        <SurgicalGrid />
         <SmoothScroll>{children}</SmoothScroll>
       </body>
     </html>

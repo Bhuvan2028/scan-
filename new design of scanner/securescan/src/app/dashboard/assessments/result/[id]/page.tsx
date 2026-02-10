@@ -104,7 +104,7 @@ export default function AssessmentResultPage({ params }: { params: Promise<{ id:
 
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                     <div className="p-10 border-2 border-slate-950 bg-white">
-                        <div className="size-12 rounded-full bg-blue-50 flex items-center justify-center mb-8 border border-blue-100">
+                        <div className="size-12 rounded-full bg-purple-50 flex items-center justify-center mb-8 border border-purple-100">
                             <CheckCircle2 className="text-primary" size={24} />
                         </div>
                         <h3 className="text-lg font-black text-slate-950 mb-4 uppercase tracking-tight">Active Strengths</h3>

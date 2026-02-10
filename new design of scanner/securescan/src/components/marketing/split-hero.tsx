@@ -7,7 +7,7 @@ import { useRouter } from "next/navigation"
 import { usePerformance } from "@/hooks/use-performance"
 
 const dnaMarkers = [
-    { label: "DNS_A_RECORD", val: "104.21.34.112", color: "text-blue-500" },
+    { label: "DNS_A_RECORD", val: "104.21.34.112", color: "text-primary" },
     { label: "DNS_A_RECORD", val: "104.21.34.112", color: "text-primary" },
     { label: "MAIL_SECURITY", val: "SPF/DKIM: PASS", color: "text-primary" },
     { label: "PHISHING_SCORE", val: "0.2/10 (CLEAN)", color: "text-primary" }
@@ -116,7 +116,7 @@ export function SplitHero() {
                             initial={{ opacity: 0, y: 30 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ duration: 0.8, delay: 0.3 }}
-                            className="italic text-slate-400/30"
+                            className="italic text-slate-400/20"
                         >
                             ENTITY.
                         </motion.span>
@@ -150,7 +150,7 @@ export function SplitHero() {
                                                 className="flex flex-col items-center"
                                             >
                                                 <span className={`text-[8px] font-black uppercase tracking-widest ${marker.color}`}>{marker.val}</span>
-                                                <div className="w-px h-4 bg-gradient-to-t from-blue-500/20 to-transparent my-1" />
+                                                <div className="w-px h-4 bg-gradient-to-t from-primary/20 to-transparent my-1" />
                                                 <span className="text-[7px] font-bold uppercase tracking-tighter text-slate-400">{marker.label}</span>
                                             </motion.div>
                                         ))}
@@ -163,7 +163,7 @@ export function SplitHero() {
                             initial={false}
                             animate={{
                                 scale: isFocused ? 1.02 : 1,
-                                borderColor: isFocused ? "rgba(37, 99, 235, 0.4)" : "rgba(226, 232, 240, 1)",
+                                borderColor: isFocused ? "rgba(161, 70, 161, 0.4)" : "rgba(226, 232, 240, 1)",
                                 backgroundColor: isFocused ? "rgba(255, 255, 255, 1)" : "rgba(255, 255, 255, 0.6)"
                             }}
                             className="relative flex items-center p-5 backdrop-blur-3xl rounded-sm border shadow-2xl overflow-hidden group"
@@ -207,7 +207,7 @@ export function SplitHero() {
                                                 transition={{ delay: i * 0.1 }}
                                                 className="flex flex-col items-center"
                                             >
-                                                <div className="w-px h-4 bg-gradient-to-b from-blue-500/20 to-transparent my-1" />
+                                                <div className="w-px h-4 bg-gradient-to-b from-primary/20 to-transparent my-1" />
                                                 <span className="text-[7px] font-bold uppercase tracking-tighter mb-1 text-slate-400">{marker.label}</span>
                                                 <span className={`text-[8px] font-black uppercase tracking-widest ${marker.color}`}>{marker.val}</span>
                                             </motion.div>
@@ -223,7 +223,7 @@ export function SplitHero() {
                                 initial={{ left: "0%" }}
                                 animate={{ left: "100%" }}
                                 transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
-                                className="absolute top-0 bottom-0 w-px bg-blue-500 shadow-[0_0_20px_rgba(59,130,246,1)] z-20"
+                                className="absolute top-0 bottom-0 w-px bg-primary shadow-[0_0_20px_rgba(161,70,161,1)] z-20"
                             />
                         )}
                     </div>
@@ -245,7 +245,7 @@ export function SplitHero() {
             {/* Decorative Side Glow */}
             <motion.div
                 style={{ opacity: useTransform(smoothX, [-500, 500], [0.1, 0.3]) }}
-                className="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-blue-50/50 to-transparent pointer-events-none"
+                className="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-purple-50/50 to-transparent pointer-events-none"
             />
         </section>
     )

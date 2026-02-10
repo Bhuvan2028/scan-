@@ -8,7 +8,7 @@ export interface Scan {
     _id: string;
     domain: string;
     mode: string;
-    status: 'pending' | 'running' | 'completed' | 'failed';
+    status: 'pending' | 'running' | 'completed' | 'failed' | 'stopped';
     progressPct: number;
     currentModule?: string;
     score?: number;

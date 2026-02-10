@@ -1,0 +1,251 @@
+/* src/components/Notifications.css */
+.notifications-container {
+  position: relative;
+}
+
+.notification-trigger {
+  position: relative;
+  background: none;
+  border: none;
+  font-size: 1.125rem;
+  color: var(--gray-600);
+  cursor: pointer;
+  padding: 0.5rem;
+  border-radius: 8px;
+  transition: var(--transition);
+}
+
+.notification-trigger:hover {
+  background: var(--gray-100);
+  color: var(--primary-color);
+}
+
+.notification-badge {
+  position: absolute;
+  top: 0.25rem;
+  right: 0.25rem;
+  background: var(--danger-color);
+  color: var(--white);
+  font-size: 0.625rem;
+  font-weight: 600;
+  padding: 0.125rem 0.375rem;
+  border-radius: 10px;
+  min-width: 18px;
+  text-align: center;
+}
+
+.notifications-dropdown {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  width: 350px;
+  background: var(--white);
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow-xl);
+  z-index: 1000;
+  overflow: hidden;
+  animation: fadeIn 0.2s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.notifications-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  border-bottom: 1px solid var(--gray-200);
+}
+
+.notifications-header h3 {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--gray-900);
+  margin: 0;
+}
+
+.notification-actions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.mark-read-btn, .clear-btn {
+  background: none;
+  border: none;
+  font-size: 0.75rem;
+  color: var(--primary-color);
+  cursor: pointer;
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  transition: var(--transition);
+}
+
+.mark-read-btn:hover, .clear-btn:hover {
+  background: var(--gray-100);
+}
+
+.notifications-list {
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+.notification-item {
+  display: flex;
+  align-items: flex-start;
+  padding: 1rem;
+  border-bottom: 1px solid var(--gray-100);
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.notification-item:hover {
+  background: var(--gray-50);
+}
+
+.notification-item.unread {
+  background: rgba(124, 58, 237, 0.05);
+  border-left: 3px solid var(--primary-color);
+}
+
+.notification-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--gray-100);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 1rem;
+  flex-shrink: 0;
+}
+
+.notification-item.unread .notification-icon {
+  background: var(--primary-color);
+  color: var(--white);
+}
+
+.notification-content {
+  flex: 1;
+}
+
+.notification-content h4 {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--gray-900);
+  margin: 0 0 0.25rem 0;
+}
+
+.notification-content p {
+  font-size: 0.875rem;
+  color: var(--gray-600);
+  margin: 0 0 0.5rem 0;
+  line-height: 1.4;
+}
+
+.notification-time {
+  font-size: 0.75rem;
+  color: var(--gray-500);
+}
+
+.no-notifications {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2rem 1rem;
+  color: var(--gray-500);
+}
+
+.no-notifications i {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  color: var(--gray-300);
+}
+
+.no-notifications p {
+  margin: 0;
+}
+
+.add-notification-btn {
+  margin-top: 1.5rem;
+  padding: 0.75rem 1.5rem;
+  background: var(--primary-color);
+  color: var(--white);
+  border: none;
+  border-radius: var(--border-radius);
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.add-notification-btn:hover {
+  background: var(--primary-dark);
+}
+
+.notifications-container.loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+}
+
+.notification-spinner {
+  width: 40px;
+  height: 40px;
+  border: 4px solid var(--gray-200);
+  border-radius: 50%;
+  border-top: 4px solid var(--primary-color);
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* src/components/Notifications.css */
+
+/* ... (keep all your existing styles) */
+
+/* Add styles for the error message */
+.error-message {
+  display: flex;
+  align-items: center;
+  padding: 1.5rem;
+  background-color: rgba(239, 68, 68, 0.1);
+  border-radius: 8px;
+  margin-bottom: 1rem;
+  color: #ef4444;
+}
+
+.error-message i {
+  font-size: 2rem;
+  margin-right: 1rem;
+  color: #ef4444;
+}
+
+.error-message p {
+  margin: 0;
+  font-size: 1rem;
+}
+
+/* Add styles for the retry button */
+.retry-btn {
+  background: #f59e0b;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.retry-btn:hover {
+  background: #d97706;
+}

@@ -153,7 +153,7 @@ export function AnatomyOfScan() {
                                     className="absolute inset-0 flex items-center justify-center p-4"
                                 >
                                     <div className="relative group w-full max-w-sm">
-                                        <div className={`absolute -inset-1 bg-gradient-to-r ${index % 2 === 0 ? "from-blue-500 to-indigo-500" : "from-slate-900 to-slate-700"
+                                        <div className={`absolute -inset-1 bg-gradient-to-r ${index % 2 === 0 ? "from-primary to-purple-600" : "from-slate-950 to-slate-800"
                                             } rounded-[2.6rem] blur opacity-0 group-hover:opacity-20 transition duration-500`} />
 
                                         <div className="relative bg-white border border-slate-100 p-6 md:p-10 rounded-[2.5rem] shadow-[0_32px_64px_-16px_rgba(0,0,0,0.08)]">

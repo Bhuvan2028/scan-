@@ -51,7 +51,7 @@ export default function SignupPage() {
                         <input
                             type="text"
                             placeholder="John Doe"
-                            className="w-full h-12 pl-12 pr-4 bg-white border border-slate-200 rounded-xl outline-none focus:ring-4 focus:ring-blue-600/5 focus:border-blue-600 transition-all text-slate-900 placeholder:text-slate-400 font-light"
+                            className="w-full h-12 pl-12 pr-4 bg-white border border-slate-200 rounded-xl outline-none focus:ring-4 focus:ring-primary/5 focus:border-primary transition-all text-slate-900 placeholder:text-slate-400 font-light"
                         />
                     </div>
                 </div>
@@ -65,7 +65,7 @@ export default function SignupPage() {
                         <input
                             type="email"
                             placeholder="name@company.com"
-                            className="w-full h-12 pl-12 pr-4 bg-white border border-slate-200 rounded-xl outline-none focus:ring-4 focus:ring-blue-600/5 focus:border-blue-600 transition-all text-slate-900 placeholder:text-slate-400 font-light"
+                            className="w-full h-12 pl-12 pr-4 bg-white border border-slate-200 rounded-xl outline-none focus:ring-4 focus:ring-primary/5 focus:border-primary transition-all text-slate-900 placeholder:text-slate-400 font-light"
                         />
                     </div>
                 </div>
@@ -79,7 +79,7 @@ export default function SignupPage() {
                         <input
                             type={showPassword ? "text" : "password"}
                             placeholder="••••••••"
-                            className="w-full h-12 pl-12 pr-12 bg-white border border-slate-200 rounded-xl outline-none focus:ring-4 focus:ring-blue-600/5 focus:border-blue-600 transition-all text-slate-900 placeholder:text-slate-400 font-light"
+                            className="w-full h-12 pl-12 pr-12 bg-white border border-slate-200 rounded-xl outline-none focus:ring-4 focus:ring-primary/5 focus:border-primary transition-all text-slate-900 placeholder:text-slate-400 font-light"
                         />
                         <button
                             type="button"
@@ -100,7 +100,7 @@ export default function SignupPage() {
                                 checked={agreed}
                                 onChange={() => setAgreed(!agreed)}
                             />
-                            <div className="size-5 border border-slate-200 rounded-lg group-hover:border-blue-600 transition-colors peer-checked:bg-blue-600 peer-checked:border-blue-600 flex items-center justify-center bg-white">
+                            <div className="size-5 border border-slate-200 rounded-lg group-hover:border-primary transition-colors peer-checked:bg-primary peer-checked:border-primary flex items-center justify-center bg-white">
                                 <svg className="size-3 text-white scale-0 peer-checked:scale-100 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="4">
                                     <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
                                 </svg>
@@ -112,7 +112,7 @@ export default function SignupPage() {
                     </label>
                 </div>
 
-                <Button className="w-full h-12 rounded-xl bg-blue-600 hover:bg-blue-700 shadow-md shadow-blue-500/10 text-white font-semibold transition-all hover:translate-y-[-1px] active:translate-y-[0px] text-base mt-2">
+                <Button className="w-full h-12 rounded-xl bg-primary hover:bg-primary/90 shadow-md shadow-primary/10 text-white font-semibold transition-all hover:translate-y-[-1px] active:translate-y-[0px] text-base mt-2">
                     Get Started Now
                     <ArrowRight className="ml-2 size-4.5" />
                 </Button>

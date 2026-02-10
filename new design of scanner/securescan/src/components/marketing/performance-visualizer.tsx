@@ -39,7 +39,7 @@ const PerformanceStep = ({
                 initial={{ scale: 0, opacity: 0 }}
                 animate={isInView ? { scale: 1, opacity: 1 } : {}}
                 transition={{ type: "spring", stiffness: 300, damping: 20 }}
-                className="absolute left-0 top-0 size-10 rounded-full bg-white border-2 border-blue-500 flex items-center justify-center z-10 shadow-lg shadow-blue-200"
+                className="absolute left-0 top-0 size-10 rounded-full bg-white border-2 border-primary flex items-center justify-center z-10 shadow-lg shadow-purple-200"
             >
                 <Icon size={18} className="text-primary" />
             </motion.div>
@@ -94,7 +94,7 @@ const EKGLine = ({ isLow }: { isLow: boolean }) => {
                     <motion.path
                         d="M 0 50 L 50 50 L 60 20 L 70 80 L 80 50 L 130 50 L 140 10 L 150 90 L 160 50 L 210 50 L 220 30 L 230 70 L 240 50 L 290 50 L 300 15 L 310 85 L 320 50 L 400 50"
                         fill="none"
-                        stroke="#3b82f6"
+                        stroke="#a146a1"
                         strokeWidth="4"
                         strokeLinecap="round"
                         className="blur-[2px] opacity-30"
@@ -149,7 +149,7 @@ export function PerformanceVisualizer() {
                                 initial={{ opacity: 0, x: -20 }}
                                 whileInView={{ opacity: 1, x: 0 }}
                                 viewport={{ once: true }}
-                                className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-50 border border-blue-100 mb-6"
+                                className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-purple-50 border border-purple-100 mb-6"
                             >
                                 <Activity size={12} className="text-primary" />
                                 <span className="text-[10px] font-black uppercase tracking-widest text-primary">Zero-Latency Engine</span>

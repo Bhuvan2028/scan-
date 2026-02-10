@@ -1,0 +1,107 @@
+/* src/components/Header.css */
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: var(--header-height);
+  background: var(--white);
+  box-shadow: var(--shadow);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 2rem;
+  z-index: 1000;
+  transition: var(--transition);
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.menu-toggle {
+  background: none;
+  border: none;
+  font-size: 1.25rem;
+  color: var(--gray-600);
+  cursor: pointer;
+  padding: 0.5rem;
+  border-radius: 8px;
+  transition: var(--transition);
+}
+
+.menu-toggle:hover {
+  background: var(--gray-100);
+  color: var(--primary-color);
+}
+
+.header-title h1 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--gray-900);
+  margin: 0;
+}
+
+.breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.875rem;
+  color: var(--gray-500);
+  margin: 0;
+}
+
+.breadcrumb i {
+  font-size: 0.75rem;
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.search-box {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.search-box i {
+  position: absolute;
+  left: 1rem;
+  color: var(--gray-400);
+}
+
+.search-box input {
+  padding: 0.5rem 1rem 0.5rem 2.5rem;
+  border: 2px solid var(--gray-200);
+  border-radius: 20px;
+  width: 250px;
+  font-size: 0.875rem;
+  transition: var(--transition);
+}
+
+.search-box input:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  width: 300px;
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+@media (max-width: 768px) {
+  .header {
+    padding: 0 1rem;
+  }
+  
+  .search-box {
+    display: none;
+  }
+}

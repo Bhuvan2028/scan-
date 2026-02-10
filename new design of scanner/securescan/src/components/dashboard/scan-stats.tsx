@@ -72,7 +72,7 @@ export function ScanStats({ scans }: ScanStatsProps) {
 
                     <div>
                         <p className="text-slate-500 font-black text-[11px] uppercase tracking-widest mb-2 flex items-center gap-2">
-                            <span className="w-1 h-1 bg-blue-500" />
+                            <span className="w-1 h-1 bg-primary" />
                             {stat.label}
                         </p>
                         <h3 className="text-4xl font-semibold text-slate-950 tracking-tighter leading-none">{stat.value}</h3>

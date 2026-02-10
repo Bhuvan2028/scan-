@@ -13,7 +13,7 @@ export function GlobalQualityMonitor() {
         pointSize: 4,
         globeColor: "#0A1229", // Industrial Navy
         showAtmosphere: true,
-        atmosphereColor: "#3B82F6",
+        atmosphereColor: "#a146a1",
         atmosphereAltitude: 0.15,
         emissive: "#0A1229",
         emissiveIntensity: 0.1,
@@ -112,7 +112,7 @@ export function GlobalQualityMonitor() {
                             transition={{ delay: i * 0.2 }}
                             className="p-4 bg-white/40 backdrop-blur-md border border-white/20 rounded-2xl flex items-center gap-3"
                         >
-                            <div className="size-2 rounded-full bg-blue-500 animate-pulse" />
+                            <div className="size-2 rounded-full bg-primary animate-pulse" />
                             <span className="text-[10px] font-black uppercase tracking-widest text-primary/70">{label}</span>
                         </motion.div>
                     ))}
