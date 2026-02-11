@@ -20,7 +20,8 @@ export default function ScanStatusPage() {
 
     // Derived values
     const progress = scan?.progressPct || 0
-    const phaseIndex = progress < 25 ? 0 : progress < 50 ? 1 : progress < 75 ? 2 : 3
+    let phaseIndex = progress < 20 ? 0 : progress < 40 ? 1 : progress < 60 ? 2 : progress < 90 ? 3 : 4
+    if (scan?.status === 'completed') phaseIndex = 5
 
     useEffect(() => {
         const fetchScan = async () => {

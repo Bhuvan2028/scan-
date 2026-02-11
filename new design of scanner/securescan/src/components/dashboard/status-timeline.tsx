@@ -8,7 +8,8 @@ const phases = [
     { id: "init", title: "Initialization", description: "Configuring assessment parameters and secure handshake." },
     { id: "recon", title: "Infrastructure Recon", description: "Mapping target infrastructure and endpoint discovery." },
     { id: "vuln", title: "Vulnerability Analysis", description: "Deep inspection for SQLi, XSS, and logic flaws." },
-    { id: "report", title: "Report Generation", description: "Consolidating findings into an actionable audit log." }
+    { id: "report", title: "Report Generation", description: "Consolidating findings into an actionable audit log." },
+    { id: "final", title: "Assessment Finalized", description: "Node verification complete. Data parity achieved." }
 ]
 
 interface StatusTimelineProps {
@@ -22,8 +23,8 @@ export function StatusTimeline({ currentPhaseIndex }: StatusTimelineProps) {
             <div className="absolute left-[20px] top-4 bottom-4 w-px bg-slate-100" />
 
             {phases.map((phase, index) => {
-                const isCompleted = index < currentPhaseIndex
-                const isActive = index === currentPhaseIndex
+                const isCompleted = index < currentPhaseIndex || currentPhaseIndex === 5
+                const isActive = index === currentPhaseIndex && currentPhaseIndex < 5
 
                 return (
                     <motion.div

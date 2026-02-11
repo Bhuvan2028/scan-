@@ -58,24 +58,28 @@ export function ProgressVisualizer({ progress, status }: ProgressVisualizerProps
             </svg>
 
             <div className="absolute inset-0 flex flex-col items-center justify-center text-center">
-                <div className="flex flex-col items-center">
-                    <span className="text-[10px] font-black text-primary uppercase tracking-[0.4em] mb-2 font-mono">TASK_PROXIMITY</span>
-                    <motion.span
+                <div className="flex flex-col items-center justify-center pt-4">
+                    <span className="text-[10px] font-black text-primary uppercase tracking-[0.4em] mb-3 font-mono">TASK_PROXIMITY</span>
+                    <motion.div
                         initial={{ opacity: 0, scale: 0.9 }}
                         animate={{ opacity: 1, scale: 1 }}
-                        className="text-6xl md:text-8xl font-black text-slate-950 tabular-nums tracking-tighter"
+                        className="flex items-baseline gap-1"
                     >
-                        {progress}%
-                    </motion.span>
+                        <span className="text-5xl md:text-7xl font-black text-slate-950 tabular-nums tracking-tighter">
+                            {progress}
+                        </span>
+                        <span className="text-2xl md:text-3xl font-black text-slate-400 select-none">%</span>
+                    </motion.div>
+
                     <motion.div
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
                         transition={{ delay: 0.5 }}
-                        className="mt-4 px-4 py-1 border border-slate-950 flex items-center gap-3"
+                        className={`mt-8 px-5 py-1.5 border border-slate-950 flex items-center gap-3 bg-white shadow-sm ${status === 'completed' ? '' : 'animate-pulse'}`}
                     >
-                        <div className="size-1.5 bg-slate-950 animate-pulse" />
+                        {status !== 'completed' && <div className="size-1.5 bg-slate-950" />}
                         <span className="text-[10px] font-black text-slate-950 uppercase tracking-widest">
-                            {status.replace(/ /g, '_')}
+                            {status === 'completed' ? 'NODE_FINALIZED' : status.replace(/ /g, '_')}
                         </span>
                     </motion.div>
                 </div>
