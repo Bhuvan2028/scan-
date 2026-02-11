@@ -113,7 +113,7 @@ export function BrandReveal({ onRevealComplete, onRevealStart }: BrandRevealProp
                             <motion.path
                                 key={i}
                                 d={path}
-                                stroke={i === 0 ? "#800080" : "black"}
+                                stroke={i === 0 ? "#a146a1" : "black"}
                                 strokeWidth="0.5"
                                 strokeLinecap="round"
                                 strokeLinejoin="round"

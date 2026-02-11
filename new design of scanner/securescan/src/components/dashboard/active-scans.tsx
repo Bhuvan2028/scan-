@@ -10,48 +10,74 @@ interface ActiveScansProps {
 
 export function ActiveScans({ scans }: ActiveScansProps) {
     return (
-        <div className="p-8 bg-white rounded-2xl ring-1 ring-slate-100 shadow-sm">
-            <div className="flex items-center justify-between mb-8">
-                <h2 className="text-xl font-semibold text-slate-900 tracking-tight">Active Assessments</h2>
+        <div className="relative p-8 bg-white border border-slate-200 shadow-[0_4px_20px_-4px_rgba(0,0,0,0.08)] rounded-none overflow-hidden">
+            {/* Surgical Accents */}
+            <div className="absolute top-0 right-0 w-24 h-[1px] bg-gradient-to-l from-slate-300 to-transparent" />
+            <div className="absolute top-0 right-0 w-[1px] h-24 bg-gradient-to-b from-slate-300 to-transparent" />
+
+            <div className="flex items-center justify-between mb-10">
+                <div className="flex items-center gap-3">
+                    <div className="w-1.5 h-6 bg-slate-900" />
+                    <h2 className="text-sm font-black text-slate-900 uppercase tracking-[0.2em]">Active Assessments</h2>
+                </div>
                 {scans.length > 0 && (
-                    <span className="flex items-center gap-2 text-xs font-semibold text-slate-900 bg-slate-50 px-3 py-1.5 rounded-full uppercase tracking-wider border border-slate-100">
-                        <Loader2 className="size-3 animate-spin text-slate-900" />
-                        {scans.length} Running
-                    </span>
+                    <div className="flex items-center gap-2 text-[10px] font-black text-slate-900 bg-slate-100 px-3 py-1 border border-slate-200 uppercase tracking-widest">
+                        <Loader2 className="size-3 animate-spin" />
+                        NODE_COUNT: {scans.length.toString().padStart(2, '0')}
+                    </div>
                 )}
             </div>
 
-            <div className="space-y-6">
+            <div className="space-y-10">
                 {scans.map((scan) => (
-                    <div key={scan._id} className="group cursor-default">
-                        <div className="flex items-center justify-between mb-3">
-                            <div>
-                                <p className="text-sm font-semibold text-slate-900 mb-0.5">{scan.domain}</p>
-                                <p className="text-xs text-slate-500 font-medium">{scan.mode?.toUpperCase()} • {scan._id.slice(-8).toUpperCase()}</p>
+                    <div key={scan._id} className="group cursor-default relative">
+                        <div className="flex items-center justify-between mb-4">
+                            <div className="flex items-baseline gap-4">
+                                <span className="text-[10px] tabular-nums font-black text-slate-400">
+                                    #{scan._id.slice(-4).toUpperCase()}
+                                </span>
+                                <div>
+                                    <p className="text-xs font-black text-slate-950 uppercase tracking-wider mb-0.5">{scan.domain}</p>
+                                    <p className="text-[10px] text-slate-500 font-bold font-mono tracking-tighter">
+                                        MODE::{scan.mode?.toUpperCase()} // SYS_INIT
+                                    </p>
+                                </div>
                             </div>
-                            <span className="text-xs font-bold text-slate-900 uppercase tracking-widest">
-                                {scan.status === 'pending' ? 'Queued' : scan.currentModule || 'Analyzing'}...
-                            </span>
+                            <div className="flex flex-col items-end">
+                                <span className="text-[10px] font-black text-slate-900 bg-slate-900 text-white px-1.5 mb-1">
+                                    {scan.status === 'pending' ? 'QUEUED' : 'ACTIVE'}
+                                </span>
+                                <span className="text-[10px] font-bold text-slate-500 uppercase tracking-widest font-mono">
+                                    {scan.currentModule || 'ENGINE_READY'}
+                                </span>
+                            </div>
                         </div>
 
-                        <div className="h-2 w-full bg-slate-50 rounded-full overflow-hidden border border-slate-100/50">
+                        {/* Sharp Linear Progress */}
+                        <div className="relative h-[2px] w-full bg-slate-100 overflow-hidden">
                             <motion.div
                                 initial={{ width: 0 }}
                                 animate={{ width: `${scan.progressPct}%` }}
-                                transition={{ duration: 1, ease: "easeOut" }}
+                                transition={{ duration: 1.5, ease: [0.16, 1, 0.3, 1] }}
                                 className="h-full bg-slate-900"
+                            />
+                            {/* Pulse scanning line inside progress */}
+                            <motion.div
+                                animate={{ x: ["0%", "100%"] }}
+                                transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
+                                className="absolute top-0 bottom-0 w-20 bg-gradient-to-r from-transparent via-white/40 to-transparent"
                             />
                         </div>
                     </div>
                 ))}
 
                 {scans.length === 0 && (
-                    <div className="flex flex-col items-center justify-center py-12 text-center">
-                        <div className="size-16 bg-slate-50 rounded-full flex items-center justify-center mb-4">
-                            <AlertCircle size={32} className="text-slate-300" />
-                        </div>
-                        <p className="text-slate-900 font-medium mb-1">No active scans</p>
-                        <p className="text-slate-500 text-sm font-light">Initiate a new scan to monitor real-time activity.</p>
+                    <div className="flex flex-col items-center justify-center py-16 text-center border border-dashed border-slate-100 bg-slate-50/30">
+                        <AlertCircle size={24} className="text-slate-200 mb-4" />
+                        <p className="text-slate-400 font-black text-[10px] uppercase tracking-[0.2em] mb-1">Grid_Status: Idle</p>
+                        <p className="text-slate-400 text-[11px] font-medium leading-relaxed max-w-[200px]">
+                            AWAITING_INPUT: START_NEW_SCAN_TO_PROCEED
+                        </p>
                     </div>
                 )}
             </div>

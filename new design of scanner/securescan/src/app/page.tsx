@@ -28,7 +28,7 @@ export default function Home() {
   const globeY = useTransform(scrollYProgress, [0, 1], ["0%", "10%"])
 
   return (
-    <main ref={containerRef} className="min-h-screen bg-white relative">
+    <main ref={containerRef} className="min-h-screen bg-transparent relative">
       <AnimatePresence>
         {!showContent && (
           <BrandReveal
@@ -52,6 +52,20 @@ export default function Home() {
         </motion.div>
       </div>
 
+      <AnimatePresence>
+        {showContent && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 1 }}
+            className="relative z-50"
+          >
+            <Navbar />
+          </motion.div>
+        )}
+      </AnimatePresence>
+
       <motion.div
         initial={{ opacity: 0, scale: 1.05, filter: "blur(10px)" }}
         animate={{
@@ -62,8 +76,6 @@ export default function Home() {
         transition={{ duration: 1.5, ease: [0.16, 1, 0.3, 1] }}
         className="relative z-10"
       >
-        <Navbar />
-
         <div className="relative z-10">
           <Hero />
           <AnatomyOfScan />

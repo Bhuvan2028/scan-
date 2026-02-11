@@ -46,7 +46,16 @@ exports.startScan = async (req, res) => {
       });
     }
 
-    const cleanDomain = domain.trim().toLowerCase();
+    let cleanDomain = domain.trim().toLowerCase();
+
+    // Remove protocol (http://, https://)
+    cleanDomain = cleanDomain.replace(/^https?:\/\//i, '');
+
+    // Remove trailing slash and any paths
+    cleanDomain = cleanDomain.split('/')[0];
+
+    // Remove port if present
+    cleanDomain = cleanDomain.split(':')[0];
 
     const isDomain = /^[a-z0-9.-]+\.[a-z]{2,}$/i.test(cleanDomain);
     const isIPv4 = /^(?:\d{1,3}\.){3}\d{1,3}$/.test(cleanDomain);
@@ -84,19 +93,13 @@ exports.startScan = async (req, res) => {
 
     await newScan.save();
 
-    /* --------------------
-       4. Fire scan (async)
-    -------------------- */
-    reconftwService.scanDomain(
-      cleanDomain,
-      newScan._id,
-      mode
-    );
+    // Scans are now handled by scanQueueWorker.js
+    // reconftwService.scanDomain() call removed from here
 
     return res.status(201).json({
       success: true,
       scanId: newScan._id,
-      message: "Scan started successfully"
+      message: "Scan added to queue successfully"
     });
 
   } catch (err) {
@@ -175,16 +178,12 @@ exports.restartScan = async (req, res) => {
 
     await scan.save();
 
-    // 🚀 Start again
-    reconftwService.scanDomain(
-      scan.domain,
-      scan._id,
-      scan.mode
-    );
+    // Scans are now handled by scanQueueWorker.js
+    // reconftwService.scanDomain() call removed from here
 
     return res.json({
       success: true,
-      message: "Scan restarted successfully",
+      message: "Scan added to queue for restart",
       scanId: scan._id
     });
 

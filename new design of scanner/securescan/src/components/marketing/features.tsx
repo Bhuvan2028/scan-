@@ -30,7 +30,7 @@ export function Features() {
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                     {features.map((feature, i) => (
                         <div key={i} className="group p-6 rounded-2xl border border-slate-100 bg-slate-50/20 hover:bg-slate-50 hover:border-slate-200 transition-all duration-300">
-                            <div className="size-12 rounded-lg bg-blue-50 flex items-center justify-center text-blue-600 mb-4 group-hover:scale-110 transition-transform">
+                            <div className="size-12 rounded-lg bg-purple-50 flex items-center justify-center text-primary mb-4 group-hover:scale-110 transition-transform">
                                 <feature.icon className="size-6" />
                             </div>
                             <h3 className="font-semibold text-slate-900 mb-2">{feature.title}</h3>

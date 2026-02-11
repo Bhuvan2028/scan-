@@ -22,7 +22,7 @@ const layers = [
         description: "Our agents parse MX, SPF, and TXT records to verify routing integrity and sender authenticity.",
         data: "MX: mx1.securescan.tech (10)\nSPF: v=spf1 include:_spf.google.com ~all\nTXT: google-site-verification=...",
         icon: Shield,
-        color: "text-blue-500"
+        color: "text-primary"
     },
     {
         id: "ssl",
@@ -31,7 +31,7 @@ const layers = [
         description: "Validating certificate chains, expiration dates, and the strength of the TLS 1.3 handshake.",
         data: "Cert: Valid | Expires: 240 days\nCipher: TLS_AES_256_GCM_SHA384\nIssuer: Let's Encrypt E6",
         icon: Lock,
-        color: "text-indigo-500"
+        color: "text-primary/70"
     },
     {
         id: "content",
@@ -153,7 +153,7 @@ export function AnatomyOfScan() {
                                     className="absolute inset-0 flex items-center justify-center p-4"
                                 >
                                     <div className="relative group w-full max-w-sm">
-                                        <div className={`absolute -inset-1 bg-gradient-to-r ${index % 2 === 0 ? "from-blue-500 to-indigo-500" : "from-slate-900 to-slate-700"
+                                        <div className={`absolute -inset-1 bg-gradient-to-r ${index % 2 === 0 ? "from-primary to-purple-600" : "from-slate-950 to-slate-800"
                                             } rounded-[2.6rem] blur opacity-0 group-hover:opacity-20 transition duration-500`} />
 
                                         <div className="relative bg-white border border-slate-100 p-6 md:p-10 rounded-[2.5rem] shadow-[0_32px_64px_-16px_rgba(0,0,0,0.08)]">
@@ -170,9 +170,9 @@ export function AnatomyOfScan() {
                                                 <Terminal size={18} className="text-slate-200" />
                                             </div>
 
-                                            <div className="bg-slate-900 rounded-[1.5rem] p-6 font-mono text-xs md:text-sm text-blue-400 overflow-hidden relative">
+                                            <div className="bg-slate-900 rounded-[1.5rem] p-6 font-mono text-xs md:text-sm text-primary overflow-hidden relative">
                                                 <div className="absolute top-0 right-0 p-3 opacity-20">
-                                                    <div className="size-1 rounded-full bg-blue-400 animate-ping" />
+                                                    <div className="size-1 rounded-full bg-purple-400 animate-ping" />
                                                 </div>
 
                                                 <div className="flex items-center gap-2 mb-3 text-slate-600 border-b border-slate-800 pb-2">
@@ -187,7 +187,7 @@ export function AnatomyOfScan() {
                                                 <motion.span
                                                     animate={{ opacity: [0, 1, 0] }}
                                                     transition={{ duration: 0.8, repeat: Infinity }}
-                                                    className="inline-block w-2 h-4 bg-blue-400 ml-1 translate-y-1"
+                                                    className="inline-block w-2 h-4 bg-primary ml-1 translate-y-1"
                                                 />
                                             </div>
 

@@ -35,7 +35,7 @@ function Arcs({ count = 10 }) {
             {lines.map((points, i) => (
                 <line key={i}>
                     <bufferGeometry attach="geometry" onUpdate={(self) => self.setFromPoints(points)} />
-                    <lineBasicMaterial attach="material" color="#60a5fa" transparent opacity={0.2} />
+                    <lineBasicMaterial attach="material" color="#a146a1" transparent opacity={0.2} />
                 </line>
             ))}
         </group>
@@ -62,7 +62,7 @@ function GlobeInner({ isLockOn = false }) {
             <Sphere args={[2.5, 64, 64]}>
                 <meshStandardMaterial
                     color="#0f172a"
-                    emissive="#1e293b"
+                    emissive="#100010"
                     wireframe={true}
                     transparent
                     opacity={0.1}
@@ -72,7 +72,7 @@ function GlobeInner({ isLockOn = false }) {
             {/* Atmosphere Glow */}
             <Sphere args={[2.52, 64, 64]}>
                 <MeshDistortMaterial
-                    color="#60a5fa"
+                    color="#a146a1"
                     speed={2}
                     distort={0.1}
                     radius={1}
@@ -86,7 +86,7 @@ function GlobeInner({ isLockOn = false }) {
             {/* Scanning Ring */}
             <mesh ref={ringRef}>
                 <torusGeometry args={[3, 0.01, 16, 100]} />
-                <meshBasicMaterial color="#60a5fa" transparent opacity={0.2} />
+                <meshBasicMaterial color="#a146a1" transparent opacity={0.2} />
             </mesh>
         </group>
     )
@@ -102,7 +102,7 @@ export function GlobalThreatGlobe({ isLockOn = false }: GlobalThreatGlobeProps) 
             <Canvas>
                 <PerspectiveCamera makeDefault position={[0, 0, 8]} />
                 <ambientLight intensity={0.5} />
-                <pointLight position={[10, 10, 10]} intensity={1} color="#60a5fa" />
+                <pointLight position={[10, 10, 10]} intensity={1} color="#a146a1" />
 
                 <Stars radius={100} depth={50} count={5000} factor={4} saturation={0} fade speed={1} />
 

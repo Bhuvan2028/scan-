@@ -70,7 +70,7 @@ export function ProductPreview() {
                         {/* Sidebar */}
                         <div className="w-64 border-r border-slate-100 bg-slate-50/30 p-4 hidden md:flex flex-col gap-1">
                             <div className="flex items-center gap-2 px-2 py-3 mb-4">
-                                <div className="size-6 bg-blue-600 rounded-md" />
+                                <div className="size-6 bg-primary rounded-md" />
                                 <span className="font-semibold text-slate-900 text-sm">SecureScan Workspace</span>
                             </div>
 
@@ -82,7 +82,7 @@ export function ProductPreview() {
                                         className={cn(
                                             "w-full flex items-center gap-3 px-3 py-2 text-sm font-medium rounded-md transition-colors",
                                             activeTab === tab.id
-                                                ? "bg-white text-blue-600 shadow-sm border border-slate-200/60"
+                                                ? "bg-white text-primary shadow-sm border border-slate-200/60"
                                                 : "text-slate-600 hover:bg-slate-100 hover:text-slate-900"
                                         )}
                                     >

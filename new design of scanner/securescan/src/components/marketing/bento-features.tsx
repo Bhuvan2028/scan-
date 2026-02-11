@@ -10,22 +10,22 @@ const ScanningLine = () => (
         initial={{ top: "-10%" }}
         animate={{ top: "110%" }}
         transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
-        className="absolute left-0 right-0 h-px bg-gradient-to-r from-transparent via-blue-500/50 to-transparent z-10 pointer-events-none"
+        className="absolute left-0 right-0 h-px bg-gradient-to-r from-transparent via-purple-500/50 to-transparent z-10 pointer-events-none"
     />
 )
 
 const BlacklistRadar = () => {
     return (
-        <div className="relative size-32 rounded-full border border-blue-100/30 flex items-center justify-center overflow-hidden bg-slate-50/50">
+        <div className="relative size-32 rounded-full border border-purple-100/30 flex items-center justify-center overflow-hidden bg-slate-50/50">
             {/* Radar Sweep */}
             <motion.div
                 animate={{ rotate: 360 }}
                 transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
-                className="absolute inset-0 bg-[conic-gradient(from_0deg,transparent_0deg,rgba(59,130,246,0.2)_90deg,transparent_91deg)]"
+                className="absolute inset-0 bg-[conic-gradient(from_0deg,transparent_0deg,rgba(168,85,247,0.2)_90deg,transparent_91deg)]"
             />
             {/* Grid Lines */}
-            <div className="absolute inset-0 border border-blue-100/20 rounded-full scale-75" />
-            <div className="absolute inset-0 border border-blue-100/10 rounded-full scale-50" />
+            <div className="absolute inset-0 border border-purple-100/20 rounded-full scale-75" />
+            <div className="absolute inset-0 border border-purple-100/10 rounded-full scale-50" />
 
             {/* Threat Dots */}
             {[
@@ -50,7 +50,7 @@ const BlacklistRadar = () => {
                 />
             ))}
 
-            <Shield className="text-blue-600 size-6 relative z-10" />
+            <Shield className="text-primary size-6 relative z-10" />
         </div>
     )
 }
@@ -65,7 +65,7 @@ const DNSTree = () => {
                     fill="none"
                     stroke="currentColor"
                     strokeWidth="1.5"
-                    className="text-blue-100"
+                    className="text-purple-100"
                     initial={{ pathLength: 0 }}
                     animate={{ pathLength: 1 }}
                     transition={{ duration: 2, ease: "easeInOut" }}
@@ -87,7 +87,7 @@ const DNSTree = () => {
                         animate={{ opacity: 1, scale: 1 }}
                         transition={{ delay: 1 + i * 0.1 }}
                     >
-                        <circle cx={node.cx} cy={node.cy} r="4" fill="#3b82f6" className="shadow-lg shadow-blue-500" />
+                        <circle cx={node.cx} cy={node.cy} r="4" fill="#a146a1" className="shadow-lg shadow-purple-500/30" />
                         <text x={node.cx} y={node.cy - 8} fontSize="6" textAnchor="middle" fontWeight="bold" className="fill-slate-400">{node.label}</text>
                     </motion.g>
                 ))}
@@ -113,7 +113,7 @@ const BentoCard = ({
         <motion.div
             whileHover={{ y: -5 }}
             className={cn(
-                "relative group bg-white border border-slate-200/60 rounded-3xl p-8 overflow-hidden flex flex-col justify-between shadow-sm hover:shadow-xl hover:shadow-blue-500/5 transition-all duration-500",
+                "relative group bg-white border border-slate-200/60 rounded-3xl p-8 overflow-hidden flex flex-col justify-between shadow-sm hover:shadow-xl hover:shadow-purple-500/5 transition-all duration-500",
                 className
             )}
         >
@@ -121,7 +121,7 @@ const BentoCard = ({
 
             <div className="relative z-20">
                 <div className="flex items-center gap-3 mb-4">
-                    <div className="size-10 rounded-xl bg-blue-50 flex items-center justify-center text-blue-600">
+                    <div className="size-10 rounded-xl bg-purple-50 flex items-center justify-center text-primary">
                         <Icon size={20} />
                     </div>
                     <div>
@@ -136,7 +136,7 @@ const BentoCard = ({
             </div>
 
             {/* Subtle Gradient Glow */}
-            <div className="absolute -bottom-24 -right-24 size-48 bg-blue-500/5 blur-[100px] rounded-full group-hover:bg-blue-500/10 transition-colors" />
+            <div className="absolute -bottom-24 -right-24 size-48 bg-purple-500/5 blur-[100px] rounded-full group-hover:bg-purple-500/10 transition-colors" />
         </motion.div>
     )
 }
@@ -150,10 +150,10 @@ export function BentoFeatures() {
                         initial={{ opacity: 0, y: 20 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
-                        className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-50 border border-blue-100 mb-4"
+                        className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-purple-50 border border-purple-100 mb-4"
                     >
-                        <Zap size={12} className="text-blue-600 fill-blue-600" />
-                        <span className="text-[10px] font-black uppercase tracking-widest text-blue-600">Core Capabilities</span>
+                        <Zap size={12} className="text-primary fill-primary" />
+                        <span className="text-[10px] font-black uppercase tracking-widest text-primary">Core Capabilities</span>
                     </motion.div>
 
                     <motion.h2
@@ -164,7 +164,7 @@ export function BentoFeatures() {
                         className="text-4xl md:text-5xl lg:text-6xl font-black tracking-tighter text-slate-900 leading-[0.9] mb-6"
                     >
                         Security Architecture, <br />
-                        <span className="text-blue-600">Reinvented.</span>
+                        <span className="text-primary">Reinvented.</span>
                     </motion.h2>
 
                     <motion.p
@@ -219,15 +219,15 @@ export function BentoFeatures() {
                                             initial={{ width: 0 }}
                                             whileInView={{ width: `${Math.random() * 60 + 40}%` }}
                                             transition={{ duration: 1, delay: i * 0.2 }}
-                                            className="h-full bg-blue-500/30"
+                                            className="h-full bg-purple-500/30"
                                         />
                                     </div>
                                     <span className="text-[10px] font-black text-slate-400">{(Math.random() * 0.99).toFixed(3)}</span>
                                 </div>
                             ))}
-                            <div className="p-3 rounded-xl bg-blue-50/50 border border-blue-100 mt-4">
-                                <span className="text-[10px] font-black uppercase text-blue-600 tracking-tighter block mb-1">Risk Score</span>
-                                <span className="text-2xl font-black text-blue-600 leading-none">0.024</span>
+                            <div className="p-3 rounded-xl bg-purple-50/50 border border-purple-100 mt-4">
+                                <span className="text-[10px] font-black uppercase text-primary tracking-tighter block mb-1">Risk Score</span>
+                                <span className="text-2xl font-black text-primary leading-none">0.024</span>
                             </div>
                         </div>
                     </BentoCard>
@@ -245,9 +245,9 @@ export function BentoFeatures() {
                                     key={i}
                                     animate={{ opacity: [0.3, 1, 0.3] }}
                                     transition={{ duration: 2, repeat: Infinity, delay: i * 0.1 }}
-                                    className="aspect-square rounded-lg bg-blue-50 border border-blue-100 flex items-center justify-center"
+                                    className="aspect-square rounded-lg bg-purple-50 border border-purple-100 flex items-center justify-center"
                                 >
-                                    <Globe size={12} className="text-blue-300" />
+                                    <Globe size={12} className="text-purple-300" />
                                 </motion.div>
                             ))}
                         </div>
@@ -263,10 +263,10 @@ export function BentoFeatures() {
                         <div className="relative mt-4 h-48 bg-slate-950 rounded-2xl overflow-hidden border border-slate-800 p-6 flex flex-col justify-between">
                             <div className="flex justify-between items-start">
                                 <div className="space-y-1">
-                                    <span className="text-[8px] font-black text-emerald-500 uppercase tracking-widest">Protocol Check</span>
+                                    <span className="text-[10px] font-black text-primary leading-none uppercase tracking-tighter">Verified</span>
                                     <div className="text-xs font-mono text-white/50">TLS_1.3_VERIFIED</div>
                                 </div>
-                                <Shield className="text-emerald-500 size-4" />
+                                <Shield className="text-primary size-4" />
                             </div>
 
                             <div className="flex items-end gap-1 h-20">
@@ -298,8 +298,8 @@ export function BentoFeatures() {
                                 transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
                                 className="relative size-32"
                             >
-                                <div className="absolute inset-0 border-2 border-dashed border-blue-100 rounded-full" />
-                                <Lock className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-blue-600 size-8" />
+                                <div className="absolute inset-0 border-2 border-dashed border-purple-100 rounded-full" />
+                                <Lock className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-primary size-8" />
                             </motion.div>
                         </div>
                     </BentoCard>

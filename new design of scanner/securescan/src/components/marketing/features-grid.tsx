@@ -30,7 +30,7 @@ export function FeaturesGrid() {
                                 Easily integrate advanced malware detection and scan capabilities into any application with few lines of code.
                             </p>
                             <div className="mt-8 p-4 bg-slate-50 rounded-lg border border-slate-100 font-mono text-xs text-slate-600">
-                                <span className="text-blue-600">POST</span> /v1/scan/file
+                                <span className="text-primary">POST</span> /v1/scan/file
                             </div>
                         </div>
                     </Card3D>
@@ -83,7 +83,7 @@ export function FeaturesGrid() {
                                 </p>
                                 <div className="flex flex-wrap gap-x-6 gap-y-2 text-sm font-medium text-slate-900">
                                     {['Static Analysis', 'Behavioral Heuristics', 'Zero-day Detection', 'Generative Defense'].map(item => (
-                                        <div key={item} className="flex items-center gap-2 group cursor-pointer hover:text-blue-600 transition-colors">
+                                        <div key={item} className="flex items-center gap-2 group cursor-pointer hover:text-primary transition-colors">
                                             {item} <ArrowRight className="size-3 transition-transform group-hover:translate-x-1" />
                                         </div>
                                     ))}
@@ -108,7 +108,7 @@ export function FeaturesGrid() {
                             <div className="relative size-32">
                                 <svg className="size-full -rotate-90" viewBox="0 0 36 36">
                                     <path className="text-slate-100" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="currentColor" strokeWidth="2" />
-                                    <path className="text-blue-600" strokeDasharray="98, 100" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="currentColor" strokeWidth="2" />
+                                    <path className="text-primary" strokeDasharray="98, 100" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="currentColor" strokeWidth="2" />
                                 </svg>
                                 <div className="absolute inset-0 flex items-center justify-center flex-col">
                                     <span className="text-2xl font-bold text-slate-900">98<span className="text-sm">%</span></span>
@@ -129,15 +129,12 @@ export function FeaturesGrid() {
                 {/* Features Row */}
                 <div className="grid grid-cols-1 md:grid-cols-3 border-b border-slate-200 divide-y md:divide-y-0 md:divide-x divide-slate-200">
                     <div className="p-8">
-                        <h4 className="font-semibold mb-2 flex items-center gap-2"><Zap className="size-4 text-blue-600" /> Auto-scale features</h4>
-                        <p className="text-xs text-slate-500 mt-2">Cloud-native architecture that automatically scales with demand, minimizing costs.</p>
-                    </div>
-                    <div className="p-8">
-                        <h4 className="font-semibold mb-2 flex items-center gap-2"><Database className="size-4 text-blue-600" /> Stateful analysis</h4>
-                        <p className="text-xs text-slate-500 mt-2">Store and analyze file relationships to refine verdicts and understand attack chains.</p>
-                    </div>
-                    <div className="p-8">
-                        <h4 className="font-semibold mb-2 flex items-center gap-2"><Server className="size-4 text-blue-600" /> High availability</h4>
+                        <h4 className="font-semibold mb-2 flex items-center gap-2"><Zap className="size-4 text-primary" /> Auto-scale features</h4>
+                        <motion.div className="h-0.5 w-8 bg-purple-100 mb-4" />
+                        <p className="text-sm text-slate-500 mb-4 font-mono leading-tight uppercase">// SCALE_MOD: EL_CAP_MAX</p>
+                        <h4 className="font-semibold mb-2 flex items-center gap-2"><Database className="size-4 text-primary" /> Stateful analysis</h4>
+                        <motion.div className="h-0.5 w-8 bg-purple-100 mb-4" />
+                        <p className="text-sm text-slate-500 mb-4 font-mono leading-tight uppercase">// STATE_SYNC: 99.99%_Uptime</p>
                         <p className="text-xs text-slate-500 mt-2">Customize replication settings and dedicated nodes for resilience under peak loads.</p>
                     </div>
                 </div>

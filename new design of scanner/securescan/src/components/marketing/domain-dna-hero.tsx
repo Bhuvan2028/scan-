@@ -8,10 +8,10 @@ import { useRouter } from "next/navigation"
 import { cn } from "@/lib/utils"
 
 const dnaMarkers = [
-    { label: "DNS_A_RECORD", val: "104.21.34.112", color: "text-blue-400" },
-    { label: "SSL_CERT_VALID", val: "210d_REMAINING", color: "text-emerald-400" },
-    { label: "MAIL_SECURITY", val: "SPF/DKIM: PASS", color: "text-blue-400" },
-    { label: "PHISHING_SCORE", val: "0.2/10 (CLEAN)", color: "text-blue-400" }
+    { label: "DNS_A_RECORD", val: "104.21.34.112", color: "text-primary" },
+    { label: "DNS_A_RECORD", val: "104.21.34.112", color: "text-primary" },
+    { label: "MAIL_SECURITY", val: "SPF/DKIM: PASS", color: "text-primary" },
+    { label: "PHISHING_SCORE", val: "0.2/10 (CLEAN)", color: "text-primary" }
 ]
 
 export function DomainDNAHero({ isLightMode = false }: { isLightMode?: boolean }) {
@@ -89,7 +89,7 @@ export function DomainDNAHero({ isLightMode = false }: { isLightMode?: boolean }
                             )}
                         />
 
-                        <Search className={`relative z-10 mr-4 transition-colors ${isFocused ? 'text-blue-500' : 'text-slate-400'}`} size={24} />
+                        <Search className={`relative z-10 mr-4 transition-colors ${isFocused ? 'text-primary' : 'text-slate-400'}`} size={24} />
 
                         <form onSubmit={handleSubmit} className="relative z-10 flex-1">
                             <input
@@ -116,7 +116,7 @@ export function DomainDNAHero({ isLightMode = false }: { isLightMode?: boolean }
                                     onClick={handleSubmit}
                                     className={cn(
                                         "relative z-10 flex items-center justify-center size-12 rounded-full shadow-xl hover:scale-110 transition-transform",
-                                        isLightMode ? "bg-blue-600 text-white" : "bg-slate-900 text-white"
+                                        isLightMode ? "bg-primary text-white" : "bg-slate-900 text-white"
                                     )}
                                 >
                                     <ArrowRight size={20} />
@@ -131,7 +131,7 @@ export function DomainDNAHero({ isLightMode = false }: { isLightMode?: boolean }
                             initial={{ left: "0%" }}
                             animate={{ left: "100%" }}
                             transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
-                            className="absolute top-0 bottom-0 w-px bg-blue-500 shadow-[0_0_20px_rgba(59,130,246,1)] z-20"
+                            className="absolute top-0 bottom-0 w-px bg-primary shadow-[0_0_20px_rgba(161,70,161,1)] z-20"
                         />
                     )}
                 </div>
@@ -171,7 +171,7 @@ export function DomainDNAHero({ isLightMode = false }: { isLightMode?: boolean }
                         { icon: Globe, label: "NODES: 84" }
                     ].map((hud, i) => (
                         <div key={i} className="flex items-center gap-2">
-                            <hud.icon size={10} className="text-blue-500" />
+                            <hud.icon size={10} className="text-primary" />
                             <span className={cn(
                                 "text-[8px] font-black tracking-widest uppercase",
                                 isLightMode ? "text-slate-400" : "text-slate-600"

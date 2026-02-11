@@ -5,7 +5,7 @@ export function CTA() {
     return (
         <section className="py-24 bg-slate-900 text-white relative overflow-hidden">
             {/* Glow effect */}
-            <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-blue-500/20 blur-[100px] rounded-full" />
+            <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-purple-500/20 blur-[100px] rounded-full" />
 
             <div className="container mx-auto px-4 md:px-6 relative z-10 text-center">
                 <h2 className="text-3xl md:text-5xl font-bold mb-6 tracking-tight">Start building with confidence</h2>

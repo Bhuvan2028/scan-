@@ -13,7 +13,7 @@ export function GlobalQualityMonitor() {
         pointSize: 4,
         globeColor: "#0A1229", // Industrial Navy
         showAtmosphere: true,
-        atmosphereColor: "#3B82F6",
+        atmosphereColor: "#a146a1",
         atmosphereAltitude: 0.15,
         emissive: "#0A1229",
         emissiveIntensity: 0.1,
@@ -32,7 +32,7 @@ export function GlobalQualityMonitor() {
         autoRotateSpeed: 0.8,
     };
 
-    const colors = ["#06b6d4", "#3b82f6", "#10b981"]; // Cyan, Blue, Emerald (NO PURPLE)
+    const colors = ["#a146a1", "#c084fc", "#10b981"]; // Purple, Light Purple, Emerald
 
     const sampleArcs = [
         { order: 1, startLat: 40.7128, startLng: -74.006, endLat: 51.5072, endLng: -0.1276, arcAlt: 0.2, color: colors[0] }, // NY to London
@@ -69,7 +69,7 @@ export function GlobalQualityMonitor() {
 
                 <div className="flex flex-col md:flex-row gap-12 items-center justify-center mb-24">
                     <div className="flex items-center gap-4 bg-slate-50 px-6 py-4 rounded-3xl border border-slate-100">
-                        <div className="size-10 rounded-full bg-blue-100 flex items-center justify-center text-blue-600">
+                        <div className="size-10 rounded-full bg-purple-100 flex items-center justify-center text-primary">
                             <Zap size={20} />
                         </div>
                         <div className="text-left">
@@ -112,8 +112,8 @@ export function GlobalQualityMonitor() {
                             transition={{ delay: i * 0.2 }}
                             className="p-4 bg-white/40 backdrop-blur-md border border-white/20 rounded-2xl flex items-center gap-3"
                         >
-                            <div className="size-2 rounded-full bg-blue-500 animate-pulse" />
-                            <span className="text-[10px] font-black uppercase tracking-widest text-slate-600">{label}</span>
+                            <div className="size-2 rounded-full bg-primary animate-pulse" />
+                            <span className="text-[10px] font-black uppercase tracking-widest text-primary/70">{label}</span>
                         </motion.div>
                     ))}
                 </div>

@@ -1,0 +1,312 @@
+/* ======================================================
+   THEME VARIABLES
+====================================================== */
+
+/* LIGHT */
+body[data-theme="light"] {
+  --bg-main: #f9fafb;
+  --bg-card: #ffffff;
+  --bg-card-hover: #f5f3ff;
+  --bg-input: #ffffff;
+  --bg-footer: #ffffff;
+
+  --border-soft: #e5e7eb;
+
+  --text-main: #111827;
+  --text-muted: #6b7280;
+
+  --accent-purple: #7c5cff;
+  --accent-purple-strong: #4f46e5;
+}
+
+/* DARK */
+body[data-theme="dark"] {
+  --bg-main: #0b0f1a;
+  --bg-card: #12172a;
+  --bg-card-hover: #161c35;
+  --bg-input: #0f1424;
+  --bg-footer: #0b0f1a;
+
+  --border-soft: rgba(255,255,255,0.08);
+
+  --text-main: #e5e7eb;
+  --text-muted: #9ca3af;
+
+  --accent-purple: #7c5cff;
+  --accent-purple-strong: #4f46e5;
+}
+
+/* ======================================================
+   PAGE
+====================================================== */
+.assessment-container {
+  padding: 32px;
+  padding-bottom: 140px;
+  min-height: 100vh;
+  background: var(--bg-main);
+  color: var(--text-main);
+  font-family: Inter, system-ui;
+}
+
+/* ======================================================
+   HEADER
+====================================================== */
+.assessment-header h1 {
+  font-size: 30px;
+  font-weight: 700;
+  color: var(--text-main);
+}
+
+.muted {
+  color: var(--text-muted);
+  font-size: 14px;
+  margin-top: 4px;
+}
+
+/* ======================================================
+   PROGRESS
+====================================================== */
+.progress-box {
+  margin-top: 16px;
+}
+
+.progress-label {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-muted);
+  margin-bottom: 6px;
+}
+
+.progress-track {
+  height: 8px;
+  background: var(--border-soft);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    var(--accent-purple),
+    var(--accent-purple-strong)
+  );
+}
+
+/* ======================================================
+   QUESTION CARD
+====================================================== */
+.question-card {
+  background: var(--bg-card);
+  border-radius: 16px;
+  padding: 22px;
+  border: 1px solid var(--border-soft);
+  margin-bottom: 22px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.35);
+  transition: all 0.25s ease;
+}
+
+.question-card:hover {
+  background: var(--bg-card-hover);
+  border-color: var(--accent-purple);
+  transform: translateY(-2px);
+}
+
+/* Category */
+.q-category {
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.4px;
+  color: var(--accent-purple);
+  margin-bottom: 6px;
+}
+
+/* Question text */
+.q-text {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--text-main);
+  margin-bottom: 18px;
+  line-height: 1.5;
+}
+
+/* ======================================================
+   OPTIONS  ✅ FINAL FIX HERE
+====================================================== */
+.option-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+}
+
+.option-btn {
+  padding: 12px 18px;
+  min-width: 180px;
+  text-align: center;
+
+  border-radius: 12px;
+  border: 1px solid var(--border-soft);
+  background: var(--bg-input);
+  color: var(--text-main);
+
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.2;
+
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+/* Hover */
+.option-btn:hover {
+  background: rgba(124,92,255,0.18);
+  border-color: var(--accent-purple);
+  color: #ffffff;
+}
+
+/* Selected */
+.option-btn.selected {
+  background: linear-gradient(
+    135deg,
+    var(--accent-purple),
+    var(--accent-purple-strong)
+  );
+  border-color: var(--accent-purple);
+  box-shadow: 0 8px 24px rgba(124,92,255,0.45);
+  transform: scale(1.04);
+}
+
+/* ======================================================
+   FOOTER
+====================================================== */
+
+
+
+
+
+
+/* Light theme → dark text */
+body[data-theme="light"] .option-btn.selected {
+  color: #1f2937; /* slate-800 */
+}
+
+/* Dark theme → white text */
+body[data-theme="dark"] .option-btn.selected {
+  color: #ffffff;
+}
+
+
+
+/* Default option text — DARK THEME */
+body[data-theme="dark"] .option-btn {
+  color: #f9fafb;                /* near-white */
+  background: #0f1424;           /* keep dark bg */
+}
+
+/* Hover option text — DARK THEME */
+body[data-theme="dark"] .option-btn:hover {
+  color: #ffffff;
+}
+
+/* Selected option text already correct */
+body[data-theme="dark"] .option-btn.selected {
+  color: #ffffff;
+}
+/* ======================================================
+   FINAL ASSESSMENT ACTION BUTTONS (CLEAN & STABLE)
+====================================================== */
+
+.footer-bar {
+  margin-top: 56px;
+  padding: 32px 0;
+  display: flex;
+  justify-content: center;
+  gap: 32px;
+}
+
+/* =====================
+   SUBMIT ASSESSMENT
+===================== */
+
+.primary-btn {
+  padding: 14px 34px;
+  border-radius: 14px;
+  border: none;
+
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: 0.3px;
+
+  cursor: pointer;
+  transition: all 0.25s ease;
+
+  background: linear-gradient(
+    135deg,
+    var(--accent-purple),
+    var(--accent-purple-strong)
+  );
+
+  color: #ffffff;
+
+  box-shadow: 0 10px 24px rgba(124, 92, 255, 0.35);
+}
+
+/* Light theme – stronger presence */
+body[data-theme="light"] .primary-btn {
+  box-shadow: 0 12px 28px rgba(124, 92, 255, 0.4);
+}
+
+/* Hover */
+.primary-btn:hover:not(.is-disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 16px 36px rgba(124, 92, 255, 0.55);
+}
+
+/* ==========================
+   VIEW ASSESSMENT HISTORY
+========================== */
+
+.outline-btn {
+  padding: 14px 34px;
+  border-radius: 14px;
+
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: 0.3px;
+
+  cursor: pointer;
+  transition: all 0.25s ease;
+
+  border: 2px solid var(--accent-purple);
+  background: transparent;
+  color: var(--accent-purple);
+}
+
+/* Light theme – subtle fill */
+body[data-theme="light"] .outline-btn {
+  background: var(--accent-purple-soft);
+}
+
+/* Hover */
+.outline-btn:hover {
+  background: rgba(124, 92, 255, 0.18);
+  border-color: var(--accent-purple-strong);
+  color: var(--accent-purple-strong);
+}
+
+/* ==========================================
+   FINAL DISABLED VISUAL FIX (LIGHT THEME)
+========================================== */
+
+body[data-theme="light"] .primary-btn.is-disabled {
+  background: linear-gradient(
+    135deg,
+    rgba(124, 92, 255, 0.18),
+    rgba(79, 70, 229, 0.18)
+  );
+
+  color: #6b7280;          /* readable grey */
+  box-shadow: none;
+}
+
+

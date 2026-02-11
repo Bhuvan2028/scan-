@@ -1,0 +1,338 @@
+/* ======================================================
+   THEME VARIABLES (shared with assessment)
+====================================================== */
+
+/* LIGHT */
+body[data-theme="light"] {
+  --bg-main: #f9fafb;
+  --bg-card: #ffffff;
+  --bg-card-hover: #f5f3ff;
+  --bg-input: #ffffff;
+
+  --border-soft: #e5e7eb;
+
+  --text-main: #111827;
+  --text-muted: #6b7280;
+
+  --accent-purple: #7c5cff;
+  --accent-purple-strong: #4f46e5;
+}
+
+/* DARK */
+body[data-theme="dark"] {
+  --bg-main: #0b0f1a;
+  --bg-card: #12172a;
+  --bg-card-hover: #161c35;
+  --bg-input: #0f1424;
+
+  --border-soft: rgba(255,255,255,0.08);
+
+  --text-main: #e5e7eb;
+  --text-muted: #9ca3af;
+
+  --accent-purple: #7c5cff;
+  --accent-purple-strong: #4f46e5;
+}
+
+/* ======================================================
+   PAGE LAYOUT
+====================================================== */
+.scan-page {
+  padding: 24px 32px;
+  min-height: 100vh;
+  background: var(--bg-main);
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  color: var(--text-main);
+}
+
+/* ======================================================
+   HEADER
+====================================================== */
+.scan-title {
+  margin: 0;
+  font-size: 26px;
+  font-weight: 700;
+  color: var(--text-main);
+}
+
+.scan-breadcrumb {
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+/* ======================================================
+   FORM
+====================================================== */
+.scan-form {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+/* ======================================================
+   TARGET CARD
+====================================================== */
+.scan-target-card {
+  background: var(--bg-card);
+  border-radius: 16px;
+  padding: 20px 24px;
+  border: 1px solid var(--border-soft);
+}
+
+.scan-label {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-main);
+  margin-bottom: 8px;
+}
+
+.scan-target-input-row {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+}
+
+
+.scan-target-input {
+  flex: 1;
+  padding: 12px 18px;
+  border-radius: 999px;
+  border: 1.5px solid var(--border-soft);
+  background: var(--bg-input);
+  color: var(--text-main);
+  font-size: 15px;
+  outline: none;
+}
+
+.scan-target-input::placeholder {
+  color: var(--text-muted);
+}
+
+.scan-target-input:focus {
+  border-color: var(--accent-purple);
+  box-shadow: 0 0 0 2px rgba(124,92,255,0.35);
+}
+
+/* ======================================================
+   BUTTONS
+====================================================== */
+.scan-start-button {
+  border-radius: 999px;
+  border: none;
+  padding: 12px 28px;
+
+  font-size: 15px;
+  font-weight: 700;
+
+  cursor: pointer;
+
+  /* ✅ ALWAYS VISIBLE */
+  background: linear-gradient(
+    135deg,
+    var(--accent-purple),
+    var(--accent-purple-strong)
+  );
+  color: #ffffff;
+
+  min-width: 150px;
+  box-shadow: 0 8px 22px rgba(124,92,255,0.45);
+
+  transition: all 0.25s ease;
+}
+.scan-start-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 30px rgba(124,92,255,0.55);
+}
+
+/* ======================================================
+   ALERTS
+====================================================== */
+.scan-alert {
+  margin-top: 12px;
+  padding: 10px 14px;
+  border-radius: 12px;
+  font-size: 13px;
+}
+
+.scan-alert-error {
+  background: rgba(239,68,68,0.15);
+  color: #fca5a5;
+  border: 1px solid rgba(239,68,68,0.3);
+}
+
+.scan-alert-success {
+  background: rgba(34,197,94,0.15);
+  color: #86efac;
+  border: 1px solid rgba(34,197,94,0.3);
+}
+
+/* ======================================================
+   SCAN MODE
+====================================================== */
+.scan-mode-section {
+  background: var(--bg-card);
+  border-radius: 16px;
+  padding: 20px 24px;
+  border: 1px solid var(--border-soft);
+}
+
+.scan-mode-header h2 {
+  font-size: 17px;
+  font-weight: 600;
+  color: var(--text-main);
+}
+
+.scan-mode-header p {
+  font-size: 13px;
+  color: var(--text-muted);
+}
+
+.scan-mode-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+  gap: 24px; /* ⬅ more breathing room */
+  margin-top: 16px;
+}
+
+
+/* ======================================================
+   MODE CARDS
+====================================================== */
+.scan-mode-card {
+  border-radius: 18px;
+  padding: 14px 12px;
+  min-height: 170px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; /* ⬅ balanced layout */
+
+  border: 1px solid var(--border-soft);
+  background: var(--bg-input);
+  color: var(--text-main);
+
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+
+.scan-mode-card:hover {
+  background: var(--bg-card-hover);
+  border-color: var(--accent-purple);
+}
+
+.scan-mode-card-active {
+  border-color: var(--accent-purple);
+  background: linear-gradient(
+    135deg,
+    rgba(124,92,255,0.18),
+    rgba(79,70,229,0.18)
+  );
+  box-shadow: 0 12px 32px rgba(124,92,255,0.35);
+  transform: translateY(-3px);
+}
+
+
+/* ======================================================
+   MODE TEXT
+====================================================== */
+.scan-mode-title {
+  font-size: 16px;
+  font-weight: 700;
+  margin-bottom: 6px;
+  color: var(--text-main);
+}
+
+.scan-mode-description {
+  font-size: 13px;
+  line-height: 1.5;
+  color: var(--text-muted);
+  margin-bottom: 12px;
+}
+
+.scan-mode-meta {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--accent-purple);
+}
+
+
+/* ======================================================
+   STATUS CARD
+====================================================== */
+.scan-status-card {
+  background: var(--bg-card);
+  border-radius: 16px;
+  padding: 20px 24px;
+  border: 1px solid var(--border-soft);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.scan-stop-button {
+  border-radius: 999px;
+  border: none;
+  padding: 8px 20px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  background: rgba(239,68,68,0.2);
+  color: #fca5a5;
+}
+
+.scan-stop-button:hover {
+  background: rgba(239,68,68,0.35);
+}
+
+/* ======================================================
+   PROGRESS
+====================================================== */
+.scan-progress-bar {
+  height: 12px;
+  border-radius: 999px;
+  background: var(--bg-input);
+  overflow: hidden;
+}
+
+.scan-progress-fill {
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    var(--accent-purple),
+    var(--accent-purple-strong)
+  );
+}
+
+/* ======================================================
+   LOADING OVERLAY
+====================================================== */
+.scan-loading-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(11,15,26,0.75);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 50;
+}
+/* ======================================================
+   FORCE START SCAN BUTTON VISIBILITY (FINAL FIX)
+====================================================== */
+
+.scan-start-button {
+  background: linear-gradient(
+    135deg,
+    #7c5cff,
+    #4f46e5
+  ) !important;
+
+  color: #ffffff !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+
+  box-shadow: 0 10px 26px rgba(124,92,255,0.45) !important;
+  border: none !important;
+}

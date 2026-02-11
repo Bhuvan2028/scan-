@@ -63,7 +63,7 @@ export function JellyThemeToggle() {
                     opacity: isDark ? 0.3 : 0,
                     scale: isDark ? 1.5 : 0.8
                 }}
-                className="absolute inset-0 bg-blue-500/20 blur-xl rounded-full -z-10 pointer-events-none"
+                className="absolute inset-0 bg-purple-500/20 blur-xl rounded-full -z-10 pointer-events-none"
             />
         </div>
     )

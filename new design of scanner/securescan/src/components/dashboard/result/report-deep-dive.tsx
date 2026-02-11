@@ -70,46 +70,45 @@ export function ReportDeepDive({ scan }: ReportDeepDiveProps) {
     const mediumCount = findings.filter((f: any) => f.severity === "medium").length
     const lowCount = findings.filter((f: any) => f.severity === "low").length
 
-    // Map real data if available
     const dynamicSections = [
         {
             id: "summary",
-            name: "Findings Summary",
+            name: "Audit_Summary",
             icon: Layout,
             data: [
-                { type: "Critical", count: criticalCount, color: "bg-black" },
-                { type: "High", count: highCount, color: "bg-slate-700" },
-                { type: "Medium", count: mediumCount, color: "bg-slate-400" },
-                { type: "Low", count: lowCount, color: "bg-slate-200" }
+                { type: "CRITICAL", count: criticalCount, color: "bg-red-600" },
+                { type: "HIGH_RISK", count: highCount, color: "bg-orange-500" },
+                { type: "MEDIUM", count: mediumCount, color: "bg-slate-400" },
+                { type: "LOW_INFO", count: lowCount, color: "bg-slate-200" }
             ]
         },
         {
             id: "subdomains",
-            name: "Subdomains",
+            name: "SUBDOMAINS",
             icon: Hash,
             data: results.subdomains || []
         },
         {
             id: "ports",
-            name: "Open Ports",
+            name: "PORT_TELEMETRY",
             icon: Terminal,
-            data: results.openPorts?.map((p: any) => `${p.port}/TCP (${p.service || "Unknown"})`) || []
+            data: results.openPorts?.map((p: any) => `${p.port}/TCP :: ${p.service?.toUpperCase() || "UNKNOWN"}`) || []
         },
         {
             id: "hosts",
-            name: "Active Hosts",
+            name: "HOST_INDEX",
             icon: HardDrive,
             data: results.hosts || []
         },
         {
             id: "osint",
-            name: "OSINT & Web Data",
+            name: "OSINT_INTEL",
             icon: Search,
             data: [
-                `Technologies identified: ${results.technologies?.length || 0}`,
-                `OSINT records found: ${results.osint?.length || 0}`,
-                `Web endpoints discovered: ${results.webData?.length || 0}`,
-                `Cloud footprint: ${results.hosts?.some((h: string) => h.includes("amazon") || h.includes("google") || h.includes("azure")) ? "Multi-Cloud Detected" : "On-Premise / Hidden"}`
+                `TECH_VECTORS::${results.technologies?.length || 0}`,
+                `OSINT_RECORDS::${results.osint?.length || 0}`,
+                `WEB_ENDPOINTS::${results.webData?.length || 0}`,
+                `CLOUD_HOSTING::${results.hosts?.some((h: string) => h.includes("amazon") || h.includes("google") || h.includes("azure")) ? "PROVIDER_DETECTED" : "UNIDENTIFIED"}`
             ]
         }
     ]
@@ -117,14 +116,13 @@ export function ReportDeepDive({ scan }: ReportDeepDiveProps) {
     const activeSection = dynamicSections.find(s => s.id === activeTab) || dynamicSections[0]
 
     return (
-        <div className="bg-white rounded-[2.5rem] border border-slate-100 overflow-hidden shadow-sm">
-            <div className="grid grid-cols-1 md:grid-cols-12 min-h-[500px]">
+        <div className="bg-white rounded-none border border-slate-200 overflow-hidden shadow-[0_4px_20px_-4px_rgba(0,0,0,0.08)]">
+            <div className="grid grid-cols-1 md:grid-cols-12 min-h-[600px]">
                 {/* Navigation Sidebar */}
-                <div className="md:col-span-4 lg:col-span-3 border-r border-slate-100 bg-slate-50/40 backdrop-blur-xl p-6 md:p-8 space-y-2 relative">
-                    <div className="absolute inset-0 bg-gradient-to-b from-blue-50/10 to-transparent pointer-events-none" />
-                    <div className="mb-8 relative z-10">
-                        <span className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400 block mb-4">Report explorer</span>
-                        <h3 className="text-xl font-bold text-slate-900 tracking-tight">Intelligence Log</h3>
+                <div className="md:col-span-4 lg:col-span-3 border-r border-slate-200 bg-slate-50/20 p-8 space-y-3 relative">
+                    <div className="mb-12 relative z-10">
+                        <span className="text-[9px] font-black uppercase tracking-[0.4em] text-primary block mb-3 font-mono">INTEL_NAVIGATION</span>
+                        <h3 className="text-xl font-black text-slate-950 tracking-tighter uppercase">Query_Buffer</h3>
                     </div>
 
                     {dynamicSections.map((section) => (
@@ -132,68 +130,84 @@ export function ReportDeepDive({ scan }: ReportDeepDiveProps) {
                             key={section.id}
                             onClick={() => setActiveTab(section.id)}
                             className={cn(
-                                "w-full flex items-center gap-4 px-5 py-4 rounded-2xl transition-all duration-300 font-bold text-sm relative z-10",
+                                "w-full flex items-center justify-between px-6 py-5 rounded-none border transition-all duration-300 font-black text-[10px] tracking-widest relative z-10 uppercase",
                                 activeTab === section.id
-                                    ? "bg-slate-900 text-white shadow-xl shadow-slate-200 ring-4 ring-slate-900/5 translate-x-1"
-                                    : "text-slate-400 hover:text-slate-600 hover:bg-white/60 hover:translate-x-1"
+                                    ? "bg-slate-950 text-white border-slate-950 shadow-[5px_5px_0px_rgba(0,0,0,0.1)] translate-x-1"
+                                    : "text-slate-500 border-slate-200 hover:text-slate-950 hover:border-slate-950 bg-white"
                             )}
                         >
-                            <section.icon size={18} className={cn("transition-transform", activeTab === section.id ? "scale-110" : "group-hover:scale-110")} />
-                            {section.name}
+                            <div className="flex items-center gap-4">
+                                <section.icon size={14} strokeWidth={2.5} />
+                                {section.name}
+                            </div>
+                            {activeTab === section.id && <div className="size-1 bg-primary" />}
                         </button>
                     ))}
                 </div>
 
                 {/* Content Area */}
-                <div className="md:col-span-8 lg:col-span-9 p-8 md:p-12 bg-white">
+                <div className="md:col-span-8 lg:col-span-9 p-12 md:p-16 bg-white relative">
+                    {/* Surgical Decoration */}
+                    <div className="absolute top-0 right-0 w-32 h-32 border-t border-r border-slate-50 pointer-events-none" />
+
                     <AnimatePresence mode="wait">
                         <motion.div
                             key={activeTab}
-                            initial={{ opacity: 0, x: 20 }}
-                            animate={{ opacity: 1, x: 0 }}
-                            exit={{ opacity: 0, x: -20 }}
-                            transition={{ duration: 0.3 }}
+                            initial={{ opacity: 0, y: 10 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            exit={{ opacity: 0, y: -10 }}
+                            transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
                             className="h-full flex flex-col"
                         >
                             {activeTab === "summary" ? (
-                                <div className="space-y-12">
-                                    <div className="grid grid-cols-2 lg:grid-cols-4 gap-6">
+                                <div className="space-y-16">
+                                    <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
                                         {activeSection.data.map((item: any) => (
-                                            <div key={item.type} className="p-6 rounded-3xl bg-slate-50 border border-slate-100/50">
-                                                <span className="text-[10px] font-bold uppercase tracking-widest text-slate-400 block mb-2">{item.type}</span>
-                                                <div className="flex items-center gap-3">
-                                                    <div className={cn("size-2 rounded-full", item.color)} />
-                                                    <span className="text-3xl font-black text-slate-900">{item.count}</span>
+                                            <div key={item.type} className="p-8 border border-slate-200 bg-white hover:border-slate-950 shadow-sm transition-colors group">
+                                                <span className="text-[9px] font-black uppercase tracking-[0.2em] text-slate-400 block mb-4 font-mono">{item.type}</span>
+                                                <div className="flex items-center justify-between">
+                                                    <span className="text-4xl font-black text-slate-950 tabular-nums">{item.count}</span>
+                                                    <div className={cn("size-2 transition-all group-hover:scale-125", item.color)} />
                                                 </div>
                                             </div>
                                         ))}
                                     </div>
 
-                                    <div className="space-y-6">
-                                        <h4 className="text-lg font-bold text-slate-900">Security Verdict</h4>
+                                    <div className="space-y-8">
+                                        <div className="flex items-center gap-3">
+                                            <div className="w-10 h-[1px] bg-slate-950" />
+                                            <h4 className="text-xs font-black text-slate-950 uppercase tracking-[0.4em]">Audit_Verdict_Report</h4>
+                                        </div>
+
                                         <div className={cn(
-                                            "p-8 rounded-3xl border flex gap-6 items-start text-white shadow-xl shadow-slate-200/50",
+                                            "p-10 border-2 flex gap-10 items-start transition-all",
                                             (criticalCount > 0 || highCount > 0)
-                                                ? "bg-rose-950 border-rose-900"
-                                                : "bg-slate-900 border-slate-900"
+                                                ? "bg-white border-red-600 shadow-[10px_10px_0px_rgba(220,38,38,0.1)]"
+                                                : "bg-white border-slate-950 shadow-[10px_10px_0px_rgba(0,0,0,0.1)]"
                                         )}>
-                                            <div className="p-3 bg-white/10 rounded-2xl text-white backdrop-blur-md">
+                                            <div className={cn(
+                                                "p-4 border transition-colors",
+                                                (criticalCount > 0 || highCount > 0) ? "bg-red-600 border-red-600 text-white" : "bg-slate-950 border-slate-950 text-white"
+                                            )}>
                                                 {(criticalCount > 0 || highCount > 0)
-                                                    ? <AlertCircle size={24} />
-                                                    : <CheckCircle2 size={24} />
+                                                    ? <AlertCircle size={32} strokeWidth={2.5} />
+                                                    : <CheckCircle2 size={32} strokeWidth={2.5} />
                                                 }
                                             </div>
                                             <div>
-                                                <p className="text-white font-semibold mb-2 text-lg">
+                                                <p className={cn(
+                                                    "font-black mb-4 text-2xl uppercase tracking-tighter",
+                                                    (criticalCount > 0 || highCount > 0) ? "text-red-600" : "text-slate-950"
+                                                )}>
                                                     {(criticalCount > 0 || highCount > 0)
-                                                        ? "Vulnerabilities Detected"
-                                                        : "Infrastructure is Stable"
+                                                        ? "VULNERABILITIES_IDENTIFIED::HIGH_RISK"
+                                                        : "INFRASTRUCTURE_STABLE::NOMINAL"
                                                     }
                                                 </p>
-                                                <p className="text-white/70 leading-relaxed font-light">
+                                                <p className="text-slate-600 leading-relaxed font-bold font-mono text-[11px] uppercase opacity-80">
                                                     {(criticalCount > 0 || highCount > 0)
-                                                        ? `Our audit discovered ${criticalCount} critical and ${highCount} high-level entry points. Immediate remediation is recommended to ensure perimeter integrity.`
-                                                        : "Our autonomous agents found no critical entry points. The overall perimeter security surpasses industry benchmarks for this infrastructure tier."
+                                                        ? `// SYSTEM_SCAN: ${criticalCount} CRITICAL, ${highCount} HIGH_LEVEL THREATS DETECTED. PERIMETER INTEGRITY COMPROMISED. IMMEDIATE REMEDIATION CALIBRATION REQUIRED.`
+                                                        : "// SYSTEM_SCAN: NO CRITICAL VECTORS IDENTIFIED. INFRASTRUCTURE ALIGNED WITH ENTERPRISE SECURITY STANDARDS. PERIMETER INTEGRITY: 100%."
                                                     }
                                                 </p>
                                             </div>
@@ -201,27 +215,30 @@ export function ReportDeepDive({ scan }: ReportDeepDiveProps) {
                                     </div>
                                 </div>
                             ) : (
-                                <div className="space-y-6 flex-1 flex flex-col">
-                                    <div className="flex items-center justify-between border-b border-slate-100 pb-6 mb-8">
-                                        <div className="flex flex-col gap-1">
-                                            <h4 className="text-2xl font-bold text-slate-900 tracking-tight">
+                                <div className="space-y-10 flex-1 flex flex-col">
+                                    <div className="flex items-center justify-between border-b border-slate-200 pb-10">
+                                        <div className="flex flex-col gap-2">
+                                            <h4 className="text-3xl font-black text-slate-950 tracking-tighter uppercase">
                                                 {activeSection.name}
                                             </h4>
-                                            <span className="text-xs font-bold text-slate-400 uppercase tracking-widest">
-                                                {activeSection.data.length} Total Items
-                                            </span>
+                                            <div className="flex items-center gap-4">
+                                                <div className="w-8 h-[1px] bg-slate-200" />
+                                                <span className="text-[10px] font-black text-slate-500 uppercase tracking-[0.2em] font-mono">
+                                                    COUNT::{activeSection.data.length.toString().padStart(3, '0')}
+                                                </span>
+                                            </div>
                                         </div>
                                         <button
                                             onClick={() => setShowJson(!showJson)}
                                             className={cn(
-                                                "flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-black uppercase tracking-widest transition-all",
+                                                "flex items-center gap-3 px-6 py-3 border font-black text-[10px] uppercase tracking-widest transition-all",
                                                 showJson
-                                                    ? "bg-slate-900 text-white shadow-lg"
-                                                    : "bg-slate-50 text-slate-400 hover:text-slate-600 border border-slate-100"
+                                                    ? "bg-slate-950 text-white border-slate-950"
+                                                    : "bg-white text-slate-500 border-slate-200 hover:text-slate-950 hover:border-slate-950 shadow-sm"
                                             )}
                                         >
-                                            <Code2 size={14} />
-                                            {showJson ? "Back to UI" : "View as JSON"}
+                                            <Code2 size={12} strokeWidth={2.5} />
+                                            {showJson ? "Render_UI" : "Query_JSON"}
                                         </button>
                                     </div>
 
@@ -233,32 +250,37 @@ export function ReportDeepDive({ scan }: ReportDeepDiveProps) {
                                                     initial={{ opacity: 0, scale: 0.98 }}
                                                     animate={{ opacity: 1, scale: 1 }}
                                                     exit={{ opacity: 0, scale: 0.98 }}
-                                                    className="bg-slate-900 rounded-3xl p-8 font-mono text-sm text-blue-400 overflow-auto max-h-[400px] border border-slate-800 shadow-2xl"
+                                                    className="bg-slate-50 border border-slate-200 rounded-none p-10 font-mono text-xs text-slate-950 overflow-auto max-h-[500px] shadow-inner"
                                                 >
-                                                    <pre>{JSON.stringify(activeSection.data, null, 2)}</pre>
+                                                    <pre className="whitespace-pre-wrap uppercase tracking-tighter">{JSON.stringify(activeSection.data, null, 4)}</pre>
                                                 </motion.div>
                                             ) : (
                                                 <motion.div
                                                     key="ui-view"
-                                                    initial={{ opacity: 0, y: 10 }}
-                                                    animate={{ opacity: 1, y: 0 }}
-                                                    className="grid gap-4"
+                                                    initial={{ opacity: 0 }}
+                                                    animate={{ opacity: 1 }}
+                                                    className="grid gap-3"
                                                 >
                                                     {activeSection.data.length > 0 ? (
                                                         activeSection.data.map((item: any, i: number) => (
                                                             <motion.div
                                                                 key={i}
-                                                                initial={{ opacity: 0, y: 10 }}
-                                                                animate={{ opacity: 1, y: 0 }}
-                                                                transition={{ delay: i * 0.05 }}
-                                                                className="flex items-center justify-between p-5 rounded-2xl bg-slate-50 hover:bg-slate-100 transition-colors cursor-default group border border-transparent hover:border-slate-200"
+                                                                initial={{ opacity: 0, x: -10 }}
+                                                                animate={{ opacity: 1, x: 0 }}
+                                                                transition={{ delay: i * 0.03 }}
+                                                                className="flex items-center justify-between p-6 rounded-none border border-slate-100 hover:border-slate-950 transition-all bg-white group shadow-sm hover:shadow-md"
                                                             >
-                                                                <span className="text-slate-700 font-mono text-sm">{item}</span>
-                                                                <div className="px-3 py-1 rounded-lg bg-white text-[10px] font-bold text-slate-400 opacity-0 group-hover:opacity-100 transition-opacity uppercase tracking-widest shadow-sm">Verified</div>
+                                                                <div className="flex items-center gap-4">
+                                                                    <div className="size-1 bg-primary opacity-0 group-hover:opacity-100 transition-opacity" />
+                                                                    <span className="text-slate-950 font-black font-mono text-sm uppercase tracking-tighter">{item}</span>
+                                                                </div>
+                                                                <span className="text-[9px] font-black text-slate-400 uppercase tracking-widest font-mono opacity-0 group-hover:opacity-100 transition-opacity">VERIFIED::LOD_01</span>
                                                             </motion.div>
                                                         ))
                                                     ) : (
-                                                        <p className="text-slate-400 font-light italic py-12 text-center">No data discoverable for this segment.</p>
+                                                        <div className="py-24 text-center border border-dashed border-slate-200 bg-slate-50/20 shadow-inner">
+                                                            <p className="text-slate-400 font-black text-[10px] uppercase tracking-[0.3em]">NO_DATA_BUFFERED_FOR_THIS_NODE</p>
+                                                        </div>
                                                     )}
                                                 </motion.div>
                                             )}
