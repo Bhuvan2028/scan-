@@ -2,15 +2,18 @@
 
 @theme {
   --font-sans: var(--font-inter);
-  
+
   --color-border: hsl(214.3 31.8% 91.4%);
   --color-input: hsl(214.3 31.8% 91.4%);
   --color-ring: hsl(215 20.2% 65.1%);
   --color-background: hsl(0 0% 100%);
   --color-foreground: hsl(222.2 47.4% 11.2%);
 
-  --color-primary: hsl(221.2 83.2% 53.3%);
-  --color-primary-foreground: hsl(210 40% 98%);
+  --color-primary: #a146a1;
+  --color-primary-foreground: hsl(0 0% 100%);
+
+  --color-brand: #a146a1;
+  --color-brand-light: #c084fc;
 
   --color-secondary: hsl(210 40% 96.1%);
   --color-secondary-foreground: hsl(222.2 47.4% 11.2%);
@@ -21,7 +24,23 @@
 
 @layer base {
   body {
-    @apply bg-white text-slate-900;
+    @apply bg-slate-50 text-slate-900;
+  }
+}
+
+@layer utilities {
+  @keyframes vertical-scroll {
+    from {
+      transform: translateY(0);
+    }
+
+    to {
+      transform: translateY(-50%);
+    }
+  }
+
+  .animate-vertical-scroll {
+    animation: vertical-scroll 20s linear infinite;
   }
 }
 

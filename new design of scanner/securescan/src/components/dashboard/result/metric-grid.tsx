@@ -60,7 +60,6 @@ export function MetricGrid({ scan }: MetricGridProps) {
     const countHits = (keywords: string[]) =>
         findings.filter(f => new RegExp(keywords.join('|'), 'i').test(f.title || f.raw || "")).length
 
-    // Define the structure of our metrics based on backend logic
     const runtimeMetrics: Metric[] = [
         {
             name: "DNS Security",
@@ -121,48 +120,72 @@ export function MetricGrid({ scan }: MetricGridProps) {
     const displayMetrics = scan ? runtimeMetrics : metrics
 
     return (
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
             {displayMetrics.map((metric, index) => {
                 const colors = colorMap[metric.color] || colorMap.blue
                 return (
-                    <TiltCard key={metric.name} degree={10}>
+                    <TiltCard
+                        key={metric.name}
+                        degree={15}
+                        className="h-full"
+                    >
                         <motion.div
-                            initial={{ opacity: 0, y: 20 }}
+                            initial={{ opacity: 0, y: 10 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ delay: index * 0.05 }}
-                            className="bg-white p-8 rounded-3xl border border-slate-100 hover:border-slate-200 transition-all group hover:shadow-xl hover:shadow-slate-200/20 h-full"
+                            className="bg-white p-6 rounded-none border border-slate-200 hover:border-slate-950 transition-all group relative overflow-hidden h-full flex flex-col"
                         >
-                            <div className="flex items-center justify-between mb-6">
+                            {/* Surgical Accents */}
+                            <div className="absolute top-0 right-0 w-6 h-[1px] bg-slate-200 group-hover:bg-slate-950 transition-colors" />
+                            <div className="absolute top-0 right-0 w-[1px] h-6 bg-slate-200 group-hover:bg-slate-950 transition-colors" />
+                            <div className="absolute bottom-0 left-0 w-4 h-[1px] bg-slate-100 group-hover:bg-slate-950 transition-colors" />
+
+                            {/* Technical Telemetry Noise */}
+                            <div className="absolute top-2 left-2 flex flex-col gap-0.5 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-700">
+                                <span className="text-[5px] font-mono text-slate-300">NODE::{(index + 1).toString().padStart(2, '0')}</span>
+                            </div>
+
+                            <div className="flex items-center justify-between mb-4 flex-1">
                                 <div className={cn(
-                                    "p-3 rounded-2xl transition-all duration-300",
-                                    colors.bg,
-                                    colors.text,
-                                    "group-hover:scale-110"
+                                    "p-2 border transition-all duration-300",
+                                    "border-slate-200 bg-slate-50 text-slate-500 group-hover:border-slate-950 group-hover:bg-white group-hover:text-slate-950 shadow-sm"
                                 )}>
-                                    <metric.icon size={24} />
+                                    <metric.icon size={16} strokeWidth={2.5} />
                                 </div>
                                 <div className="text-right">
-                                    <span className="text-xs font-black uppercase tracking-widest text-slate-400 mb-1 block">Rating</span>
-                                    <span className={cn(
-                                        "text-2xl font-bold",
-                                        metric.score >= 90 ? "text-slate-900" : "text-slate-500"
-                                    )}>
+                                    <div className="flex items-center justify-end gap-1.5 mb-0.5">
+                                        <div className={cn(
+                                            "size-1 rounded-full animate-pulse",
+                                            metric.score > 0 ? "bg-emerald-500" : "bg-slate-300"
+                                        )} />
+                                        <span className="text-[8px] font-black uppercase tracking-[0.2em] text-slate-400 font-mono">VAL::OUT</span>
+                                    </div>
+                                    <span className="text-3xl lg:text-4xl font-black tracking-tighter tabular-nums text-slate-950">
                                         {metric.score}%
                                     </span>
                                 </div>
                             </div>
 
-                            <h3 className="text-lg font-semibold text-slate-900 mb-2 truncate">{metric.name}</h3>
-                            <div className="w-full bg-slate-50 h-1.5 rounded-full overflow-hidden">
-                                <motion.div
-                                    initial={{ width: 0 }}
-                                    animate={{ width: `${metric.score}%` }}
-                                    transition={{ duration: 1.5, delay: 0.5 + index * 0.05 }}
-                                    className={cn(
-                                        "h-full rounded-full transition-colors",
-                                        metric.score >= 70 ? "bg-slate-900" : "bg-slate-400"
-                                    )}
-                                />
+                            <div className="mt-2">
+                                <h3 className="font-black text-slate-950 uppercase tracking-wider mb-3 text-[13px]">
+                                    {metric.name}
+                                </h3>
+
+                                <div className="w-full bg-slate-50 h-[2px] rounded-none overflow-hidden mb-1.5">
+                                    <motion.div
+                                        initial={{ width: 0 }}
+                                        animate={{ width: `${metric.score}%` }}
+                                        transition={{ duration: 1.5, delay: 0.5 + index * 0.05, ease: [0.16, 1, 0.3, 1] }}
+                                        className={cn(
+                                            "h-full rounded-none transition-colors",
+                                            metric.score >= 70 ? "bg-slate-950" : "bg-slate-300"
+                                        )}
+                                    />
+                                </div>
+                                <div className="flex justify-between text-[7px] font-black text-slate-400 uppercase tracking-widest font-mono">
+                                    <span>THR</span>
+                                    <span>CAL::{metric.score}/100</span>
+                                </div>
                             </div>
                         </motion.div>
                     </TiltCard>

@@ -42,48 +42,46 @@ interface ScanTypeSelectorProps {
 
 export function ScanTypeSelector({ selected, onSelect }: ScanTypeSelectorProps) {
     return (
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {scanTypes.map((type) => {
                 const isSelected = selected === type.id
                 return (
                     <motion.div
                         key={type.id}
                         onClick={() => onSelect(type.id)}
-                        whileHover={{ scale: 1.01 }}
-                        whileTap={{ scale: 0.99 }}
+                        whileHover={{ y: -2 }}
+                        whileTap={{ scale: 0.98 }}
                         className={cn(
-                            "p-6 rounded-2xl border-2 transition-all cursor-pointer group relative overflow-hidden",
+                            "p-10 rounded-none border transition-all cursor-pointer group relative overflow-hidden",
                             isSelected
-                                ? "border-slate-900 bg-slate-50/30 shadow-md shadow-slate-900/5"
-                                : "border-slate-100 bg-white hover:border-slate-200"
+                                ? "border-slate-950 bg-slate-50/50 shadow-[0_10px_40px_rgba(0,0,0,0.12)]"
+                                : "border-slate-200 bg-white hover:border-slate-950 shadow-[0_4px_20px_-4px_rgba(0,0,0,0.05)] hover:shadow-[0_8px_30px_rgb(0,0,0,0.06)]"
                         )}
                     >
-                        <div className="flex items-start justify-between mb-4 relative z-10">
+                        {/* Selector indicator */}
+                        {isSelected && (
+                            <div className="absolute top-0 left-0 w-2 h-full bg-slate-950" />
+                        )}
+
+                        <div className="flex items-start justify-between mb-8 relative z-10">
                             <div className={cn(
-                                "p-3 rounded-xl transition-colors",
-                                isSelected ? "bg-slate-900 text-white" : "bg-slate-50 text-slate-500 group-hover:bg-slate-100"
+                                "p-3 border transition-all duration-300",
+                                isSelected ? "border-slate-950 bg-slate-950 text-white" : "border-slate-200 bg-slate-50 text-slate-500 group-hover:border-slate-950 group-hover:bg-white group-hover:text-slate-950"
                             )}>
-                                <type.icon size={20} />
+                                <type.icon size={20} strokeWidth={2.5} />
                             </div>
-                            <div className="flex items-center gap-1.5 text-xs font-bold text-slate-400 group-hover:text-slate-600 transition-colors uppercase tracking-widest">
-                                <Clock size={12} />
-                                {type.duration}
+                            <div className="flex items-center gap-2 text-[10px] font-black text-slate-400 group-hover:text-slate-900 transition-colors uppercase tracking-[0.2em] font-mono">
+                                <Clock size={10} />
+                                EST::{type.duration.replace(' min', 'M')}
                             </div>
                         </div>
 
                         <div className="relative z-10">
-                            <h3 className="text-lg font-semibold text-slate-900 mb-2">{type.title}</h3>
-                            <p className="text-sm text-slate-500 font-light leading-relaxed">
-                                {type.description}
+                            <h3 className="text-xl font-black text-slate-950 mb-3 tracking-tighter uppercase">{type.title}</h3>
+                            <p className="text-[11px] text-slate-600 font-bold font-mono leading-relaxed uppercase opacity-80 group-hover:opacity-100 transition-opacity">
+                                // {type.description}
                             </p>
                         </div>
-
-                        {isSelected && (
-                            <motion.div
-                                layoutId="active-bg"
-                                className="absolute inset-0 bg-slate-900/5 z-0"
-                            />
-                        )}
                     </motion.div>
                 )
             })}

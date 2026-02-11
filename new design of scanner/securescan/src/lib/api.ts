@@ -8,7 +8,7 @@ export interface Scan {
     _id: string;
     domain: string;
     mode: string;
-    status: 'pending' | 'running' | 'completed' | 'failed';
+    status: 'pending' | 'running' | 'completed' | 'failed' | 'stopped';
     progressPct: number;
     currentModule?: string;
     score?: number;
@@ -18,6 +18,30 @@ export interface Scan {
     error?: string;
     createdAt: string;
     completedAt?: string;
+}
+
+export interface AssessmentItem {
+    id: number;
+    category: string;
+    questions: {
+        id: number;
+        text: string;
+        options: {
+            key: string;
+            text: string;
+            score: number;
+        }[];
+    }[];
+}
+
+export interface AssessmentResult {
+    _id: string;
+    userId?: string;
+    domain?: string;
+    responses: Record<string, string>;
+    score: number;
+    grade: string;
+    createdAt: string;
 }
 
 export const api = {
@@ -81,6 +105,48 @@ export const api = {
             method: "POST",
         });
         if (!response.ok) throw new Error("Failed to stop scan");
+        return response.json();
+    },
+
+    /**
+     * Assessment: Fetch questions.
+     */
+    async getAssessmentQuestions(): Promise<AssessmentItem[]> {
+        const response = await fetch(`${API_URL}/assessments/questions`);
+        if (!response.ok) throw new Error("Failed to fetch assessment questions");
+        return response.json();
+    },
+
+    /**
+     * Assessment: Submit responses.
+     */
+    async submitAssessment(responses: Record<string, string>, domain?: string): Promise<{ success: boolean; assessmentId: string; score: number; grade: string }> {
+        const response = await fetch(`${API_URL}/assessments/submit`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ responses, domain }),
+        });
+        if (!response.ok) throw new Error("Failed to submit assessment");
+        return response.json();
+    },
+
+    /**
+     * Assessment: Get history.
+     */
+    async getAssessmentHistory(): Promise<AssessmentResult[]> {
+        const response = await fetch(`${API_URL}/assessments/history`);
+        if (!response.ok) throw new Error("Failed to fetch assessment history");
+        return response.json();
+    },
+
+    /**
+     * Assessment: Get details.
+     */
+    async getAssessmentDetails(id: string): Promise<AssessmentResult> {
+        const response = await fetch(`${API_URL}/assessments/${id}`);
+        if (!response.ok) throw new Error("Failed to fetch assessment details");
         return response.json();
     }
 };

@@ -21,8 +21,8 @@ export function ActiveAgentsBadge() {
             className="flex items-center gap-3 px-4 py-2 bg-white/5 backdrop-blur-xl border border-white/10 rounded-full shadow-2xl ring-1 ring-inset ring-white/5 pointer-events-none select-none"
         >
             <div className="relative">
-                <Users size={14} className="text-blue-400" />
-                <span className="absolute -top-1 -right-1 size-1.5 bg-blue-500 rounded-full animate-ping" />
+                <Users size={14} className="text-primary" />
+                <span className="absolute -top-1 -right-1 size-1.5 bg-primary rounded-full animate-ping" />
             </div>
             <div className="flex flex-col">
                 <span className="text-[10px] font-black uppercase tracking-widest text-slate-500 leading-none mb-0.5">Active Agents</span>

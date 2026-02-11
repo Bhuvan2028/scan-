@@ -70,10 +70,10 @@ export function CurtainMenu() {
                                             <Link
                                                 href={link.href}
                                                 onClick={() => setIsOpen(false)}
-                                                className="text-4xl md:text-6xl font-bold tracking-tight text-slate-900 hover:text-blue-600 transition-colors inline-flex items-center group"
+                                                className="text-4xl md:text-6xl font-bold tracking-tight text-slate-900 hover:text-primary transition-colors inline-flex items-center group"
                                             >
                                                 {link.name}
-                                                <ArrowRight className="ml-4 opacity-0 -translate-x-4 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300 size-8 text-blue-600" />
+                                                <ArrowRight className="ml-4 opacity-0 -translate-x-4 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300 size-8 text-primary" />
                                             </Link>
                                         </motion.div>
                                     ))}

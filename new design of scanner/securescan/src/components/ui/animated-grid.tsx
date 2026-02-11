@@ -9,7 +9,7 @@ export function AnimatedGridPattern() {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 0.5 }}
                 transition={{ duration: 1 }}
-                className="absolute inset-0 h-full w-full stroke-blue-100/30"
+                className="absolute inset-0 h-full w-full stroke-purple-100/30"
             >
                 <svg
                     aria-hidden="true"
@@ -54,7 +54,7 @@ export function AnimatedGridPattern() {
             </motion.div>
 
             {/* Aurora / Mesh Gradient Overlay */}
-            <div className="absolute -top-40 left-0 right-0 h-96 bg-blue-500/10 blur-[100px] rounded-full mix-blend-multiply opacity-20 animate-pulse" />
+            <div className="absolute -top-40 left-0 right-0 h-96 bg-purple-500/10 blur-[100px] rounded-full mix-blend-multiply opacity-20 animate-pulse" />
         </div>
     )
 }

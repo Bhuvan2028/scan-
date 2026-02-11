@@ -39,7 +39,7 @@ function HolographicArcs({ count = 15, isLow = false }) {
                     <bufferGeometry attach="geometry" onUpdate={(self) => self.setFromPoints(points)} />
                     <lineBasicMaterial
                         attach="material"
-                        color={i % 2 === 0 ? "#06b6d4" : "#8b5cf6"}
+                        color={i % 2 === 0 ? "#a146a1" : "#c084fc"}
                         transparent
                         opacity={0.3}
                     />
@@ -94,7 +94,7 @@ function HolographicGrid({ isLow = false }) {
                 </bufferGeometry>
                 <pointsMaterial
                     size={0.02}
-                    color="#155e75"
+                    color="#a146a1"
                     transparent
                     opacity={0.6}
                 />
@@ -121,9 +121,9 @@ function ThreatNodes({ count = 8, isLow = false }) {
                 <Float key={i} speed={2} rotationIntensity={2} floatIntensity={1}>
                     <mesh position={pos}>
                         <octahedronGeometry args={[0.08, 0]} />
-                        <meshBasicMaterial color={i % 2 === 0 ? "#ff3366" : "#06b6d4"} transparent opacity={0.6} />
+                        <meshBasicMaterial color={i % 2 === 0 ? "#a146a1" : "#c084fc"} transparent opacity={0.6} />
                         {/* Reduce shadow/light casting nodes on mobile */}
-                        {!isLow && <pointLight distance={1} intensity={2} color={i % 2 === 0 ? "#ff3366" : "#06b6d4"} />}
+                        {!isLow && <pointLight distance={1} intensity={2} color={i % 2 === 0 ? "#a146a1" : "#c084fc"} />}
                     </mesh>
                 </Float>
             ))}
@@ -144,7 +144,7 @@ function ShieldAura() {
         <Sphere ref={auraRef} args={[3.2, 32, 32]}>
             <meshStandardMaterial
                 name="ShieldAuraMaterial"
-                color="#06b6d4"
+                color="#a146a1"
                 transparent
                 opacity={0.03}
                 side={THREE.BackSide}
@@ -185,7 +185,7 @@ function HolographicGlobeInner({ isActive = false, profile }: { isActive?: boole
             {/* Inner Core - Technical Heart */}
             <Sphere ref={coreRef} args={[1.8, isLow ? 16 : 32, isLow ? 16 : 32]}>
                 <meshBasicMaterial
-                    color="#06b6d4"
+                    color="#a146a1"
                     wireframe={true}
                     transparent
                     opacity={0.3}
@@ -196,7 +196,7 @@ function HolographicGlobeInner({ isActive = false, profile }: { isActive?: boole
             <Sphere args={[2.5, isLow ? 24 : 48, isLow ? 24 : 48]}>
                 <meshStandardMaterial
                     color="#f8fafc"
-                    emissive="#06b6d4"
+                    emissive="#a146a1"
                     emissiveIntensity={0.5}
                     wireframe={true}
                     transparent
@@ -218,7 +218,7 @@ function HolographicGlobeInner({ isActive = false, profile }: { isActive?: boole
             <mesh ref={ringRef}>
                 <torusGeometry args={[3.1, 0.015, 12, isLow ? 60 : 120]} />
                 <meshBasicMaterial
-                    color="#8b5cf6"
+                    color="#c084fc"
                     transparent
                     opacity={0.4}
                 />
@@ -227,7 +227,7 @@ function HolographicGlobeInner({ isActive = false, profile }: { isActive?: boole
             <mesh rotation={[Math.PI / 4, 0, 0]}>
                 <torusGeometry args={[2.9, 0.01, 12, isLow ? 60 : 120]} />
                 <meshBasicMaterial
-                    color="#06b6d4"
+                    color="#a146a1"
                     transparent
                     opacity={0.3}
                 />
@@ -236,7 +236,7 @@ function HolographicGlobeInner({ isActive = false, profile }: { isActive?: boole
             {/* Vertical HUD Ring */}
             <mesh rotation={[0, Math.PI / 2, 0]}>
                 <torusGeometry args={[3.3, 0.005, 12, isLow ? 60 : 120]} />
-                <meshBasicMaterial color="#06b6d4" transparent opacity={0.2} />
+                <meshBasicMaterial color="#a146a1" transparent opacity={0.2} />
             </mesh>
         </group>
     )
@@ -254,8 +254,8 @@ export function HolographicGlobe({ isActive = false }: HolographicGlobeProps) {
             <Canvas gl={{ antialias: !profile.isLow, powerPreference: "high-performance", alpha: true }}>
                 <PerspectiveCamera makeDefault position={[0, 0, 8]} />
                 <ambientLight intensity={0.4} />
-                <pointLight position={[10, 10, 10]} intensity={1} color="#06b6d4" />
-                {!profile.isLow && <pointLight position={[-10, -10, -10]} intensity={0.8} color="#8b5cf6" />}
+                <pointLight position={[10, 10, 10]} intensity={1} color="#a146a1" />
+                {!profile.isLow && <pointLight position={[-10, -10, -10]} intensity={0.8} color="#c084fc" />}
 
                 {/* Scale stars count */}
                 <Stars radius={100} depth={50} count={profile.isLow ? 800 : 3000} factor={4} saturation={0} fade speed={0.8} />
@@ -270,7 +270,7 @@ export function HolographicGlobe({ isActive = false }: HolographicGlobeProps) {
                         <mesh rotation={[Math.PI / 2, 0, 0]}>
                             <circleGeometry args={[3.2, profile.isLow ? 32 : 64]} />
                             <meshBasicMaterial
-                                color="#06b6d4"
+                                color="#a146a1"
                                 transparent
                                 opacity={0.08}
                                 side={THREE.DoubleSide}

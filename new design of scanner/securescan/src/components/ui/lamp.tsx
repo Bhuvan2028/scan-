@@ -52,10 +52,10 @@ export const LampContainer = ({
                 </motion.div>
                 <div className="absolute top-1/2 h-48 w-full translate-y-12 scale-x-150 bg-slate-950 blur-2xl"></div>
                 <div className="absolute top-1/2 z-50 h-48 w-full bg-transparent opacity-10 backdrop-blur-md"></div>
-                <div className="absolute inset-auto z-50 h-36 w-[28rem] -translate-y-1/2 rounded-full bg-cyan-500 opacity-50 blur-[80px]"></div>
+                <div className="absolute inset-auto z-50 h-36 w-[28rem] -translate-y-1/2 rounded-full bg-purple-500 opacity-50 blur-[80px]"></div>
 
                 {/* Secondary Deep Glow */}
-                <div className="absolute inset-auto z-40 h-64 w-[40rem] -translate-y-1/2 rounded-full bg-cyan-900/20 blur-[120px]"></div>
+                <div className="absolute inset-auto z-40 h-64 w-[40rem] -translate-y-1/2 rounded-full bg-purple-900/20 blur-[120px]"></div>
 
                 <motion.div
                     initial={{ width: "8rem" }}
@@ -65,7 +65,7 @@ export const LampContainer = ({
                         duration: 0.8,
                         ease: "easeInOut",
                     }}
-                    className="absolute inset-auto z-30 h-36 w-64 -translate-y-[6rem] rounded-full bg-cyan-400 blur-2xl"
+                    className="absolute inset-auto z-30 h-36 w-64 -translate-y-[6rem] rounded-full bg-purple-400 blur-2xl"
                 ></motion.div>
 
                 {/* Noise Texture Layer */}
@@ -79,7 +79,7 @@ export const LampContainer = ({
                         duration: 0.8,
                         ease: "easeInOut",
                     }}
-                    className="absolute inset-auto z-50 h-0.5 w-[30rem] -translate-y-[7rem] bg-cyan-400 "
+                    className="absolute inset-auto z-50 h-0.5 w-[30rem] -translate-y-[7rem] bg-purple-400 "
                 ></motion.div>
 
                 <div className="absolute inset-auto z-40 h-44 w-full -translate-y-[12.5rem] bg-slate-950 "></div>

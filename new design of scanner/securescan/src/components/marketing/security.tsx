@@ -13,17 +13,17 @@ export function SecuritySection() {
 
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
                     <div className="p-6">
-                        <ShieldCheck className="size-12 text-blue-600 mx-auto mb-4" />
+                        <ShieldCheck className="size-12 text-primary mx-auto mb-4" />
                         <h3 className="font-semibold text-slate-900 mb-2">SOC2 Type II</h3>
                         <p className="text-sm text-slate-500">Independently audited and verified for security, availability, and confidentiality.</p>
                     </div>
                     <div className="p-6">
-                        <Lock className="size-12 text-blue-600 mx-auto mb-4" />
+                        <Lock className="size-12 text-primary mx-auto mb-4" />
                         <h3 className="font-semibold text-slate-900 mb-2">End-to-End Encryption</h3>
                         <p className="text-sm text-slate-500">Data is encrypted at rest and in transit using industry-standard protocols.</p>
                     </div>
                     <div className="p-6">
-                        <FileKey className="size-12 text-blue-600 mx-auto mb-4" />
+                        <FileKey className="size-12 text-primary mx-auto mb-4" />
                         <h3 className="font-semibold text-slate-900 mb-2">GDPR & CCPA Ready</h3>
                         <p className="text-sm text-slate-500">Built-in tools to help you manage data privacy and compliance requests.</p>
                     </div>

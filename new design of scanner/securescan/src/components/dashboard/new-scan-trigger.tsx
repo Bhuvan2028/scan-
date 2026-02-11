@@ -9,14 +9,13 @@ export function NewScanTrigger() {
     return (
         <Link href="/dashboard/assessments">
             <Button
-                className="h-14 px-8 bg-slate-900 hover:bg-slate-800 rounded-2xl shadow-lg shadow-slate-900/10 text-white font-semibold transition-all hover:scale-[1.02] active:scale-[0.98] group"
-                onClick={() => console.log("Initiating new scan...")}
+                className="h-14 px-8 bg-slate-950 hover:bg-black rounded-none shadow-[0_8px_30px_rgb(0,0,0,0.12)] text-white font-black uppercase tracking-[0.2em] transition-all hover:translate-y-[-2px] active:translate-y-[1px] group border border-slate-800"
             >
-                <div className="mr-3 p-1.5 bg-white/10 rounded-lg group-hover:bg-white/20 transition-colors">
-                    <Plus size={18} />
+                <div className="mr-4 p-1 bg-white/10 group-hover:bg-primary transition-colors">
+                    <Plus size={16} strokeWidth={3} />
                 </div>
-                Initiate New Scan
-                <Zap className="ml-3 size-4 text-slate-400" />
+                Access_Protocol
+                <Zap className="ml-4 size-4 text-primary group-hover:animate-pulse" />
             </Button>
         </Link>
     )

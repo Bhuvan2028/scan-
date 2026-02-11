@@ -82,7 +82,7 @@ export function Navbar() {
                                 }}
                                 className="flex items-center overflow-hidden whitespace-nowrap"
                             >
-                                <div className="w-px h-6 bg-slate-200 mx-2" />
+                                <div className="w-1 h-3 bg-primary mx-2" />
                                 <div className="flex items-center gap-1 px-2">
                                     {links.map((link, i) => (
                                         <motion.div
@@ -125,13 +125,13 @@ export function Navbar() {
                             </Button>
                         </Link>
                         <Link href="/signup">
-                            <Button size="sm" className="rounded-full px-6 bg-slate-900 hover:bg-slate-800 shadow-xl shadow-slate-200/20 text-white font-bold text-[10px] uppercase tracking-widest">
+                            <Button size="sm" className="rounded-full px-6 bg-slate-950 hover:bg-primary shadow-xl shadow-primary/10 text-white font-bold text-[10px] uppercase tracking-widest transition-all">
                                 Sign Up
                             </Button>
                         </Link>
                     </>
                 ) : (
-                    <div className="flex items-center gap-2 p-1.5 bg-white/80 backdrop-blur-md rounded-full shadow-lg shadow-slate-200/50 border border-slate-100">
+                    <div className="flex items-center gap-2 p-1.5 bg-white/80 backdrop-blur-md rounded-full shadow-lg shadow-primary/20 border border-slate-100">
                         <Link href="/login">
                             <Button variant="ghost" size="sm" className="text-slate-400 hover:text-rose-600 rounded-full text-[10px] font-bold uppercase tracking-widest px-6 h-9 transition-colors">
                                 Sign Out
