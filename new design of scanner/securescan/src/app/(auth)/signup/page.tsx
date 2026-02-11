@@ -3,13 +3,65 @@
 import Link from "next/link"
 import Image from "next/image"
 import { motion } from "framer-motion"
-import { Mail, Lock, Eye, EyeOff, User, ArrowRight, Github } from "lucide-react"
+import { Mail, Lock, Eye, EyeOff, User, ArrowRight, Github, AlertCircle, Loader2, CheckCircle2 } from "lucide-react"
 import { useState } from "react"
+import { useRouter } from "next/navigation"
 import { Button } from "@/components/ui/button"
+import { authApi } from "@/lib/api"
 
 export default function SignupPage() {
     const [showPassword, setShowPassword] = useState(false)
     const [agreed, setAgreed] = useState(false)
+    const [fullName, setFullName] = useState("")
+    const [email, setEmail] = useState("")
+    const [password, setPassword] = useState("")
+    const [error, setError] = useState("")
+    const [loading, setLoading] = useState(false)
+    const router = useRouter()
+
+    const handleSignup = async (e: React.FormEvent) => {
+        e.preventDefault()
+        setError("")
+
+        if (!fullName || !email || !password) {
+            setError("Please fill in all fields")
+            return
+        }
+
+        if (password.length < 6) {
+            setError("Password must be at least 6 characters")
+            return
+        }
+
+        if (!agreed) {
+            setError("Please agree to the Terms of Use and Privacy Policy")
+            return
+        }
+
+        setLoading(true)
+        try {
+            const response = await authApi.register(fullName, email, password)
+            if (response.success) {
+                router.push("/dashboard")
+            }
+        } catch (err: unknown) {
+            const message = err instanceof Error ? err.message : "Registration failed. Please try again."
+            setError(message)
+        } finally {
+            setLoading(false)
+        }
+    }
+
+    // Password strength indicator
+    const getPasswordStrength = () => {
+        if (!password) return { level: 0, text: "", color: "" }
+        if (password.length < 6) return { level: 1, text: "Weak", color: "bg-red-400" }
+        if (password.length < 10) return { level: 2, text: "Fair", color: "bg-amber-400" }
+        if (/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)/.test(password)) return { level: 3, text: "Strong", color: "bg-emerald-400" }
+        return { level: 2, text: "Fair", color: "bg-amber-400" }
+    }
+
+    const strength = getPasswordStrength()
 
     return (
         <motion.div
@@ -41,7 +93,18 @@ export default function SignupPage() {
                 <p className="text-slate-500 text-lg font-light">Join the future of autonomous security.</p>
             </div>
 
-            <form className="space-y-5" onSubmit={(e) => e.preventDefault()}>
+            {error && (
+                <motion.div
+                    initial={{ opacity: 0, y: -10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    className="flex items-center gap-3 p-4 mb-6 rounded-xl bg-red-50 border border-red-100 text-red-600 text-sm"
+                >
+                    <AlertCircle className="size-4 shrink-0" />
+                    <span>{error}</span>
+                </motion.div>
+            )}
+
+            <form className="space-y-5" onSubmit={handleSignup}>
                 <div className="space-y-2">
                     <label className="text-sm font-medium text-slate-600 ml-0.5">Full Name</label>
                     <div className="relative group">
@@ -50,8 +113,11 @@ export default function SignupPage() {
                         </div>
                         <input
                             type="text"
+                            value={fullName}
+                            onChange={(e) => setFullName(e.target.value)}
                             placeholder="John Doe"
                             className="w-full h-12 pl-12 pr-4 bg-white border border-slate-200 rounded-xl outline-none focus:ring-4 focus:ring-primary/5 focus:border-primary transition-all text-slate-900 placeholder:text-slate-400 font-light"
+                            disabled={loading}
                         />
                     </div>
                 </div>
@@ -64,8 +130,11 @@ export default function SignupPage() {
                         </div>
                         <input
                             type="email"
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
                             placeholder="name@company.com"
                             className="w-full h-12 pl-12 pr-4 bg-white border border-slate-200 rounded-xl outline-none focus:ring-4 focus:ring-primary/5 focus:border-primary transition-all text-slate-900 placeholder:text-slate-400 font-light"
+                            disabled={loading}
                         />
                     </div>
                 </div>
@@ -78,8 +147,11 @@ export default function SignupPage() {
                         </div>
                         <input
                             type={showPassword ? "text" : "password"}
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
                             placeholder="••••••••"
                             className="w-full h-12 pl-12 pr-12 bg-white border border-slate-200 rounded-xl outline-none focus:ring-4 focus:ring-primary/5 focus:border-primary transition-all text-slate-900 placeholder:text-slate-400 font-light"
+                            disabled={loading}
                         />
                         <button
                             type="button"
@@ -89,6 +161,21 @@ export default function SignupPage() {
                             {showPassword ? <EyeOff className="size-4.5" /> : <Eye className="size-4.5" />}
                         </button>
                     </div>
+                    {/* Password strength indicator */}
+                    {password && (
+                        <div className="flex items-center gap-2 mt-2">
+                            <div className="flex-1 flex gap-1">
+                                {[1, 2, 3].map((i) => (
+                                    <div
+                                        key={i}
+                                        className={`h-1 flex-1 rounded-full transition-colors ${i <= strength.level ? strength.color : "bg-slate-100"
+                                            }`}
+                                    />
+                                ))}
+                            </div>
+                            <span className="text-xs text-slate-400 font-light">{strength.text}</span>
+                        </div>
+                    )}
                 </div>
 
                 <div className="pt-2">
@@ -101,20 +188,31 @@ export default function SignupPage() {
                                 onChange={() => setAgreed(!agreed)}
                             />
                             <div className="size-5 border border-slate-200 rounded-lg group-hover:border-primary transition-colors peer-checked:bg-primary peer-checked:border-primary flex items-center justify-center bg-white">
-                                <svg className="size-3 text-white scale-0 peer-checked:scale-100 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="4">
-                                    <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
-                                </svg>
+                                {agreed && <CheckCircle2 className="size-3.5 text-white" />}
                             </div>
                         </div>
                         <span className="text-xs text-slate-500 font-light leading-relaxed">
-                            I agree to iSecurify&apos;s <Link href="#" className="text-primary font-medium hover:underline underline-offset-4 decoration-purple-200/30">Terms of Use</Link> and <Link href="#" className="text-primary font-medium hover:underline underline-offset-4 decoration-purple-200/30">Privacy Policy</Link>.
+                            I agree to iSecurify&apos;s <Link href="#" className="text-primary font-medium hover:underline underline-offset-4">Terms of Use</Link> and <Link href="#" className="text-primary font-medium hover:underline underline-offset-4">Privacy Policy</Link>.
                         </span>
                     </label>
                 </div>
 
-                <Button className="w-full h-12 rounded-xl bg-primary hover:bg-primary/90 shadow-md shadow-primary/10 text-white font-semibold transition-all hover:translate-y-[-1px] active:translate-y-[0px] text-base mt-2">
-                    Get Started Now
-                    <ArrowRight className="ml-2 size-4.5" />
+                <Button
+                    type="submit"
+                    disabled={loading}
+                    className="w-full h-12 rounded-xl bg-primary hover:bg-primary/90 shadow-md shadow-primary/10 text-white font-semibold transition-all hover:translate-y-[-1px] active:translate-y-[0px] text-base mt-2 disabled:opacity-60 disabled:cursor-not-allowed disabled:hover:translate-y-0"
+                >
+                    {loading ? (
+                        <>
+                            <Loader2 className="mr-2 size-4.5 animate-spin" />
+                            Creating account...
+                        </>
+                    ) : (
+                        <>
+                            Get Started Now
+                            <ArrowRight className="ml-2 size-4.5" />
+                        </>
+                    )}
                 </Button>
             </form>
 

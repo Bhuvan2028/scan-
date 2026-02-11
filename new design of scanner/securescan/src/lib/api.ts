@@ -148,5 +148,151 @@ export const api = {
         const response = await fetch(`${API_URL}/assessments/${id}`);
         if (!response.ok) throw new Error("Failed to fetch assessment details");
         return response.json();
+    },
+
+    /**
+     * Delete a scan by ID.
+     */
+    async deleteScan(scanId: string): Promise<{ success: boolean; message: string }> {
+        const response = await fetch(`${API_URL}/scans/${scanId}`, {
+            method: "DELETE",
+        });
+        if (!response.ok) throw new Error("Failed to delete scan");
+        return response.json();
     }
+};
+
+/* ============================================
+   Authentication API
+   ============================================ */
+
+export interface AuthUser {
+    id: string;
+    fullName: string;
+    email: string;
+    createdAt: string;
+}
+
+export interface AuthResponse {
+    success: boolean;
+    message: string;
+    data: {
+        user: AuthUser;
+        token: string;
+    };
+}
+
+const TOKEN_KEY = "securescan_token";
+const USER_KEY = "securescan_user";
+
+export const authApi = {
+    /**
+     * Register a new user.
+     */
+    async register(fullName: string, email: string, password: string): Promise<AuthResponse> {
+        const response = await fetch(`${API_URL}/auth/register`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ fullName, email, password }),
+        });
+
+        const data = await response.json();
+        if (!response.ok) {
+            throw new Error(data.message || "Registration failed");
+        }
+
+        // Store token and user in localStorage
+        if (typeof window !== "undefined") {
+            localStorage.setItem(TOKEN_KEY, data.data.token);
+            localStorage.setItem(USER_KEY, JSON.stringify(data.data.user));
+        }
+
+        return data;
+    },
+
+    /**
+     * Login with email and password.
+     */
+    async login(email: string, password: string): Promise<AuthResponse> {
+        const response = await fetch(`${API_URL}/auth/login`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ email, password }),
+        });
+
+        const data = await response.json();
+        if (!response.ok) {
+            throw new Error(data.message || "Login failed");
+        }
+
+        // Store token and user in localStorage
+        if (typeof window !== "undefined") {
+            localStorage.setItem(TOKEN_KEY, data.data.token);
+            localStorage.setItem(USER_KEY, JSON.stringify(data.data.user));
+        }
+
+        return data;
+    },
+
+    /**
+     * Get the current logged-in user from the server.
+     */
+    async getMe(): Promise<AuthUser | null> {
+        const token = this.getToken();
+        if (!token) return null;
+
+        try {
+            const response = await fetch(`${API_URL}/auth/me`, {
+                headers: { Authorization: `Bearer ${token}` },
+            });
+
+            if (!response.ok) {
+                this.logout();
+                return null;
+            }
+
+            const data = await response.json();
+            return data.data.user;
+        } catch {
+            return null;
+        }
+    },
+
+    /**
+     * Logout by clearing stored data.
+     */
+    logout(): void {
+        if (typeof window !== "undefined") {
+            localStorage.removeItem(TOKEN_KEY);
+            localStorage.removeItem(USER_KEY);
+        }
+    },
+
+    /**
+     * Get the stored JWT token.
+     */
+    getToken(): string | null {
+        if (typeof window !== "undefined") {
+            return localStorage.getItem(TOKEN_KEY);
+        }
+        return null;
+    },
+
+    /**
+     * Get the stored user data (fast, no network call).
+     */
+    getStoredUser(): AuthUser | null {
+        if (typeof window !== "undefined") {
+            const user = localStorage.getItem(USER_KEY);
+            return user ? JSON.parse(user) : null;
+        }
+        return null;
+    },
+
+    /**
+     * Check if user is authenticated.
+     */
+    isAuthenticated(): boolean {
+        return !!this.getToken();
+    },
 };

@@ -3,18 +3,41 @@
 import Link from "next/link"
 import Image from "next/image"
 import { motion } from "framer-motion"
-import { Mail, Lock, Eye, EyeOff, ArrowRight, Github } from "lucide-react"
+import { Mail, Lock, Eye, EyeOff, ArrowRight, Github, AlertCircle, Loader2 } from "lucide-react"
 import { useState } from "react"
 import { useRouter } from "next/navigation"
 import { Button } from "@/components/ui/button"
+import { authApi } from "@/lib/api"
 
 export default function LoginPage() {
     const [showPassword, setShowPassword] = useState(false)
+    const [email, setEmail] = useState("")
+    const [password, setPassword] = useState("")
+    const [error, setError] = useState("")
+    const [loading, setLoading] = useState(false)
     const router = useRouter()
 
-    const handleLogin = (e: React.FormEvent) => {
+    const handleLogin = async (e: React.FormEvent) => {
         e.preventDefault()
-        router.push("/dashboard")
+        setError("")
+
+        if (!email || !password) {
+            setError("Please fill in all fields")
+            return
+        }
+
+        setLoading(true)
+        try {
+            const response = await authApi.login(email, password)
+            if (response.success) {
+                router.push("/dashboard")
+            }
+        } catch (err: unknown) {
+            const message = err instanceof Error ? err.message : "Login failed. Please try again."
+            setError(message)
+        } finally {
+            setLoading(false)
+        }
     }
 
     return (
@@ -47,6 +70,17 @@ export default function LoginPage() {
                 <p className="text-slate-500 text-lg font-light">Access your autonomous security dashboard.</p>
             </div>
 
+            {error && (
+                <motion.div
+                    initial={{ opacity: 0, y: -10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    className="flex items-center gap-3 p-4 mb-6 rounded-xl bg-red-50 border border-red-100 text-red-600 text-sm"
+                >
+                    <AlertCircle className="size-4 shrink-0" />
+                    <span>{error}</span>
+                </motion.div>
+            )}
+
             <form className="space-y-6" onSubmit={handleLogin}>
                 <div className="space-y-2.5">
                     <label className="text-sm font-medium text-slate-600 ml-0.5">Work Email</label>
@@ -56,8 +90,11 @@ export default function LoginPage() {
                         </div>
                         <input
                             type="email"
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
                             placeholder="name@company.com"
                             className="w-full h-12 pl-12 pr-4 bg-white border border-slate-200 rounded-xl outline-none focus:ring-4 focus:ring-primary/5 focus:border-primary transition-all text-slate-900 placeholder:text-slate-400 font-light"
+                            disabled={loading}
                         />
                     </div>
                 </div>
@@ -75,8 +112,11 @@ export default function LoginPage() {
                         </div>
                         <input
                             type={showPassword ? "text" : "password"}
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
                             placeholder="••••••••"
                             className="w-full h-12 pl-12 pr-12 bg-white border border-slate-200 rounded-xl outline-none focus:ring-4 focus:ring-primary/5 focus:border-primary transition-all text-slate-900 placeholder:text-slate-400 font-light"
+                            disabled={loading}
                         />
                         <button
                             type="button"
@@ -90,10 +130,20 @@ export default function LoginPage() {
 
                 <Button
                     type="submit"
-                    className="w-full h-12 rounded-xl bg-primary hover:bg-primary/90 shadow-md shadow-primary/10 text-white font-semibold transition-all hover:translate-y-[-1px] active:translate-y-[0px] text-base"
+                    disabled={loading}
+                    className="w-full h-12 rounded-xl bg-primary hover:bg-primary/90 shadow-md shadow-primary/10 text-white font-semibold transition-all hover:translate-y-[-1px] active:translate-y-[0px] text-base disabled:opacity-60 disabled:cursor-not-allowed disabled:hover:translate-y-0"
                 >
-                    Continue to Dashboard
-                    <ArrowRight className="ml-2 size-4.5" />
+                    {loading ? (
+                        <>
+                            <Loader2 className="mr-2 size-4.5 animate-spin" />
+                            Signing in...
+                        </>
+                    ) : (
+                        <>
+                            Continue to Dashboard
+                            <ArrowRight className="ml-2 size-4.5" />
+                        </>
+                    )}
                 </Button>
             </form>
 
